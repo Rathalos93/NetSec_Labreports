@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.17)  5 APR 2018 17:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.17)  5 APR 2018 17:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -770,8 +770,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 63.
+Overfull \hbox (17.6039pt too wide) in paragraph at lines 63--63
+[]\T1/lmr/bx/n/17.28 Abeiten mit der Linux-Kommandozeile(bash) 
+ []
 
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 63.
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -785,7 +788,7 @@ Package microtype Info: Loading generic settings for font family
 Here is how much of TeX's memory you used:
  7091 strings out of 494910
  101481 string characters out of 6179835
- 216939 words of memory out of 5000000
+ 217939 words of memory out of 5000000
  10205 multiletter control sequences out of 15000+600000
  41462 words of font info for 48 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -795,7 +798,7 @@ share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/public/l
 m/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texm
 f/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8
 .pfb>
-Output written on Labreport1.pdf (1 page, 76775 bytes).
+Output written on Labreport1.pdf (1 page, 90907 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  17 compressed objects within 1 object stream
