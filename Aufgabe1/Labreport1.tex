@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{eurosym}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{units}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{import}
+\usepackage{url}
+\usepackage{amsthm}
+\theoremstyle{plain}
+
+\lstset
+{ %
+  language=R,                     % the language of the code
+  basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+%  keywordstyle=\color{blue},      % keyword style
+%  commentstyle=\color{green},   % comment style
+%  stringstyle=\color{blue},       % string literal style
+  %escapeinside={\%*}{*)},         % if you want to add a comment within your code
+  escapeinside={(*@}{@*)},         
+  morekeywords={*,...}            % if you want to add more keywords to the set
+} 
+
+\title{default title}
+\author{default author \\facculty}
+\date{00/00/0000}
+
+\begin{document}
+\pagenumbering{arabic}
+\maketitle
+\centerline{\rule{1.2\linewidth}{.2pt}}
+\begin{linenumbers}
+\section{test}
+\subsection{test}
+\section{test}
+\subsection{test}
+\end{linenumbers}
+\end{document}
