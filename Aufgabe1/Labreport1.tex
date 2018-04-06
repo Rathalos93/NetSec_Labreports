@@ -65,15 +65,6 @@ Mit den Befehlen man(Manual) und help(--help flag) lassen sich nützliche Inform
 \subsection{Script}
 Script ist ein Unix-Programm welches die momentane Shell-Session in einer Datei abspeichert bzw. aufzeichnet. Mit "Script Dateiname.txt" startet die Aufzeichnung und alle eingetippten Befehle landen in Dateiname.txt. Wird keine Datei angegeben wird eine default-Datei verwendet. Dieses tool kann dabei helfen mögliche Lösungen für Aufgaben zu präsentieren.
 \section{Benutzerkonten und Verwaltung}
-Nützliche Befehle für User-Verwaltung:
-\begin{itemize}
-\item adduser
-\item addgroup
-\item passwd
-\item deluser
-\item usermod
-\item groups
-\end{itemize}
 Es wurde ein neuer user mit dem Namen "labmate" mit dem Befehl "adduser labmate" angelegt. \\
 Um herauszufinden zu welcher Gruppe labmate gehört wurde "groups labmate" benutzt. \\
 Eine neue Gruppe "labortests" wurde mit "addgrp labortests" angelegt. \\
@@ -83,8 +74,19 @@ Mit dem Befehl "sudo usermod -aG labmate sudo" gaben wir labmate Sudo-Berechtigu
 \section{Datei- und Rechteverwaltung}
 Der Benutzer wurde von user zu labmate gewechselt. \\
 Das Verzeichnis /home/labreports wurde angelegt. \\
-Im Verzeichnis labreports wurde mit "touch bericht1.txt" eine neue Datei angelegt. Anschließend wurde diese über vim (einem Texteditor) mit dem Text "dies ist ein Test" befüllt.\\
-Mit dem Befehl "chmod g+rw bericht1.txt" wurden die Rechte auf der Datei so gesetzt, dass für Eigentümer und Gruppenmitglieder Lese- und Schreibrechte vergeben wurden. Die Gruppe der Datei bericht1.txt ist labortests.
+Im Verzeichnis labreports wurde mit "touch bericht1.txt" eine neue Datei angelegt. Anschließend wurde diese über vim mit dem Text "dies ist ein Test" befüllt.\\
+Mit dem Befehl "chmod g+rw bericht1.txt" wurden die Rechte auf der Datei so gesetzt, dass für Eigentümer und Gruppenmitglieder Lese- und Schreibrechte vergeben wurden. Die Gruppe der Datei bericht1.txt ist labortests.\\
+Mit "wget http://www.uni-hamburg.de/index.html" wurde der Inhalt der Seite in das Verzeichnis labreports gespeichert.\\
+Die Zugreiffberechtigung wurde mit "chmod 0660 labreports" so geändert, dass Dateieigentümer und Gruppe Lese- und Schreibzugriff haben.\\
+Ein neues Verzeichnis test wurde unter /opt angelegt. Die Gruppe von test wurde auf user gesetzt, der Owner ist labmate.
+Die Rechte von test wurden mit "chmod 0770 test" auf Lese- Schreib- und Executezugriff (rwx) für Owner und Gruppenmitglieder gesetzt.In der Zahl mit der die Rechte gesetzt werden steht die 2. Stelle für die rechte des Owners, die 3. Stelle für die Rechte der Gruppenmitglieder und die 4. Stelle für die Rechte aller anderen. Die Flags r, w und x werden durch jeweils ein Bit dargestellt, wobei $r=100_2=4_{10}$, $w=010_2=2_{10}$ und $x=001_2=1_{10}$ gilt.\\
+Mit "cp index.html test" wurde die Datei index.html von labreports nach test kopiert.\\
+Mit "groupadd specialrights" wurde eine neue Gruppe angelegt. Dieser Gruppe wurden user und labmate hinzugefügt, die Gruppe von index.html wurde auf specialrights geändert und der Owner auf labmate gesetzt. Dies wäre im Nachhinein auch einfacher gegangen, indem die Gruppe von indes.html auf user gesetzt wird. Die Rechte von index.html wurden mit "chmod 0640 index.html" so gesetzt, dass der Owner (labmate) die Lese- und Schreibrecht hat und die Gruppenmitglieder (hier user) Leseberechtigung haben.\\
+Mit exit wurde der user labmate ausgeloggt und anschließend der user user angemeldet.\\
+Mit dem Befehl "cat index.html" lies sich die Datei erfolgreich auslesen.\\
+Die Datei wurde mit "vim index.html" erfolgreich geöffnet. Ein Abspeichern war nicht möglich, da die Datei read-only war.\\
+Unter dem Benutzer user wurde die Datei index.html kopiert. Ein Bearbeiten und Abspeichern der Datei war nun möglich, da user der Owner der Kopie war und somit rw Berechtigung hatte.\\
+Mit "rm index.html" wurde als user erfolgreich die Datei gelöscht, von der labmate der Owner war. Dies war möglich, da für rm die Schreibberechtigung auf dem übergeordnetem Verzeichnis nötig ist, nicht die Berechtigung auf der Datei selber.
 \section{Administration und Akualisierung}
 \subsection{apt update und apt upgrade}
 Mit den Parametern "update" und "upgrade" von "apt" (aptitude) lassen sich Pakete auf den neuesten Stand aktualisieren. Update verzeichnet alle neuen Versionen von Installierten Paketen. Upgrade benutzt dann die von Update aktualisierten Versionen und downloaded/installiert diese.
