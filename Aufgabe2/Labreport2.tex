@@ -54,7 +54,7 @@
 
 \title{Blatt 2 - Kennwortsicherheit}
 \author{Kolja Hopfmann, Jonas Sander}
-\date{00/00/0000}
+\date{\today}
 
 \begin{document}
 \shorthandoff{"}
@@ -63,8 +63,45 @@
 \centerline{\rule{1.2\linewidth}{.2pt}}
 \section{Sicherheit lokaler Rechner}
 \subsection{}
+\subsubsection{}
+Die VM wurde mit der grml-CD gebootet und der Festplatteninhalt der eigentlichen VM wurde gemountet.
+\begin{lstlisting}
+lsblk
+mount -r /dev/sda1
+\end{lstlisting}
+Der Aufbau von $/etc/passwd/$ ist: \\Name:Passwort:UserID:GroupID:Kommentar:Verzeichnis:Shell , wobei hier das Passwort in der $/etc/shadow/$ Datei als Hash ausgelagert ist. \\
+Es existieren die User $Georg$ und $webadmin$. Der User $Georg$ hat Sudo-Berechtigung
 \subsection{}
+\subsubsection{}
+Eine kryptographische Hashfunktion ist eine Funktion welche einen beliebigen Eingabeparameter so verändert, dass es praktisch unmöglich ist, mittels Berechnung auf den ursprünglichen Eingabewert zu schließen. Ein Salt ist ein randomisierter Eingabewert, welcher mit dem Passwort konkateniert wird und gemeinsam gehasht wird. Dadurch ist der Hash eines bestimmten Klartextes mit Salt nicht immer der selbe. Die bedeutet das man das Ursprüngliche Passwort nur durch mehrfaches Ausprobieren herausfinden kann.
+\subsubsection{}
+John wurde installiert und die Manual wurde gelesen:
+\begin{lstlisting}
+sudo apt install john
+man john
+\end{lstlisting}
+John wurde im Incremental-Mode gestartet:
+\begin{lstlisting}
+john -incremental /etc/shadow
+\end{lstlisting}
+Der Versuch war nicht erfolgreich. Grund: Incremental Mode iteriert von Anfang über alle möglichen Passwort-Strings, für einen Zeitraum von 15 Minuten war das Passwort zu lang um es über Incremental zu ermitteln.
+\subsubsection{}
+Es wurde eine Wordlist runtergeladen,entpackt und anschließend für einen weiteren Versuch mit John The Ripper benutzt.
+\begin{lstlisting}
+wget http://download.openwall.net/pub/wordlists/all.gz
+gunzip all.gz
+john --wordlist=all /etc/shadow
+\end{lstlisting}
+Das Passwort für den User $webadmin$ wurde nach kurzer Zeit gefunden: $mockingbird$. Eine Nachricht auf seinem Blog wurde hinterlassen.
 \subsection{}
+Das Passwort für den User $georg$ war nicht in der Wordlist enthalten. \\ \\
+Das VM-Image wurde erneut gemountet, diesmal mit Schreibzugriff. Daraufhin wurde mit $chroot$ eine neue Bash-Session gestartet mit dem VM-Image root als root. Somit konnte man mit Rootrechten das Passwort von $georg$ ändern.
+\begin{lstlisting}
+mount /dev/sda1
+chroot /media/sda1 /bin/bash
+passwd georg
+exit
+\end{lstlisting}
 \section{Sichere Speicherung von Kennwörtern}
 \subsection{}
 1.	Zuerst wurde in das Verzeichnis von rcracki navigiert.
@@ -102,12 +139,12 @@ Die wiederhergestellten Dateien wurden aufgrund Platzmangel der grml-CD unter $/
 find . -name "*.elf" | xargs grep -E 'PASSWORD'
 find . -name "*.txt" | xargs grep -E 'PASSWORD'
 find . -name "*.java" | xargs grep -E 'PASSWORD'
-grep -a f0402684.elf
-grep -a f0853144.elf
-grep -a f0932456.elf
-grep -a f0052256.elf
+grep -a 'PASSWORD' f0402684.elf
+grep -a 'PASSWORD' f0853144.elf
+grep -a 'PASSWORD' f0932456.elf
+grep -a 'PASSWORD' f0052256.elf
 \end{lstlisting}
-In der Datei f0853144.elf befand sich das Passwort als Klartext: Kindergeburtstag/119911
+In der Datei $f0853144.elf$ befand sich das Passwort als Klartext: "Kindergeburtstag/119911"
 \section{Unsicherer Umgang mit Passwörtern in Java}
 Der Passwortmanager verwendet sowohl für Encryption als auch Decryption die selbe Funktion. Dieser wird entweder das Klartextpasswort oder das Verschlüsselte Passwort übergeben. Kommt man in den Besitz der Verschlüsselten Passwörter, kann man sie also einfach über den Passwortmanager entschlüsseln.
 \end{document}
