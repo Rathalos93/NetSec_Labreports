@@ -57,16 +57,16 @@
 \date{00/00/0000}
 
 \begin{document}
+\shorthandoff{"}
 \pagenumbering{arabic}
 \maketitle
 \centerline{\rule{1.2\linewidth}{.2pt}}
-\begin{linenumbers}
-\section{1. - Sicherheit lokaler Rechner}
-\subsection{1.1}
-\subsection{1.2}
-\subsection{1.3}
-\section{2. - Sichere Speicherung von Kennwörtern}
-\subsection{2.1}
+\section{Sicherheit lokaler Rechner}
+\subsection{}
+\subsection{}
+\subsection{}
+\section{Sichere Speicherung von Kennwörtern}
+\subsection{}
 1.	Zuerst wurde in das Verzeichnis von rcracki navigiert.
 \begin{lstlisting}
 cd webadmin/Rainbowtables/rcracki_mt_0.7.0_Linux:x86_64
@@ -78,10 +78,34 @@ Hier wurde dann rcracki auf der Datei mit den Passwörtern ausgeführt.
 Hierbei wurden Passwort Nummer 4: ulardi und Passwort Nummer 5: avanti gefunden.
 2.	Die Restlichen Passwörter konnten mit der Verwendeten Rainbowtable nicht geknackt werden. Dies ist darauf zurück zu führen, dass die Passwörter nicht als Wörter in der Tabelle enthalten sind. Ein erneuter Versuch mit einer anderen Rainbowtable könnte weitere Passwörter knacken, jedoch ist dies keineswegs sicher.\\
 Für das Abspeichern der MD5-Hashes aller alphanumerischen Passwörtern der Länge 1-7 wäre ein Speicher von $\sum_1^7 (62^i \cdot 32 byte) = 1,1 \cdot 10^{14} Byte = 110 TB$ nötig. Dies ist um den Faktor $10^4$ größer als die verwendete Rainbowtable und deutlich zu groß zur Speicherung.
-\subsection{2.2}
+\subsection{}
 Unsere Lösung war auf dem Alphabet bestehend aus 0-9 und a-z iterativ alle möglichen Strings durch zu probieren. Hierfür haben wird eine Java Klasse geschrieben, die in einer Schleife von 0 bis $36^7-1$ iteriert. In Jeder Iteration wird ein String zusammengesetzt, dieser mit dem Salt gehasht und das Ergebnis des Hashes mit dem in der Passwort-Datei gefundenem Hash verglichen. Hierbei werden erst alle 1-Stelligen, dann alle 2-Stelligen Passwörter durchlaufen etc. Hiermit wurde das Passwort s1v3s gefunden.
-\subsection{2.3}
-\section{3. - Forensische Wiederherstellung von Kennwörtern}
-\section{4. - Unsicherer Umgang mit passwörtern in Java}
-\end{linenumbers}
+\subsection{}
+\section{Forensische Wiederherstellung von Kennwörtern}
+\subsection{}
+Aus den empfohlenen Quellen zu Blatt 2 unter "Zum sicheren Umgang mit Passwörtern im Speicher" geht hervor, dass viele Anwendungen Passwörter als Klartext im Arbeitsspeicher ablegen. Dadurch ist es Möglich das Passwort (für kurze Zeit) selbst nach ausschalten des Systems aus dem Speicher zu extrahieren. Desweiteren Dient eine Swap-Partition als zusätzlicher Arbeitsspeicher. So ist es Möglich aus der Swap-Partition Passwörter zu extrahieren.
+\subsection{}
+Unter grml wurde der Inhalt der VM gemountet:
+\begin{lstlisting} 
+mount /dev/sda1
+\end{lstlisting}
+Unter $/home/user/.bash\_history$ befinden sich die letzten commands welcher der user in der letzten bash-session in die shell eingetippt hat.
+\subsection{}
+Da der Admin zunächst mit Jedit die Server-File editiert hatte haben wir zunächst in den Jedit config-Files gesucht, unter $home/.jedit$. Da war zu erkennen dass das alte Passwort "Flugentenfederkiel/991199" war, mit dem User "bloguser". \\ \\ Daraufhin wurde versucht mit dem Programm photorec, Teile der Swap-Parition wiederherzustellen:
+\begin{lstlisting}
+lsblk
+photorec /dev/sda5
+\end{lstlisting}
+Die wiederhergestellten Dateien wurden aufgrund Platzmangel der grml-CD unter $/dev/sda1$ abgelegt. Nun wurde versucht die Dateien nach dem String "PASSWORD" zu untersuchen da dies in der Server-Datei vor dem tatsächlichen Passwort stand.
+\begin{lstlisting}
+find . -name "*.elf" | xargs grep -E 'PASSWORD'
+find . -name "*.txt" | xargs grep -E 'PASSWORD'
+find . -name "*.java" | xargs grep -E 'PASSWORD'
+grep -a f0402684.elf
+grep -a f0853144.elf
+grep -a f0932456.elf
+grep -a f0052256.elf
+\end{lstlisting}
+In der Datei f0853144.elf befand sich das Passwort als Klartext: Kindergeburtstag/119911
+\section{Unsicherer Umgang mit Passwörtern in Java}
 \end{document}
