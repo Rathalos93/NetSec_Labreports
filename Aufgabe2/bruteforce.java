@@ -1,10 +1,8 @@
-package com.hoppix;
-
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Main
+public class bruteforce
 {
 
 	public static void main(String[] args)
@@ -72,7 +70,10 @@ public class Main
 			}
 			else
 			{
-				System.out.println(i + ". at " + result + "-- Retry");
+				if(i%100000 == 0)
+				{
+					System.out.println(i + ". at " + result + "-- Retry");
+				}
 			}
 		}
 		System.out.println("############################################### --- *hackervoice* I'M IN --- ##############################################################");

@@ -79,8 +79,9 @@ Hierbei wurden Passwort Nummer 4: ulardi und Passwort Nummer 5: avanti gefunden.
 2.	Die Restlichen Passwörter konnten mit der Verwendeten Rainbowtable nicht geknackt werden. Dies ist darauf zurück zu führen, dass die Passwörter nicht als Wörter in der Tabelle enthalten sind. Ein erneuter Versuch mit einer anderen Rainbowtable könnte weitere Passwörter knacken, jedoch ist dies keineswegs sicher.\\
 Für das Abspeichern der MD5-Hashes aller alphanumerischen Passwörtern der Länge 1-7 wäre ein Speicher von $\sum_1^7 (62^i \cdot 32 byte) = 1,1 \cdot 10^{14} Byte = 110 TB$ nötig. Dies ist um den Faktor $10^4$ größer als die verwendete Rainbowtable und deutlich zu groß zur Speicherung.
 \subsection{}
-Unsere Lösung war auf dem Alphabet bestehend aus 0-9 und a-z iterativ alle möglichen Strings durch zu probieren. Hierfür haben wird eine Java Klasse geschrieben, die in einer Schleife von 0 bis $36^7-1$ iteriert. In Jeder Iteration wird ein String zusammengesetzt, dieser mit dem Salt gehasht und das Ergebnis des Hashes mit dem in der Passwort-Datei gefundenem Hash verglichen. Hierbei werden erst alle 1-Stelligen, dann alle 2-Stelligen Passwörter durchlaufen etc. Hiermit wurde das Passwort s1v3s gefunden.
+Unsere Lösung war auf dem Alphabet bestehend aus 0-9 und a-z iterativ alle möglichen Strings durch zu probieren. Hierfür haben wird eine Java Klasse geschrieben, die in einer Schleife von 0 bis $36^7-1$ iteriert. In Jeder Iteration wird ein String zusammengesetzt, dieser mit dem Salt gehasht und das Ergebnis des Hashes mit dem in der Passwort-Datei gefundenem Hash verglichen. Hierbei werden erst alle 1-Stelligen, dann alle 2-Stelligen Passwörter durchlaufen etc. Hiermit wurde das Passwort s1v3s gefunden. Die Datei bruteforce.java befindet sich im Anhang.
 \subsection{}
+Die erstellte Java Datei Useradmin.java befindet sich im Anhang.
 \section{Forensische Wiederherstellung von Kennwörtern}
 \subsection{}
 Aus den empfohlenen Quellen zu Blatt 2 unter "Zum sicheren Umgang mit Passwörtern im Speicher" geht hervor, dass viele Anwendungen Passwörter als Klartext im Arbeitsspeicher ablegen. Dadurch ist es Möglich das Passwort (für kurze Zeit) selbst nach ausschalten des Systems aus dem Speicher zu extrahieren. Desweiteren Dient eine Swap-Partition als zusätzlicher Arbeitsspeicher. So ist es Möglich aus der Swap-Partition Passwörter zu extrahieren.
@@ -108,4 +109,5 @@ grep -a f0052256.elf
 \end{lstlisting}
 In der Datei f0853144.elf befand sich das Passwort als Klartext: Kindergeburtstag/119911
 \section{Unsicherer Umgang mit Passwörtern in Java}
+Der Passwortmanager verwendet sowohl für Encryption als auch Decryption die selbe Funktion. Dieser wird entweder das Klartextpasswort oder das Verschlüsselte Passwort übergeben. Kommt man in den Besitz der Verschlüsselten Passwörter, kann man sie also einfach über den Passwortmanager entschlüsseln.
 \end{document}
