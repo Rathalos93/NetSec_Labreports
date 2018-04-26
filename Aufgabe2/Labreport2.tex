@@ -57,19 +57,43 @@
 \date{00/00/0000}
 
 \begin{document}
+\shorthandoff{"}
 \pagenumbering{arabic}
 \maketitle
 \centerline{\rule{1.2\linewidth}{.2pt}}
-\begin{linenumbers}
-\section{1. - Sicherheit lokaler Rechner}
-\subsection{1.1}
-\subsection{1.2}
-\subsection{1.3}
-\section{2. - Sichere Speicherung von Kennwörtern}
-\subsection{2.1}
-\subsection{2.2}
-\subsection{2.3}
-\section{3. - Forensische Wiederherstellung von Kennwörtern}
-\section{4. - Unsicherer Umgang mit passwörtern in Java}
-\end{linenumbers}
+\section{Sicherheit lokaler Rechner}
+\subsection{}
+\subsection{}
+\subsection{}
+\section{Sichere Speicherung von Kennwörtern}
+\subsection{}
+\subsection{}
+\subsection{}
+\section{Forensische Wiederherstellung von Kennwörtern}
+\subsection{}
+Aus den empfohlenen Quellen zu Blatt 2 unter "Zum sicheren Umgang mit Passwörtern im Speicher" geht hervor, dass viele Anwendungen Passwörter als Klartext im Arbeitsspeicher ablegen. Dadurch ist es Möglich das Passwort (für kurze Zeit) selbst nach ausschalten des Systems aus dem Speicher zu extrahieren. Desweiteren Dient eine Swap-Partition als zusätzlicher Arbeitsspeicher. So ist es Möglich aus der Swap-Partition Passwörter zu extrahieren.
+\subsection{}
+Unter grml wurde der Inhalt der VM gemountet:
+\begin{lstlisting} 
+mount /dev/sda1
+\end{lstlisting}
+Unter $/home/user/.bash\_history$ befinden sich die letzten commands welcher der user in der letzten bash-session in die shell eingetippt hat.
+\subsection{}
+Da der Admin zunächst mit Jedit die Server-File editiert hatte haben wir zunächst in den Jedit config-Files gesucht, unter $home/.jedit$. Da war zu erkennen dass das alte Passwort "Flugentenfederkiel/991199" war, mit dem User "bloguser". \\ \\ Daraufhin wurde versucht mit dem Programm photorec, Teile der Swap-Parition wiederherzustellen:
+\begin{lstlisting}
+lsblk
+photorec /dev/sda5
+\end{lstlisting}
+Die wiederhergestellten Dateien wurden aufgrund Platzmangel der grml-CD unter $/dev/sda1$ abgelegt. Nun wurde versucht die Dateien nach dem String "PASSWORD" zu untersuchen da dies in der Server-Datei vor dem tatsächlichen Passwort stand.
+\begin{lstlisting}
+find . -name "*.elf" | xargs grep -E 'PASSWORD'
+find . -name "*.txt" | xargs grep -E 'PASSWORD'
+find . -name "*.java" | xargs grep -E 'PASSWORD'
+grep -a f0402684.elf
+grep -a f0853144.elf
+grep -a f0932456.elf
+grep -a f0052256.elf
+\end{lstlisting}
+In der Datei f0853144.elf befand sich das Passwort als Klartext: Kindergeburtstag/119911
+\section{Unsicherer Umgang mit Passwörtern in Java}
 \end{document}
