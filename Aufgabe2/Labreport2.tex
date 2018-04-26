@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 
 \usepackage{amssymb}
@@ -135,6 +135,7 @@ lsblk
 photorec /dev/sda5
 \end{lstlisting}
 Die wiederhergestellten Dateien wurden aufgrund Platzmangel der grml-CD unter $/dev/sda1$ abgelegt. Nun wurde versucht die Dateien nach dem String "PASSWORD" zu untersuchen da dies in der Server-Datei vor dem tatsächlichen Passwort stand.
+\newpage
 \begin{lstlisting}
 find . -name "*.elf" | xargs grep -E 'PASSWORD'
 find . -name "*.txt" | xargs grep -E 'PASSWORD'
@@ -147,4 +148,10 @@ grep -a 'PASSWORD' f0052256.elf
 In der Datei $f0853144.elf$ befand sich das Passwort als Klartext: "Kindergeburtstag/119911"
 \section{Unsicherer Umgang mit Passwörtern in Java}
 Der Passwortmanager verwendet sowohl für Encryption als auch Decryption die selbe Funktion. Dieser wird entweder das Klartextpasswort oder das Verschlüsselte Passwort übergeben. Kommt man in den Besitz der Verschlüsselten Passwörter, kann man sie also einfach über den Passwortmanager entschlüsseln.
+\section{Quellen}
+\begin{itemize}
+\item 0. Empfohlene Quellen
+\item \url{https://unix.stackexchange.com/}
+\item man command der Kommandozeile
+\end{itemize}
 \end{document}
