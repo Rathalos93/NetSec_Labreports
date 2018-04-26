@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
 
 \usepackage{amssymb}
@@ -92,7 +92,7 @@ wget http://download.openwall.net/pub/wordlists/all.gz
 gunzip all.gz
 john --wordlist=all /etc/shadow
 \end{lstlisting}
-Das Passwort für den User $webadmin$ wurde nach kurzer Zeit gefunden: $mockingbird$. Eine Nachricht auf seinem Blog wurde hinterlassen.
+Passwort für $webadmin$: $mockingbird$
 \subsection{}
 Das Passwort für den User $georg$ war nicht in der Wordlist enthalten. \\ \\
 Das VM-Image wurde erneut gemountet, diesmal mit Schreibzugriff. Daraufhin wurde mit $chroot$ eine neue Bash-Session gestartet mit dem VM-Image root als root. Somit konnte man mit Rootrechten das Passwort von $georg$ ändern.
@@ -135,7 +135,6 @@ lsblk
 photorec /dev/sda5
 \end{lstlisting}
 Die wiederhergestellten Dateien wurden aufgrund Platzmangel der grml-CD unter $/dev/sda1$ abgelegt. Nun wurde versucht die Dateien nach dem String "PASSWORD" zu untersuchen da dies in der Server-Datei vor dem tatsächlichen Passwort stand.
-\newpage
 \begin{lstlisting}
 find . -name "*.elf" | xargs grep -E 'PASSWORD'
 find . -name "*.txt" | xargs grep -E 'PASSWORD'
