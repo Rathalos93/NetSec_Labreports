@@ -153,4 +153,292 @@ Der Passwortmanager verwendet sowohl für Encryption als auch Decryption die sel
 \item \url{https://unix.stackexchange.com/}
 \item man command der Kommandozeile
 \end{itemize}
+\section{Anhang}
+\subsection{}
+Code des Bruteforcers
+\begin{lstlisting}
+import javax.xml.bind.DatatypeConverter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class bruteforce
+{
+
+	public static void main(String[] args)
+	{
+		final String hash = "2b2935865b8a6749b0fd31697b467bd7";
+		final String salt = "8kofferradio";
+		final String account = "testaccount";
+		final int cardinality = 6;
+		String result = "";
+
+		final char[] alphabet = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+				'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+
+
+		for (long i = 0L; i < Math.pow(alphabet.length, cardinality + 1); i++)
+		{
+			//first arity
+			result = alphabet[(int) (i % 36)] + ""; //36^0
+			if (i >= Math.pow(36, 1))
+			{
+				//second arity
+				result = alphabet[(int) ((i / 36) - 1) % 36] + result; //36^1
+				if (i >= Math.pow(36, 2))
+				{
+					//third arity
+					result = alphabet[(int) ((i / Math.pow(36, 2) - 1) % 36)] + result;
+					if (i >= Math.pow(36, 3))
+					{
+						//fourth arity
+						result = alphabet[(int) ((i / Math.pow(36, 3)) - 1) % 36] + result;
+						if (i >= Math.pow(36, 4))
+						{
+							//fifth arity
+							result = alphabet[(int) ((i / Math.pow(36, 4)) - 1) % 36] + result;
+							if (i >= Math.pow(36, 5))
+							{
+								//sixth arity
+								result = alphabet[(int) ((i / Math.pow(36, 5)) - 1) % 36] + result;
+							}
+						}
+					}
+				}
+			}
+
+			String saltAndPasswd = salt + result;
+			String hashedPasswd = "";
+			try
+			{
+				hashedPasswd = md5Hash(saltAndPasswd);
+			}
+			catch (NoSuchAlgorithmException ex)
+			{
+				System.out.println("Error when hashing: ");
+				ex.printStackTrace();
+			}
+
+
+			if (hash.equals(hashedPasswd))
+			{
+
+				System.out.println("Password found! :");
+				System.out.println("User: " + account + " Password: " + result);
+				break;
+			}
+			else
+			{
+				if(i%100000 == 0)
+				{
+					System.out.println(i + ". at " + result + "-- Retry");
+				}
+			}
+		}
+		System.out.println("############################################### --- *hackervoice* I'M IN --- #################################################");
+	}
+
+	private static String md5Hash(String plain) throws NoSuchAlgorithmException
+	{
+		MessageDigest md5 = MessageDigest.getInstance("MD5");
+		md5.update(plain.getBytes());
+		byte[] byteHash = md5.digest();
+		return DatatypeConverter.printHexBinary(byteHash).toLowerCase();
+	}
+}
+
+\end{lstlisting}
+
+\subsection{}
+Code der Webadmin Klasse
+\begin{lstlisting}
+package com.hoppix;
+
+import javax.xml.bind.DatatypeConverter;
+import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Useradmin implements Useradministration
+{
+
+	private static final String fileName = "passwords.txt";
+	private static final int hashIterator = 1337;
+
+	public static void main(String[] args)
+	{
+		String command = args[0];
+		String user = args[1];
+
+		Useradmin admin = new Useradmin();
+
+		System.out.println("Password: ");
+		Scanner scanner = new Scanner(System.in);
+		String password = scanner.next();
+		scanner.close();
+
+
+
+		switch (command)
+		{
+			case "addUser":
+				admin.addUser(user, password.toCharArray());
+				break;
+
+			case "checkUser":
+				boolean found = admin.checkUser(user, password.toCharArray());
+				if (found)
+				{
+					System.out.println("User correct");
+				}
+				break;
+
+			default:
+				System.out.println("Wrong input");
+
+		}
+
+	}
+
+	public void addUser(String username, char[] password)
+	{
+		String passwordString = String.copyValueOf(password);
+		String hash = "";
+
+		Random rand = new Random();
+		int salt = rand.nextInt(1234567) + 100000;
+
+		try
+		{
+			hash = md5Hash(salt + passwordString);
+			for (int i = 0; i < hashIterator; i++)
+			{
+				hash = md5Hash(hash);
+			}
+
+		}
+		catch (NoSuchAlgorithmException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			writeLine(fileName, username, salt, hash);
+		}
+
+
+	}
+
+	public boolean checkUser(String username, char[] password)
+	{
+		String[] content = checkPasswordLine(fileName, username);
+		if (content.equals(null))
+		{
+			System.out.println("User not found!");
+			return false;
+		}
+
+		String passwordString = String.copyValueOf(password);
+		String salt = content[1];
+		String hashSave = content[2];
+
+		try
+		{
+			String hash = md5Hash(salt + passwordString);
+			for (int i = 0; i < hashIterator; i++)
+			{
+				hash = md5Hash(hash);
+			}
+
+			return hash.equals(hashSave);
+		}
+		catch (NoSuchAlgorithmException e)
+		{
+			System.out.println("Wrong password!");
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	private static String md5Hash(String plain) throws NoSuchAlgorithmException
+	{
+		MessageDigest md5 = MessageDigest.getInstance("MD5");
+		md5.update(plain.getBytes());
+
+		byte[] byteHash = md5.digest();
+		return DatatypeConverter.printHexBinary(byteHash).toLowerCase();
+	}
+
+	public void writeLine(String fileName, String username, int salt, String saltHashedPassword)
+	{
+		try
+		{
+			FileWriter fileWriter = new FileWriter(fileName);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			if (bufferedReader.readLine() == null)
+			{
+				bufferedWriter.write(username + " " + salt + " " + saltHashedPassword);
+				bufferedWriter.newLine();
+			}
+
+			bufferedWriter.close();
+			bufferedReader.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			System.out.println("Schreibfehler");
+		}
+	}
+
+	public String[] checkPasswordLine(String fileName, String username)
+	{
+		String line = null;
+
+		try
+		{
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null)
+			{
+				String[] content = line.split(" ");
+				if (username.equals(content[0]))
+				{
+					return content;
+				}
+			}
+			bufferedReader.close();
+			System.out.println("Read " + fileName);
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+			System.out.println("Datei nicht gefunden");
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			System.out.println("Lesefehler");
+		}
+		return null;
+	}
+
+}
+
+interface Useradministration
+{
+	void addUser(String username, char[] password);
+
+	boolean checkUser(String username, char[] password);
+}
+
+\end{lstlisting}
+
 \end{document}
