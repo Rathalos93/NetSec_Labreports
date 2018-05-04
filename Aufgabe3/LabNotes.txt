@@ -1,0 +1,66 @@
+﻿Blatt3 - Notes
+
+1. HTTP
+1.
+über http nicht erreichbar (cannot be resolve,
+versuch über IP zu erreichen, gleiches problem
+telnet {url} {port} mit port = 80
+lösung:
+telnet -b {ip}, ip = 213.131.240.174:80
+Die IP wurde über den Responseheader Browser gefunden
+telnet wurde gestartet, jedoch nicht richtig verbunden
+telnet man7.org 80 => bad request
+mit wget lässt sich die html erfolgreich abrufen
+telnet 213.131.240.174 80 verbindet sich
+GET /HTTP/1.1 gibt kein bad REquest, aber auch nciht den nötig header
+
+Bei anderer Gruppe erfolgreich:
+telnet man7.org 80
+GET /linus/... HTTP/1.1
+Host: www.man7.org
+klappt...yay, gibt html zurück
+
+GET /style.css gibt stylesheet zurück, siehe header.txt
+
+Responseheader:
+siehe Mail
+
+2. SMTP
+1.
+mit telnet an den Mailhost verbinden
+1-1 quelle linuxjournal benutzt mit netcat, mailhost infomatik und ikum adresse angegeben
+bei mailhost informatik und angabe einer g-mail adresse: Cannot find your hostname
+versuch zu Google Host zu connecten: timeout
+
+Sicherheit:
+im quelltext der gefälschten mail: unknown host
+Sender und empfänger werden im mailprogramm korrekt angezeigt
+
+3. DNS-Spoofing
+1.
+Was fällt auf?
+serial={} erwartet eine bestimmte länge, andere eingaben sind nicht valid
+serial.length=8
+2.
+umleitung mittels etc/hosts auf eigenen TCP server
+Request serial=string response: SERIAL_VALID=1
+
+Used Sources:
+Wikipedia.org/wiki/
+- Telnet
+- NetCat
+- DNS_Spoofing
+3.
+etc/host auf eigenen Server (127.0.0.1) umleiten, server gibt immer SERIAL_VALID=1 zurück, prüft ggf schlüssel auf grobe syntaktische richtigkeit.
+4.
+Adressen über direkte IP auflösen statt über namespaces
+alternativ: Validierungsalgorithmus, random generierter Wert wird vom Client an Server gesendet und dort mit Valid.Alg gehasht, das ergebnis zurückgesendet
+Client prüft ob der Hash korrekt ist und damit auch der Server.
+4.
+1. siehe Code
+2. Max anzahl Versuche begrenzen
+3.
+chipkin.com/articles/telnet-commands
+www.linuxjournal.com/content/sending-email-netcat
+www.ubunuusers.com/host
+www.hacksparrow.com/tcp-socket-programming-in-node-js.html
