@@ -91,7 +91,16 @@ Schutzmaßnahmen gegen diese Angriffsart wären das Begrenzen wie viele Versuche
 Der erste gefundene Key ist 03133700. Alle weiteren Schlüssel sind die nächsten vielfachen dieses Schlüssels, insgesamt 31 Stück.
 \section{TCP-Chat}
 \subsection{}
+Ein UDP Socket wurde erstellt, der auf dem Port 9999 mithört und die empfangenen URL Schnipsel ausgibt. Da immer zufällige URL Schnipsel übertragen werden, speichert unser Programm ab, welche Schnipsel seit Start bereits empfangen wurden und gibt nur neue aus. Nach 200 Empfangenen Schnipseln wird der Socket geschlossen, da die Wahrscheinlichkeit einen Schnipsel noch nicht empfangen zu haben ausreichend gering ist.\\
+URL1: technetwork/; http://www.oracle.com/; java/; socket-140484.html\\
+URL2: /?r=56+basic\%2Fsocket; http://code.google.com/; \\\indent
+\quad p/example-of-servlet/source/browse; /trunk/src/javaLanguage/basic\\
+Hierraus wurden die URLs zusammengesetzt:\\
+\url{http://www.oracle.com/technetwork/java/socket-140484.html}\\
+\url{http://code.google.com/p/example-of-servlet/source/browse/trunk/src/javaLanguage/basic/?r=56+basic\%2Fsocket}
 \subsection{}
+Das Projekt von URL2 wurde Runtergeladen, benötig wurde hiervon der Ordner example-of-servlettrunk\textbackslash src\textbackslash main\textbackslash java\textbackslash javaLanguage\textbackslash basic\textbackslash socket.\\
+SocketThrdServer erzeugt die Graphische Oberfläche und startet die listenSocket Methode. Verbindet sich nun ein Client mit dem Server, wird ein neuer Thread mit einem ClientWorker erzeugt. Der ClientWorker wartet nun auf eine Eingabe vom Client. Sobald er eine erhält gibt er diese als Echo an den Client zurück und fügt die Nachricht der Graphischen Textbox hinzu.
 \subsection{}
 Es wurde eine neue statische Java-Class $MessageManager$ erstellt.
 Besitzt die Methoden um neue Clients zu registrieren und wieder zu entfernen, sowie eine Nachricht an alle bestehenden Clients zu senden.
@@ -104,20 +113,16 @@ class MessageManager {
 	{
 		for(Socket client : connectedClients)
 		{
-			....
-				
+			....			
 				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 				out.println(message);
-
 			....
 		}
 	}
-
 	public synchronized static void registerClient(Socket client)
 	{
 		connectedClients.add(client);
 	}
-
 	public synchronized static void removeClient(Socket client)
 	{
 			connectedClients.remove(client);
@@ -147,18 +152,6 @@ Für die Authentifizierungsfunktion wurde ein $AuthentificationManager$ erstellt
 Dieser hält eine Liste an zugelassenen Users stellt diese statisch für das System zur Verfügung.
 Der ClientWorker prüft nun ob die eingegebenen Daten mit einem User/Passwort-Tupel übereinstimmen und startet nur nach akzeptierter Eingabe die $run()$ Methode.
 \begin{lstlisting}
-class AuthentificationManager {
-	public static Map<String, String> registeredUsers = new HashMap<>();
-
-	public static void initUserbase()
-	{
-		registeredUsers.put("user1", "123");
-		registeredUsers.put("user2", "123");
-	}
-}
-
-...
-
 w = new ClientWorker(server.accept(), textArea);
 AuthentificationManager.initUserbase();
 if(w.verifyUser())
