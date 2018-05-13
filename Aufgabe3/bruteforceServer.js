@@ -1,10 +1,11 @@
 const net = require("net");
 
 var client = new net.Socket();
-const targetIp = "127.0.0.1";
-const port = 80;
-
+const targetIp = "license-server.svslab";
+const port = 1337;
+const logfile = "foundkeys.txt" //file needs to exist to work properly.
 var keygen = 0;
+
 
 client.connect(port, targetIp, function() {
   console.log("Connected on: " + targetIp + ":" + port);
@@ -12,23 +13,23 @@ client.connect(port, targetIp, function() {
   console.log("Kickoff send");
 });
 
-client.on("data", function(data) {
-  //TODO check if send serial was correct
+client.on("data", function(data) { 
   if(data.includes("SERIAL_VALID=1"))
   {
-    console.log("Key found: " + generateSerialKey(keygen));
+    var sKey = generateSerialKey(keygen);
+    console.log("Key found: " + sKey);
+    logFoundKey(sKey);
+  }
+  
+  if(keygen > Math.pow(10, 8))
+  {
+    console.log("Finished!");
   }
   else
   {
-    if(keygen > Math.pow(10, 8))
-    {
-      console.log("I should never be called!")
-    }
-    else
-    {
-      client.write("serial=" + generateSerialKey(keygen));
-    }
-  }
+    keygen++;
+    client.write("serial=" + generateSerialKey(keygen));  
+  } 
 });
 
 
@@ -42,4 +43,17 @@ function generateSerialKey(key)
   }
 
   return key;
+}
+
+function logFoundKey(str)
+{
+			if (!str) return;
+
+			fs.appendFile(logfile, str + "\n", function (err)
+			{
+				if (err)
+				{
+					return console.log(err);
+				}
+			});
 }
