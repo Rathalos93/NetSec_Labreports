@@ -47,13 +47,12 @@ function generateSerialKey(key)
 
 function logFoundKey(str)
 {
-			if (!str) return;
-
-			fs.appendFile(logfile, str + "\n", function (err)
-			{
-				if (err)
-				{
-					return console.log(err);
-				}
-			});
+  if (!str) return;
+  fs.appendFile(logfile, str + "\n", function (err)
+  {
+    if (err)
+    {
+      return console.log(err);
+    }
+  });
 }
