@@ -59,8 +59,29 @@ Client prüft ob der Hash korrekt ist und damit auch der Server.
 4.
 1. siehe Code
 2. Max anzahl Versuche begrenzen
-3.
+3. In VM nodejs installiert (v 4.8.2)
+git repo auf vm runtergeladen, sowie client.class
+/etc/hosts geändert, license-server.svslab auf 127.0.0.1 umgeleitet, spoofserver erfolgreich
+umleitung deaktiviert, bruteforce
+gefundene Schlüssel sind 03133700 und seine nächsten 30 vielfachen (bis 91714470)
+5.
+1.
+Gefundene URL stücke:
+URL1:
+technetwork/
+socket-140484.html
+http://www.oracle.com/
+java/
+http://www.oracle.com/technetwork/java/socket-140484.html
+URL2:
+/?r=56+basic%2Fsocket
+http://code.google.com/
+p/example-of-servlet/source/browse
+/trunk/src/javaLanguage/basic
+http://code.google.com/p/example-of-servlet/source/browse/trunk/src/javaLanguage/basic/?r=56+basic%2Fsocket
+
 chipkin.com/articles/telnet-commands
 www.linuxjournal.com/content/sending-email-netcat
 www.ubunuusers.com/host
 www.hacksparrow.com/tcp-socket-programming-in-node-js.html
+systembash.com (simple udp client)
