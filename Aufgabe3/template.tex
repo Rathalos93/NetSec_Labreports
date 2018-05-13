@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{lineno}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{eurosym}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{units}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{import}
+\usepackage{url}
+\usepackage{amsthm}
+\theoremstyle{plain}
+
+\lstset
+{ %
+  language=R,                     % the language of the code
+  basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+%  keywordstyle=\color{blue},      % keyword style
+%  commentstyle=\color{green},   % comment style
+%  stringstyle=\color{blue},       % string literal style
+  %escapeinside={\%*}{*)},         % if you want to add a comment within your code
+  escapeinside={(*@}{@*)},         
+  morekeywords={*,...}            % if you want to add more keywords to the set
+} 
+
+\title{default title}
+\author{default author \\facculty}
+\date{00/00/0000}
+
+\begin{document}
+\pagenumbering{arabic}
+\maketitle
+\centerline{\rule{1.2\linewidth}{.2pt}}
+\begin{linenumbers}
+\section{HTTP}
+\subsection{}
+\begin{lstlisting}
+telnet man7.org 80
+GET /linux/man-pages/man8/lsof.8.html HTTP/1.1
+Host: www.man7.org
+GET /style.css
+\end{lstlisting}
+\section{SMTP}
+\subsection{}
+Die Verbindung zum Mailhost wurde mit Telnet hergestellt. Zum Erstellen der Mail wurde die Quelle linuxjournal.com verwendet. Als Mailhost wurde die Adresse des Fachbereichs angegeben und eine Informatik Mailadresse sowohl als Absender als auch Empfänger.\\
+Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender \"Unknown Host\" angegeben ist.\\
+Der Versuch vom Mailhost des Fachbereiches aus eine g-mail-Adresse anzugeben schlug mit \"Cannot find your hostname\" fehl. Der Versuch zum Google Host zu verbinden scheiterte aufgrund eines Timeouts.
+\section{DNS-Spoofing}
+\subsection{}
+$serial={}$ erwartet eine Eingabe von bestimmter Länge, andere Eingaben sind nicht valide und es wird ausgegeben, dass die Länge falsch ist. Durch ausprobieren von Eingaben mit aufsteigender Länge wurde herausgefunden, dass die Eingaben die Länge 8 haben müssen. Bei Falschen Eingaben korrekter Länge wird $SERIAL_VALID=0$ zurück gegeben, um die Software zu aktivieren wird also $SERIAL_VALID=1$ als Rückgabe benötigt.
+\subsection{}
+In der Datei /etc/hosts wird license-server.svslab auf 127.0.0.1 umgeleitet, wo der Spoof-Server gestartet wurde. Dieser gibt bei jeder beliebigen Eingabe $SERIAL_VALID=1$ zurück. Die Software lässt sich so ohne Kenntnis eines gültigen Keys aktivieren.
+\subsection{}
+Um sich  gegen Spoofing zu schützen wäre eine Möglichkeit Adressen über die direkte IP aufzulösen statt über Namespaces.\\
+Alternativ könnte auf Client und Server eine Hashfunktion definiert sein. Der Client generiert eine Beliebige Zahl und schickt diese an den Server. Der Server schickt die gehashte Zahl an den Client zurück, woraufhin dieser die Ursprüngliche Zahl ebenfalls hasht und mit der vom Server gehashten Zahl vergleicht. Ist dies korrekt, weiß der Client, dass er mit dem echten Server verbunden ist und kann nun einen Key zur Freischaltung der Software schicken. Da der Client nur als class Datei vorliegt wäre es sehr schwer für einen Angreifer die Hashfunktion heraus zu finden.
+\section{Brute-Force-Angriff}
+\subsection{}
+Der Verwendete Bruteforcer bricht nicht nach dem ersten Schlüssel ab, sondern Schreibt alle gefundenen Schlüssel in eine Datei. Basierend auf den am Whiteboard angeschriebenen Schlüsseln wurde die Annahme getroffen, dass alle Schlüssel auf 00 enden. Die Menge der auszuprobierenden Schlüssel wurde so von $10^8$ auf $10^6$ verringert. Code Siehe Anhang
+\subsection{}
+Schutzmaßnahmen gegen diese Angriffsart wären das Begrenzen wie viele Versuche ein Client hat um falsche Schlüssel zu Schicken oder zu begrenzen wie viele Anfragen mit einem Schlüssel pro Zeiteinheit angenommen werden.
+\subsection{}
+Der erste gefundene Key ist 03133700. Alle weiteren Schlüssel sind die nächsten vielfachen dieses Schlüssels, insgesamt 31 Stück.
+\section{TCP-Chat}
+\subsection{}
+\subsection{}
+\subsection{}
+\subsection{}
+\subsection{}
+\section{Anhang}
+\subsection{Response-Header}
+
+\end{linenumbers}
+\end{document}

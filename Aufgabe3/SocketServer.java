@@ -1,5 +1,5 @@
 //http://java.sun.com/developer/onlineTraining/Programming/BasicJava2/socket.html#server
-package javaLanguage.basic.socket;
+//package javaLanguage.basic.socket;
 
 import java.awt.Color;
 import java.awt.BorderLayout;
