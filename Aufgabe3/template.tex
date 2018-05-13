@@ -91,7 +91,27 @@ Schutzmaßnahmen gegen diese Angriffsart wären das Begrenzen wie viele Versuche
 Der erste gefundene Key ist 03133700. Alle weiteren Schlüssel sind die nächsten vielfachen dieses Schlüssels, insgesamt 31 Stück.
 \section{TCP-Chat}
 \subsection{}
+Ein UDP Socket wurde erstellt, der auf dem Port 9999 mithört und die empfangenen URL Schnipsel ausgibt. Da immer zufällige URL Schnipsel übertragen werden, speichert unser Programm ab, welche Schnipsel seit Start bereits empfangen wurden und gibt nur neue aus. Nach 200 Empfangenen Schnipseln wird der Socket geschlossen, da die Wahrscheinlichkeit einen Schnipsel noch nicht empfangen zu haben ausreichend gering ist.\\
+URL1
+\begin{itemize}
+\item technetwork/
+\item http://www.oracle.com/
+\item java/
+\item socket-140484.html
+\end{itemize}
+URL2
+\begin{itemize}
+\item /?r=56+basic\%2Fsocket
+\item http://code.google.com/
+\item p/example-of-servlet/source/browse
+\item /trunk/src/javaLanguage/basic
+\end{itemize}
+Hierraus wurden die URLs zusammengesetzt:\\
+\url{http://www.oracle.com/technetwork/java/socket-140484.html}\\
+\url{http://code.google.com/p/example-of-servlet/source/browse/trunk/src/javaLanguage/basic/?r=56+basic\%2Fsocket}
 \subsection{}
+Das Projekt von URL2 wurde Runtergeladen, benötig wurde hiervon der Ordner example-of-servlettrunk\textbackslash src\textbackslash main\textbackslash java\textbackslash javaLanguage\textbackslash basic\textbackslash socket.\\
+SocketThrdServer erzeugt die Graphische Oberfläche und startet die listenSocket Methode. Verbindet sich nun ein Client mit dem Server, wird ein neuer Thread mit einem ClientWorker erzeugt. Der ClientWorker wartet nun auf eine Eingabe vom Client. Sobald er eine erhält gibt er diese als Echo an den Client zurück und fügt die Nachricht der Graphischen Textbox hinzu.
 \subsection{}
 \subsection{}
 \subsection{}
