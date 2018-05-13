@@ -171,6 +171,698 @@ if(w.verifyUser())
 \subsection{}
 \section{Anhang}
 \subsection{Response-Header}
-\section{Quellen}
+\begin{lstlisting}
+Trying 213.131.240.174...
+Connected to man7.org.
+Escape character is '^]'.
+GET /style.css HTTP/1.1
+Host: www.man7.org
 
+HTTP/1.1 200 OK
+Date: Thu, 03 May 2018 12:30:17 GMT
+Server: Apache
+Last-Modified: Mon, 30 Apr 2018 19:02:44 GMT
+ETag: "b5d-119c-56b157fabbd00"
+Accept-Ranges: bytes
+Content-Length: 4508
+Connection: close
+Content-Type: text/css
+
+
+/*
+General color scheme:
+#333 Grey for copy text
+
+Links: #336699;
+Links visited state: #4488bb;
+Other Link states: #07488A;
+
+#666 text grey
+#ddd grey
+#BBCCD9 blue grey
+#4488bb lighter blue
+#336699 dk blue
+*/
+
+/*
+that space that you wanted to get rid of is actually space further up here;
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+*/
+
+/* General Styles */
+html, body {   
+    background-color: #fcfcfc;
+    font-family: sans-serif;
+    font-size: 100%;
+    color: #181818;
+}
+
+body {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+h1, h2, h3, h4, h5, h5 {
+    font-family: helvetica, sans-serif;
+    font-weight: normal;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #008000;
+    margin-top: 25px;
+}
+
+h1 {
+/*
+    font-size: 18px;
+*/
+}
+
+h2 {
+/*
+    font-size: 16px;
+*/
+}
+
+h3 {
+    color: #006000;
+    font-style: italic;
+}
+
+p {
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 0.5em;
+}
+
+p {
+    max-width: 750px;
+}
+
+.review-quote blockquote {
+    max-width: 650px;
+    margin-left: 80px;
+}
+
+.review-quote p {
+    border: dashed rgb(250,100,100);
+    background-color: rgb(230,255,230);
+    border-width: 1px;
+    padding: 10px;
+    margin-top: 30px;
+    max-width: 730px;
+
+}
+
+
+li {
+    max-width: 710px;
+}
+
+p.copyright-text {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+pre {
+    margin-left: 8px;
+}
+
+li {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+ul.list-wide li {
+    margin-bottom: 12px;
+}
+
+a {
+    color: #1030ff;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #4080dd;
+}
+
+a:hover, a:focus, a:active {
+    color: red;
+    background-color: #ffe0e0;
+    text-decoration: underline;
+}
+
+/* Preamble */
+
+
+/* End of Interfaces */
+
+a.func {
+    color: red;
+    text-decoration: none;
+}
+a.manpage {
+    color: red;
+    text-decoration: none;
+}
+a.file {
+    color: red;
+    text-decoration: none;
+}
+
+div.lmargin {
+    margin-left: 8px;
+}
+
+pre.code {
+    background-color: #f4f0f4;
+//    font-family: monospace, courier;
+    font-size: 110%;
+    margin-left: 0px;
+    margin-right: 60px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid #AADDAA;
+}
+
+div.nav-bar {
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:3px;
+    padding-bottom:3px;
+    background-color: #e8e8e8;
+}
+
+div.footer {
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:3px;
+    padding-bottom:3px;
+    background-color: #e8e8e8;
+}
+
+hr.nav-end {
+    height:0px;
+    margin-top:0px;
+    color: #0000ff;
+    border-color:#ffffff;
+    width:100%;
+}
+
+hr.start-footer, hr.end-footer {
+    height:0px;
+    margin-top:0px;
+    margin-bottom:0px;
+    color: #0000ff;
+    border-color:#ffffff;
+    width:100%;
+}
+
+p.indented {
+    margin-left: 100px;
+}
+
+
+p.training-text {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+
+    font-weight: bold;
+    font-size: 15px;
+}
+
+strong, span.hl {
+    font-weight: bold;
+    color: #303030;
+}
+
+a.training-link:hover, a.training-link:visited, a.training-link:link,
+a.training-link:active {
+    color: #008000;
+}
+
+a.training-link:hover, a.training-link:active {
+    text-decoration: underline;
+    background-color: #ffd0d0;
+}
+
+/*
+a.training-link {
+    color: #228822;
+}
+*/
+
+p.nav-text {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
+p.nav-text, p.copyright-text {
+    font-size: 15px;
+}
+
+.footer p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.cmd {
+    font-family: monospace;
+    color: darkgreen;
+}
+
+.code {
+    color: darkgreen;
+}
+
+.const {
+    font-family: monospace;
+    color: #330000;
+}
+
+.email {
+    font-family: monospace;
+    color: #000080;
+}
+
+.envvar {
+    font-family: monospace;
+    color: #330000;
+}
+
+.func {
+    font-family: serif;
+    font-style: italic;
+    color: #330000;
+}
+
+.man-page {
+    font-family: serif;
+    font-style: italic;
+    color: darkblue;
+}
+
+.pathname {
+    font-family: monospace;
+    color: darkgreen;
+}
+
+.url {
+    font-family: serif;
+    font-style: italic;
+    color: #440064;
+}
+
+.var {
+    font-family: serif;
+    font-style: italic;
+    color: #330000;
+}
+
+.t-del {
+    text-decoration: line-through;
+    border-bottom: 3px double #ff0000;
+    background-color: #ffcccc;
+}
+
+.t-add {
+    border-bottom: 3px double #00ff00;
+    background-color: #ccffcc;
+}
+
+hr.errata-expl {
+    border: 1px solid;
+    color: #006600;
+    height: 2px;
+    width: 90%;
+}
+
+hr.prod-comment {
+    border: 0.3px solid;
+    color: #4040aa;
+    height: 0px;
+    width: 90%;
+}
+Connection closed by foreign host.
+\end{lstlisting}
+\subsection{fakeServer.js}
+\begin{lstlisting}
+const net = require("net");
+
+
+const HOST = '127.0.0.1';
+const PORT = 1337;
+
+net.createServer(function(sock) {
+
+	console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
+
+	// Add a 'data' event handler to this instance of socket
+	sock.on('data', function(data) {
+
+		console.log('DATA ' + sock.remoteAddress + ': ' + data);
+		// Write the data back to the socket, the client will receive it as data from the server
+		sock.write("SERIAL_VALID=1");
+
+	});
+
+	// Add a 'close' event handler to this instance of socket
+	sock.on('close', function(data) {
+		console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
+	});
+
+}).listen(PORT, HOST);
+
+console.log('Server listening on ' + HOST +':'+ PORT);
+\end{lstlisting}
+\subsection{bruteforceClient.js}
+\begin{lstlisting}
+const net = require("net");
+
+var client = new net.Socket();
+const targetIp = "license-server.svslab";
+const port = 1337;
+const logfile = "foundkeys.txt" //file needs to exist to work properly.
+var keygen = 0;
+
+
+client.connect(port, targetIp, function() {
+  console.log("Connected on: " + targetIp + ":" + port);
+  client.write("Kickoff");
+  console.log("Kickoff send");
+});
+
+client.on("data", function(data) { 
+  if(data.includes("SERIAL_VALID=1"))
+  {
+    var sKey = generateSerialKey(keygen);
+    console.log("Key found: " + sKey);
+    logFoundKey(sKey);
+  }
+  
+  if(keygen > Math.pow(10, 6))
+  {
+    console.log("Finished!");
+  }
+  else
+  {
+    keygen++;
+    client.write("serial=" + generateSerialKey(keygen));  
+  } 
+});
+
+
+function generateSerialKey(key)
+{
+  const digits = key.toString().length();
+
+  while(key.toString().length() < 6)
+  {
+    key = "0" + key;
+  }
+
+  return key + "00";
+}
+
+function logFoundKey(str)
+{
+  if (!str) return;
+  fs.appendFile(logfile, str + "\n", function (err)
+  {
+    if (err)
+    {
+      return console.log(err);
+    }
+  });
+}
+\end{lstlisting}
+\subsection{UDP-Client.java}
+\begin{lstlisting}
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+class UDPClient
+{
+   public static void main(String args[]) throws Exception
+   {
+
+      DatagramSocket clientSocket = new DatagramSocket(9999);
+      InetAddress IPAddress = InetAddress.getByName("10.1.1.1");
+      
+      ArrayList<String> alreadyReceived = new ArrayList<>();
+      
+      int c = 0;
+      while(c < 200)
+      {
+         byte[] receiveData = new byte[2048];
+         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+         clientSocket.receive(receivePacket);
+         String modifiedSentence = new String(receivePacket.getData());
+      
+         c++;
+         
+         if(!alreadyReceived.contains(modifiedSentence))
+         {
+           System.out.println("FROM SERVER:" + modifiedSentence);
+           alreadyReceived.add(modifiedSentence);
+         }
+      }
+      clientSocket.close(); 
+   }
+}
+\end{lstlisting}
+\subsection{SocketThrdServer.java}
+\begin{lstlisting}
+//package javaLanguage.basic.socket;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
+import java.net.ServerSocket;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.event.*;
+import javax.swing.*;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+class SocketThrdServer extends JFrame{
+
+	   JLabel label = new JLabel("Text received over socket:");
+	   JPanel panel;
+	   JTextArea textArea = new JTextArea();
+	   ServerSocket server = null;
+
+
+
+	   SocketThrdServer(){ //Begin Constructor
+	     panel = new JPanel();
+	     panel.setLayout(new BorderLayout());
+	     panel.setBackground(Color.white);
+	     getContentPane().add(panel);
+	     panel.add("North", label);
+	     panel.add("Center", textArea);
+	   } //End Constructor
+
+	  public void listenSocket(){
+	    try{
+	      server = new ServerSocket(4444);
+	    } catch (IOException e) {
+	      System.out.println("Could not listen on port 4444");
+	      System.exit(-1);
+	    }
+	    while(true){
+	      ClientWorker w;
+	      try{
+	        w = new ClientWorker(server.accept(), textArea);
+
+					AuthentificationManager.initUserbase();
+					if(w.verifyUser())
+					{
+						MessageManager.registerClient(w.getClient());
+		        Thread t = new Thread(w);
+		        t.start();
+					}
+
+	      } catch (IOException e) {
+	        System.out.println("Accept failed: 4444");
+	        System.exit(-1);
+	      }
+	    }
+	  }
+
+	  protected void finalize(){
+	//Objects created in run method are finalized when
+	//program terminates and thread exits
+	     try{
+	        server.close();
+	    } catch (IOException e) {
+	        System.out.println("Could not close socket");
+	        System.exit(-1);
+	    }
+	  }
+
+	  public static void main(String[] args){
+	        SocketThrdServer frame = new SocketThrdServer();
+		frame.setTitle("Server Program");
+	        WindowListener l = new WindowAdapter() {
+	                public void windowClosing(WindowEvent e) {
+	                        System.exit(0);
+	                }
+	        };
+	        frame.addWindowListener(l);
+	        frame.pack();
+	        frame.setVisible(true);
+	        frame.listenSocket();
+	  }
+	}
+
+	class ClientWorker implements Runnable {
+	  private Socket client;
+	  private JTextArea textArea;
+
+	  ClientWorker(Socket client, JTextArea textArea) {
+	   this.client = client;
+	   this.textArea = textArea;
+	  }
+
+		public Socket getClient()
+		{
+			return client;
+		}
+
+		public boolean verifyUser()
+		{
+			String username = "!";
+			String password = "!";
+		 	BufferedReader in = null;
+		 	PrintWriter out = null;
+
+			try{
+			 in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			 out = new PrintWriter(client.getOutputStream(), true);
+
+			 out.println("USERNAME: ");
+			 username = in.readLine();
+
+			 out.println("PASSWORD: ");
+			 password = in.readLine();
+
+		 } catch (IOException e) {
+			 System.out.println("in or out failed");
+			 System.exit(-1);
+		 }
+
+		 return checkUserPassword(username, password);
+		}
+
+		private boolean checkUserPassword(String user, String password)
+		{
+			for (Map.Entry<String, String> entry : AuthentificationManager.registeredUsers.entrySet())
+			{
+				if(user.equals(entry.getKey()) && password.equals(entry.getValue()))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+	  public void run(){
+	    String line;
+	    BufferedReader in = null;
+	    PrintWriter out = null;
+	    try{
+	      in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+	      out = new PrintWriter(client.getOutputStream(), true);
+	    } catch (IOException e) {
+	      System.out.println("in or out failed");
+	      System.exit(-1);
+	    }
+
+			out.println("Successfully logged in!");
+			
+	    while(true){
+	      try{
+	        line = in.readLine();
+	//Send data back to client
+	         //out.println(line);
+					 MessageManager.sendMessage(line);
+	         textArea.append(line + "\n");
+	       } catch (IOException e) {
+	         System.out.println("Read failed");
+	         System.exit(-1);
+	       }
+	    }
+	  }
+	}
+
+	class MessageManager {
+		private static ArrayList<Socket> connectedClients = new ArrayList<>();
+
+		public synchronized static void sendMessage(String message)
+		{
+			for(Socket client : connectedClients)
+			{
+				try
+				{
+					PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+					out.println(message);
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+					System.out.println("Error occurred, when broadcasting");
+				}
+			}
+		}
+
+		public synchronized static void registerClient(Socket client)
+		{
+			connectedClients.add(client);
+		}
+
+		public synchronized static void removeClient(Socket client)
+		{
+			connectedClients.remove(client);
+		}
+	}
+
+	class AuthentificationManager {
+		public static Map<String, String> registeredUsers = new HashMap<>();
+
+		public static void initUserbase()
+		{
+			registeredUsers.put("user1", "123");
+			registeredUsers.put("user2", "123");
+		}
+}
+\end{lstlisting}
+\section{Quellen}
+\begin{thebibliography}{50}
+\bibitem[telnet]{Telnet} Telnet, \url{www.chipkin.com/articles/telnet-commands}	
+\bibitem [Linuxjournal]{7655} Mails via netcat, \url{www.linuxjournal.com/content/sending-email-netcat}	
+\bibitem [Ubuntuusers]{7655} /etc/hosts, \url{www.ubunuusers.com/host}	
+\bibitem [Hacksparrow]{7655} tcp, \url{www.hacksparrow.com/tcp-socket-programming-in-node-js.html}	
+\bibitem [Systembash]{7655}udp,\url{https://systembash.com/a-simple-java-udp-server-and-udp-client/}	
+\end{thebibliography}
 \end{document}
