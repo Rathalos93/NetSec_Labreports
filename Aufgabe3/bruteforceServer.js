@@ -21,7 +21,7 @@ client.on("data", function(data) {
     logFoundKey(sKey);
   }
   
-  if(keygen > Math.pow(10, 8))
+  if(keygen > Math.pow(10, 6))
   {
     console.log("Finished!");
   }
@@ -37,12 +37,12 @@ function generateSerialKey(key)
 {
   const digits = key.toString().length();
 
-  while(key.toString().length() < 8)
+  while(key.toString().length() < 6)
   {
     key = "0" + key;
   }
 
-  return key;
+  return key + "00";
 }
 
 function logFoundKey(str)
