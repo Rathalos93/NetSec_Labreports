@@ -92,20 +92,9 @@ Der erste gefundene Key ist 03133700. Alle weiteren Schlüssel sind die nächste
 \section{TCP-Chat}
 \subsection{}
 Ein UDP Socket wurde erstellt, der auf dem Port 9999 mithört und die empfangenen URL Schnipsel ausgibt. Da immer zufällige URL Schnipsel übertragen werden, speichert unser Programm ab, welche Schnipsel seit Start bereits empfangen wurden und gibt nur neue aus. Nach 200 Empfangenen Schnipseln wird der Socket geschlossen, da die Wahrscheinlichkeit einen Schnipsel noch nicht empfangen zu haben ausreichend gering ist.\\
-URL1
-\begin{itemize}
-\item technetwork/
-\item http://www.oracle.com/
-\item java/
-\item socket-140484.html
-\end{itemize}
-URL2
-\begin{itemize}
-\item /?r=56+basic\%2Fsocket
-\item http://code.google.com/
-\item p/example-of-servlet/source/browse
-\item /trunk/src/javaLanguage/basic
-\end{itemize}
+URL1: technetwork/; http://www.oracle.com/; java/; socket-140484.html\\
+URL2: /?r=56+basic\%2Fsocket; http://code.google.com/; \\\indent
+\quad p/example-of-servlet/source/browse; /trunk/src/javaLanguage/basic\\
 Hierraus wurden die URLs zusammengesetzt:\\
 \url{http://www.oracle.com/technetwork/java/socket-140484.html}\\
 \url{http://code.google.com/p/example-of-servlet/source/browse/trunk/src/javaLanguage/basic/?r=56+basic\%2Fsocket}
@@ -124,20 +113,16 @@ class MessageManager {
 	{
 		for(Socket client : connectedClients)
 		{
-			....
-				
+			....			
 				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 				out.println(message);
-
 			....
 		}
 	}
-
 	public synchronized static void registerClient(Socket client)
 	{
 		connectedClients.add(client);
 	}
-
 	public synchronized static void removeClient(Socket client)
 	{
 			connectedClients.remove(client);
@@ -167,18 +152,6 @@ Für die Authentifizierungsfunktion wurde ein $AuthentificationManager$ erstellt
 Dieser hält eine Liste an zugelassenen Users stellt diese statisch für das System zur Verfügung.
 Der ClientWorker prüft nun ob die eingegebenen Daten mit einem User/Passwort-Tupel übereinstimmen und startet nur nach akzeptierter Eingabe die $run()$ Methode.
 \begin{lstlisting}
-class AuthentificationManager {
-	public static Map<String, String> registeredUsers = new HashMap<>();
-
-	public static void initUserbase()
-	{
-		registeredUsers.put("user1", "123");
-		registeredUsers.put("user2", "123");
-	}
-}
-
-...
-
 w = new ClientWorker(server.accept(), textArea);
 AuthentificationManager.initUserbase();
 if(w.verifyUser())
