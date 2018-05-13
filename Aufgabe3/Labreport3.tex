@@ -25,7 +25,7 @@
 
 \lstset
 { %
-  language=R,                     % the language of the code
+  language=Java,                     % the language of the code
   basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
   numbers=left,                   % where to put the line-numbers
   numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
@@ -57,10 +57,10 @@
 \date{00/00/0000}
 
 \begin{document}
+\shorthandoff{"}
 \pagenumbering{arabic}
 \maketitle
 \centerline{\rule{1.2\linewidth}{.2pt}}
-\begin{linenumbers}
 \section{HTTP}
 \subsection{}
 \begin{lstlisting}
@@ -72,13 +72,13 @@ GET /style.css
 \section{SMTP}
 \subsection{}
 Die Verbindung zum Mailhost wurde mit Telnet hergestellt. Zum Erstellen der Mail wurde die Quelle linuxjournal.com verwendet. Als Mailhost wurde die Adresse des Fachbereichs angegeben und eine Informatik Mailadresse sowohl als Absender als auch Empfänger.\\
-Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender \"Unknown Host\" angegeben ist.\\
+Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender "Unknown Host" angegeben ist.\\
 Der Versuch vom Mailhost des Fachbereiches aus eine g-mail-Adresse anzugeben schlug mit \"Cannot find your hostname\" fehl. Der Versuch zum Google Host zu verbinden scheiterte aufgrund eines Timeouts.
 \section{DNS-Spoofing}
 \subsection{}
-$serial={}$ erwartet eine Eingabe von bestimmter Länge, andere Eingaben sind nicht valide und es wird ausgegeben, dass die Länge falsch ist. Durch ausprobieren von Eingaben mit aufsteigender Länge wurde herausgefunden, dass die Eingaben die Länge 8 haben müssen. Bei Falschen Eingaben korrekter Länge wird $SERIAL_VALID=0$ zurück gegeben, um die Software zu aktivieren wird also $SERIAL_VALID=1$ als Rückgabe benötigt.
+$serial={}$ erwartet eine Eingabe von bestimmter Länge, andere Eingaben sind nicht valide und es wird ausgegeben, dass die Länge falsch ist. Durch ausprobieren von Eingaben mit aufsteigender Länge wurde herausgefunden, dass die Eingaben die Länge 8 haben müssen. Bei Falschen Eingaben korrekter Länge wird $SERIAL\_VALID=0$ zurück gegeben, um die Software zu aktivieren wird also $SERIAL\_VALID=1$ als Rückgabe benötigt.
 \subsection{}
-In der Datei /etc/hosts wird license-server.svslab auf 127.0.0.1 umgeleitet, wo der Spoof-Server gestartet wurde. Dieser gibt bei jeder beliebigen Eingabe $SERIAL_VALID=1$ zurück. Die Software lässt sich so ohne Kenntnis eines gültigen Keys aktivieren.
+In der Datei /etc/hosts wird license-server.svslab auf 127.0.0.1 umgeleitet, wo der Spoof-Server gestartet wurde. Dieser gibt bei jeder beliebigen Eingabe $SERIAL\_VALID=1$ zurück. Die Software lässt sich so ohne Kenntnis eines gültigen Keys aktivieren.
 \subsection{}
 Um sich  gegen Spoofing zu schützen wäre eine Möglichkeit Adressen über die direkte IP aufzulösen statt über Namespaces.\\
 Alternativ könnte auf Client und Server eine Hashfunktion definiert sein. Der Client generiert eine Beliebige Zahl und schickt diese an den Server. Der Server schickt die gehashte Zahl an den Client zurück, woraufhin dieser die Ursprüngliche Zahl ebenfalls hasht und mit der vom Server gehashten Zahl vergleicht. Ist dies korrekt, weiß der Client, dass er mit dem echten Server verbunden ist und kann nun einen Key zur Freischaltung der Software schicken. Da der Client nur als class Datei vorliegt wäre es sehr schwer für einen Angreifer die Hashfunktion heraus zu finden.
@@ -93,10 +93,84 @@ Der erste gefundene Key ist 03133700. Alle weiteren Schlüssel sind die nächste
 \subsection{}
 \subsection{}
 \subsection{}
+Es wurde eine neue statische Java-Class $MessageManager$ erstellt.
+Besitzt die Methoden um neue Clients zu registrieren und wieder zu entfernen, sowie eine Nachricht an alle bestehenden Clients zu senden.
+Da die Funktionen des $MessageManager$ zeitgleich von mehreren Threads verwendet werden wird das Schlüsselwort $synchronized$ benötigt um einen sicheren Zugriff zu gewährleisten.
+\begin{lstlisting}
+class MessageManager {
+	private static ArrayList<Socket> connectedClients = new ArrayList<>();
+
+	public synchronized static void sendMessage(String message)
+	{
+		for(Socket client : connectedClients)
+		{
+			....
+				
+				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+				out.println(message);
+
+			....
+		}
+	}
+
+	public synchronized static void registerClient(Socket client)
+	{
+		connectedClients.add(client);
+	}
+
+	public synchronized static void removeClient(Socket client)
+	{
+			connectedClients.remove(client);
+	}
+}
+\end{lstlisting}
+Beim Erstellen einer neuen Client-Verbindung wird der Client nun zu den verbundenen Clients hinzugefügt.
+\begin{lstlisting}
+ClientWorker w;
+	try {
+		w = new ClientWorker(server.accept(), textArea);
+		MessageManager.registerClient(w.getClient());
+		Thread t = new Thread(w);
+		t.start();
+	}
+\end{lstlisting}
+In der $run()$ Methode wird nun anstatt des PrintWriters die sendMessage() Funktion verwendet.
+\begin{lstlisting}
+	line = in.readLine();
+	//Send data back to client
+	//out.println(line);
+	MessageManager.sendMessage(line);
+	textArea.append(line + "\n");
+\end{lstlisting}
 \subsection{}
+Für die Authentifizierungsfunktion wurde ein $AuthentificationManager$ erstellt.
+Dieser hält eine Liste an zugelassenen Users stellt diese statisch für das System zur Verfügung.
+Der ClientWorker prüft nun ob die eingegebenen Daten mit einem User/Passwort-Tupel übereinstimmen und startet nur nach akzeptierter Eingabe die $run()$ Methode.
+\begin{lstlisting}
+class AuthentificationManager {
+	public static Map<String, String> registeredUsers = new HashMap<>();
+
+	public static void initUserbase()
+	{
+		registeredUsers.put("user1", "123");
+		registeredUsers.put("user2", "123");
+	}
+}
+
+...
+
+w = new ClientWorker(server.accept(), textArea);
+AuthentificationManager.initUserbase();
+if(w.verifyUser())
+{
+	MessageManager.registerClient(w.getClient());
+	Thread t = new Thread(w);
+	t.start();
+}
+\end{lstlisting}
 \subsection{}
 \section{Anhang}
 \subsection{Response-Header}
+\section{Quellen}
 
-\end{linenumbers}
 \end{document}
