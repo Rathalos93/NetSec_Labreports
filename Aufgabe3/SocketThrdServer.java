@@ -51,9 +51,15 @@ class SocketThrdServer extends JFrame{
 	      ClientWorker w;
 	      try{
 	        w = new ClientWorker(server.accept(), textArea);
-					MessageManager.registerClient(w.getClient());
-	        Thread t = new Thread(w);
-	        t.start();
+
+					AuthentificationManager.initUserbase();
+					if(w.verifyUser())
+					{
+						MessageManager.registerClient(w.getClient());
+		        Thread t = new Thread(w);
+		        t.start();
+					}
+
 	      } catch (IOException e) {
 	        System.out.println("Accept failed: 4444");
 	        System.exit(-1);
@@ -101,6 +107,43 @@ class SocketThrdServer extends JFrame{
 			return client;
 		}
 
+		public boolean verifyUser()
+		{
+			String username = "!";
+			String password = "!";
+		 	BufferedReader in = null;
+		 	PrintWriter out = null;
+
+			try{
+			 in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			 out = new PrintWriter(client.getOutputStream(), true);
+
+			 out.println("USERNAME: ");
+			 username = in.readLine();
+
+			 out.println("PASSWORD: ");
+			 password = in.readLine();
+
+		 } catch (IOException e) {
+			 System.out.println("in or out failed");
+			 System.exit(-1);
+		 }
+
+		 return checkUserPassword(username, password);
+		}
+
+		private boolean checkUserPassword(String user, String password)
+		{
+			for (Map.Entry<String, String> entry : AuthentificationManager.registeredUsers.entrySet())
+			{
+				if(user.equals(entry.getKey()) && password.equals(entry.getValue()))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 	  public void run(){
 	    String line;
 	    BufferedReader in = null;
@@ -113,6 +156,8 @@ class SocketThrdServer extends JFrame{
 	      System.exit(-1);
 	    }
 
+			out.println("Successfully logged in!");
+			
 	    while(true){
 	      try{
 	        line = in.readLine();
@@ -156,5 +201,15 @@ class SocketThrdServer extends JFrame{
 		public synchronized static void removeClient(Socket client)
 		{
 			connectedClients.remove(client);
+		}
+	}
+
+	class AuthentificationManager {
+		public static Map<String, String> registeredUsers = new HashMap<>();
+
+		public static void initUserbase()
+		{
+			registeredUsers.put("user1", "123");
+			registeredUsers.put("user2", "123");
 		}
 	}
