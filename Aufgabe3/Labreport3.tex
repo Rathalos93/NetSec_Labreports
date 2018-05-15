@@ -52,7 +52,7 @@
   morekeywords={*,...}            % if you want to add more keywords to the set
 } 
 
-\title{Blatt 3}
+\title{Blatt 3: TCP/UDP}
 \author{Kolja Hopfmann, Jonas Sander}
 \date{\today}
 
@@ -71,9 +71,7 @@ GET /style.css
 \end{lstlisting}
 \section{SMTP}
 \subsection{}
-Die Verbindung zum Mailhost wurde mit Telnet hergestellt. Zum Erstellen der Mail wurde die Quelle linuxjournal.com verwendet. Als Mailhost wurde die Adresse des Fachbereichs angegeben und eine Informatik Mailadresse sowohl als Absender als auch Empfänger.\\
-Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender "Unknown Host" angegeben ist.\\
-Der Versuch vom Mailhost des Fachbereiches aus eine g-mail-Adresse anzugeben schlug mit \"Cannot find your hostname\" fehl. Der Versuch zum Google Host zu verbinden scheiterte aufgrund eines Timeouts.
+Die Verbindung zum Mailhost wurde mit Telnet hergestellt. Zum Erstellen der Mail wurde die Quelle linuxjournal.com verwendet. Als Mailhost wurde die Adresse des Fachbereichs angegeben und eine Informatik Mailadresse sowohl als Absender als auch Empfänger. Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender "Unknown Host" angegeben ist. Der Versuch vom Mailhost des Fachbereiches aus eine g-mail-Adresse anzugeben schlug mit \"Cannot find your hostname\" fehl. Der Versuch zum Google Host zu verbinden scheiterte aufgrund eines Timeouts.
 \section{DNS-Spoofing}
 \subsection{}
 $serial={}$ erwartet eine Eingabe von bestimmter Länge, andere Eingaben sind nicht valide und es wird ausgegeben, dass die Länge falsch ist. Durch ausprobieren von Eingaben mit aufsteigender Länge wurde herausgefunden, dass die Eingaben die Länge 8 haben müssen. Bei Falschen Eingaben korrekter Länge wird $SERIAL\_VALID=0$ zurück gegeben, um die Software zu aktivieren wird also $SERIAL\_VALID=1$ als Rückgabe benötigt.
@@ -109,7 +107,6 @@ Da die Funktionen des $MessageManager$ zeitgleich von mehreren Threads verwendet
 \begin{lstlisting}
 class MessageManager {
 	private static ArrayList<Socket> connectedClients = new ArrayList<>();
-
 	public synchronized static void sendMessage(String message)
 	{
 		for(Socket client : connectedClients)
@@ -149,7 +146,6 @@ Der ClientWorker prüft nun ob die eingegebenen Daten mit einem User/Passwort-Tu
 \begin{lstlisting}
 class AuthentificationManager {
 	public static Map<String, String> registeredUsers = new HashMap<>();
-
 	public static void initUserbase()
 	...
 }
@@ -158,16 +154,7 @@ if(this.verifyUser())
 {
 	MessageManager.registerClient(client);
 	while(true){
-	try {
-		line = in.readLine();
-		//Send data back to client
-		//out.println(line);
-		MessageManager.sendMessage(line);
-		textArea.append(line + "\n");
-		} catch (IOException e) {
-		System.out.println("Read failed");
-		System.exit(-1);
-		}
+	...
 	 }
 }
 \end{lstlisting}
