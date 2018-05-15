@@ -53,12 +53,9 @@ class SocketThrdServer extends JFrame{
 	        w = new ClientWorker(server.accept(), textArea);
 
 					AuthentificationManager.initUserbase();
-					if(w.verifyUser())
-					{
-						MessageManager.registerClient(w.getClient());
-		        Thread t = new Thread(w);
-		        t.start();
-					}
+
+		      Thread t = new Thread(w);
+		      t.start();
 
 	      } catch (IOException e) {
 	        System.out.println("Accept failed: 4444");
@@ -96,10 +93,12 @@ class SocketThrdServer extends JFrame{
 	class ClientWorker implements Runnable {
 	  private Socket client;
 	  private JTextArea textArea;
+		private Long lastLoginAttempt;
 
 	  ClientWorker(Socket client, JTextArea textArea) {
 	   this.client = client;
 	   this.textArea = textArea;
+		 lastLoginAttempt = 0L;
 	  }
 
 		public Socket getClient()
@@ -114,22 +113,40 @@ class SocketThrdServer extends JFrame{
 		 	BufferedReader in = null;
 		 	PrintWriter out = null;
 
-			try{
-			 in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			 out = new PrintWriter(client.getOutputStream(), true);
+			while(!checkUserPassword(username, password))
+			{
+				try {
+				 in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+				 out = new PrintWriter(client.getOutputStream(), true);
 
-			 out.println("USERNAME: ");
-			 username = in.readLine();
+				 String usernameAttempt = "";
+				 String passwordAttempt = "";
+				 out.println("USERNAME: ");
+				 usernameAttempt = in.readLine();
+				 out.println("PASSWORD: ");
+				 passwordAttempt = in.readLine();
 
-			 out.println("PASSWORD: ");
-			 password = in.readLine();
+				 Long now = new Date().getTime();
+				 if(lastLoginAttempt > now - 1000)
+  				{
+  					out.println("Too many login attempts!");
+  				}
+					else
+					{
+						lastLoginAttempt = now;
+						username = usernameAttempt;
+						password = passwordAttempt;
+					}
 
-		 } catch (IOException e) {
-			 System.out.println("in or out failed");
-			 System.exit(-1);
-		 }
+			 } catch (IOException e) {
+				 System.out.println("in or out failed");
+				 System.exit(-1);
+			 }
+			}
 
-		 return checkUserPassword(username, password);
+
+			out.println("Successfully logged in!");
+			return true;
 		}
 
 		private boolean checkUserPassword(String user, String password)
@@ -156,20 +173,23 @@ class SocketThrdServer extends JFrame{
 	      System.exit(-1);
 	    }
 
-			out.println("Successfully logged in!");
-			
-	    while(true){
-	      try{
-	        line = in.readLine();
-	//Send data back to client
-	         //out.println(line);
-					 MessageManager.sendMessage(line);
-	         textArea.append(line + "\n");
-	       } catch (IOException e) {
-	         System.out.println("Read failed");
-	         System.exit(-1);
-	       }
-	    }
+			if(this.verifyUser())
+			{
+				MessageManager.registerClient(client);
+				while(true){
+		      try{
+		        line = in.readLine();
+						//Send data back to client
+		         //out.println(line);
+						 MessageManager.sendMessage(line);
+		         textArea.append(line + "\n");
+		       } catch (IOException e) {
+		         System.out.println("Read failed");
+		         System.exit(-1);
+		       }
+		    }
+			}
+
 	  }
 	}
 
