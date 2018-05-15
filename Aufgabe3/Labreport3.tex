@@ -63,12 +63,7 @@
 \centerline{\rule{1.2\linewidth}{.2pt}}
 \section{HTTP}
 \subsection{}
-\begin{lstlisting}
-telnet man7.org 80
-GET /linux/man-pages/man8/lsof.8.html HTTP/1.1
-Host: www.man7.org
-GET /style.css
-\end{lstlisting}
+Telnet wurde gestartet und über Port 80 mit man7.org verbunden. Der URL-Pfad wurde mit HTTP/1.1 angefordert und anschließend style.css angefordert, siehe Anhang.
 \section{SMTP}
 \subsection{}
 Die Verbindung zum Mailhost wurde mit Telnet hergestellt. Zum Erstellen der Mail wurde die Quelle linuxjournal.com verwendet. Als Mailhost wurde die Adresse des Fachbereichs angegeben und eine Informatik Mailadresse sowohl als Absender als auch Empfänger. Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender "Unknown Host" angegeben ist. Der Versuch vom Mailhost des Fachbereiches aus eine g-mail-Adresse anzugeben schlug mit \"Cannot find your hostname\" fehl. Der Versuch zum Google Host zu verbinden scheiterte aufgrund eines Timeouts.
