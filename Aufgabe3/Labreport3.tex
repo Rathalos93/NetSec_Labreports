@@ -175,6 +175,7 @@ if(this.verifyUser())
 }
 \end{lstlisting}
 \subsection{}
+Um vor Bruteforce Angriffen zu schützen wurde der Clientworker erweitert. Dieser hält nun ein Feld LastLoginAttempt, in dem der Zeitpunkt des letzten zugelassenen Loginversuches gespeichert wird. Kommt es zu einem neuem Loginversuch geprüft ob der gespeicherte Zeitpunkt mindestens 1000ms vor dem Aktuellem Zeitpunkt liegt. Ist des der Fall wird des letzte zugelassene Login aktualisiert und Passwort und User auf Korrektheit geprüft.
 \section{Anhang}
 \subsection{Response-Header}
 \begin{lstlisting}
