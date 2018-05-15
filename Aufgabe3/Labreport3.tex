@@ -107,13 +107,11 @@ Da die Funktionen des $MessageManager$ zeitgleich von mehreren Threads verwendet
 \begin{lstlisting}
 class MessageManager {
 	private static ArrayList<Socket> connectedClients = new ArrayList<>();
-	public synchronized static void sendMessage(String message)
-	{
-		for(Socket client : connectedClients)
-		{
+	public synchronized static void sendMessage(String message){
+		for(Socket client : connectedClients){
 			....			
-				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-				out.println(message);
+			PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+			out.println(message);
 			....
 		}
 	}
@@ -150,8 +148,7 @@ class AuthentificationManager {
 	...
 }
 ...
-if(this.verifyUser())
-{
+if(this.verifyUser()){
 	MessageManager.registerClient(client);
 	while(true){
 	...
