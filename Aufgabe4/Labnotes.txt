@@ -22,11 +22,11 @@ Internet Surfen möglich
 ###2.
 1
 sudo tcpdump -p startet tcp dump, sudo ist nötig, ohne witd tcpdump nicht gefunden
-Felder:
-<timestamp> IP <source IP-Adress and port> > <destination IP Adress and port> Flags [<flags>] <sequence from to, ack number| ack> <tcp window> <packet length>
 2
 sudo tcpdump -p -i any host 192.168.254.44 or 10.1.1.1
 zur Interpretation: Packetpushers Quelle
+Felder:
+<timestamp> IP <source IP-Adress and port> > <destination IP Adress and port> Flags [<flags>] <sequence from to, ack number| ack> <tcp window> <packet length>
 3
 sudo tcpdump -p -i any src 192.168.254.44 or 10.1.1.1 and port 80
 4
