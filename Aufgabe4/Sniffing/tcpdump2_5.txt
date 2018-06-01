@@ -1,0 +1,266 @@
+15:37:11.904675 IP (tos 0x0, ttl 64, id 50174, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [S], cksum 0x2332 (correct), seq 653650674, win 29200, options [mss 1460,sackOK,TS val 2238732 ecr 0,nop,wscale 6], length 0
+E..<..@.@......,
+......P&.........r.#2.........
+.").........
+15:37:11.905309 IP (tos 0x0, ttl 127, id 49198, offset 0, flags [none], proto TCP (6), length 44)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [S.], cksum 0x8168 (correct), seq 462976659, ack 653650675, win 64240, options [mss 1460], length 0
+E..,........
+......,.P....v.&...`....h......
+15:37:11.906327 IP (tos 0x0, ttl 64, id 50175, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x2206 (correct), seq 653650675, ack 462976660, win 29200, length 0
+E..(..@.@......,
+......P&.....v.P.r.".........
+15:37:11.906459 IP (tos 0x0, ttl 64, id 50176, offset 0, flags [DF], proto TCP (6), length 329)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [P.], cksum 0x2e62 (correct), seq 653650675:653650964, ack 462976660, win 29200, length 289: HTTP, length: 289
+	GET /verysecure/ HTTP/1.1
+	Host: 10.1.1.2
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+	Accept-Language: en-US,en;q=0.5
+	Accept-Encoding: gzip, deflate
+	Connection: keep-alive
+	
+E..I..@.@......,
+......P&.....v.P.r..b..GET /verysecure/ HTTP/1.1
+Host: 10.1.1.2
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+
+15:37:11.906592 IP (tos 0x0, ttl 127, id 49199, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [.], cksum 0x9804 (correct), seq 462976660, ack 653650964, win 64240, length 0
+E..(./......
+......,.P....v.&...P.......
+15:37:11.907611 IP (tos 0x0, ttl 127, id 49200, offset 0, flags [none], proto TCP (6), length 742)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [P.], cksum 0x2239 (correct), seq 462976660:462977362, ack 653650964, win 64240, length 702: HTTP, length: 702
+	HTTP/1.1 401 Authorization Required
+	Date: Wed, 16 May 2018 16:03:49 GMT
+	Server: Apache/2.2.17 (Ubuntu)
+	WWW-Authenticate: Basic realm="secure content - you have to enter your credentials"
+	Vary: Accept-Encoding
+	Content-Encoding: gzip
+	Content-Length: 339
+	Keep-Alive: timeout=15, max=100
+	Connection: Keep-Alive
+	Content-Type: text/html; charset=iso-8859-1
+	
+E....0.....	
+......,.P....v.&...P..."9..HTTP/1.1 401 Authorization Required
+Date: Wed, 16 May 2018 16:03:49 GMT
+Server: Apache/2.2.17 (Ubuntu)
+WWW-Authenticate: Basic realm="secure content - you have to enter your credentials"
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 339
+Keep-Alive: timeout=15, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=iso-8859-1
+
+..........u.OK.@....).^.P.I....j..P.hz.....B.....?.....YX.f~o......U.....x..n....`v..&/.8_..S'.b...Y.D..M&j..
+.}..M..2..X.-.6-..g.....	&.D...a.I...j1.eE..8._h.2.Q...T...|-=.&0i..Y..x....9.@P.
+Gl=.$.....rM-;..B.5z.h...=..,..e.`..!Z@).t...Xu..3.....d..A.^z..B..l.....L...............K*e.u..dU#O.4Jna./C.....b...8J...3..],./J	O.R......<......
+15:37:11.907787 IP (tos 0x0, ttl 64, id 50177, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x1a4d (correct), seq 653650964, ack 462977362, win 30186, length 0
+E..(..@.@......,
+......P&.....yRP.u..M........
+15:37:21.649535 IP (tos 0x0, ttl 64, id 50178, offset 0, flags [DF], proto TCP (6), length 376)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [P.], cksum 0xbbad (correct), seq 653650964:653651300, ack 462977362, win 30186, length 336: HTTP, length: 336
+	GET /verysecure/ HTTP/1.1
+	Host: 10.1.1.2
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+	Accept-Language: en-US,en;q=0.5
+	Accept-Encoding: gzip, deflate
+	Connection: keep-alive
+	Authorization: Basic YWxpY2U6c2VocmdlaGVpbQ==
+	
+E..x..@.@......,
+......P&.....yRP.u.....GET /verysecure/ HTTP/1.1
+Host: 10.1.1.2
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Authorization: Basic YWxpY2U6c2VocmdlaGVpbQ==
+
+
+15:37:21.649750 IP (tos 0x0, ttl 127, id 49201, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [.], cksum 0x93f6 (correct), seq 462977362, ack 653651300, win 64240, length 0
+E..(.1......
+......,.P....yR&..dP.......
+15:37:21.650867 IP (tos 0x0, ttl 127, id 49202, offset 0, flags [none], proto TCP (6), length 483)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [P.], cksum 0x08ba (correct), seq 462977362:462977805, ack 653651300, win 64240, length 443: HTTP, length: 443
+	HTTP/1.1 200 OK
+	Date: Wed, 16 May 2018 16:03:58 GMT
+	Server: Apache/2.2.17 (Ubuntu)
+	Last-Modified: Thu, 16 May 2013 08:45:06 GMT
+	ETag: "24a6b-60-4dcd1e21d4dff"
+	Accept-Ranges: bytes
+	Vary: Accept-Encoding
+	Content-Encoding: gzip
+	Content-Length: 106
+	Keep-Alive: timeout=15, max=99
+	Connection: Keep-Alive
+	Content-Type: text/html
+	
+E....2.....
+
+......,.P....yR&..dP.......HTTP/1.1 200 OK
+Date: Wed, 16 May 2018 16:03:58 GMT
+Server: Apache/2.2.17 (Ubuntu)
+Last-Modified: Thu, 16 May 2013 08:45:06 GMT
+ETag: "24a6b-60-4dcd1e21d4dff"
+Accept-Ranges: bytes
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 106
+Keep-Alive: timeout=15, max=99
+Connection: Keep-Alive
+Content-Type: text/html
+
+..........%.1
+.0....S..X.CA'G......h;$
+.^.w.G..=.Z.;R..RO...H2.g5.z...q.'.l*.O...
+...Z.......+|q.....	`...
+15:37:21.652011 IP (tos 0x0, ttl 64, id 50179, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x11c6 (correct), seq 653651300, ack 462977805, win 31590, length 0
+E..(..@.@......,
+......P&..d..{.P.{f..........
+15:37:22.034583 IP (tos 0x0, ttl 64, id 50180, offset 0, flags [DF], proto TCP (6), length 299)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [P.], cksum 0x59c4 (correct), seq 653651300:653651559, ack 462977805, win 31590, length 259: HTTP, length: 259
+	GET /favicon.ico HTTP/1.1
+	Host: 10.1.1.2
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+	Accept: image/png,image/*;q=0.8,*/*;q=0.5
+	Accept-Language: en-US,en;q=0.5
+	Accept-Encoding: gzip, deflate
+	Connection: keep-alive
+	
+E..+..@.@......,
+......P&..d..{.P.{fY...GET /favicon.ico HTTP/1.1
+Host: 10.1.1.2
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+
+15:37:22.034785 IP (tos 0x0, ttl 127, id 49203, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [.], cksum 0x9138 (correct), seq 462977805, ack 653651559, win 64240, length 0
+E..(.3......
+......,.P....{.&..gP....8..
+15:37:22.035376 IP (tos 0x0, ttl 127, id 49204, offset 0, flags [none], proto TCP (6), length 539)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [P.], cksum 0xdb82 (correct), seq 462977805:462978304, ack 653651559, win 64240, length 499: HTTP, length: 499
+	HTTP/1.1 404 Not Found
+	Date: Wed, 16 May 2018 16:03:59 GMT
+	Server: Apache/2.2.17 (Ubuntu)
+	Vary: Accept-Encoding
+	Content-Encoding: gzip
+	Content-Length: 235
+	Keep-Alive: timeout=15, max=98
+	Connection: Keep-Alive
+	Content-Type: text/html; charset=iso-8859-1
+	
+E....4......
+......,.P....{.&..gP.......HTTP/1.1 404 Not Found
+Date: Wed, 16 May 2018 16:03:59 GMT
+Server: Apache/2.2.17 (Ubuntu)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 235
+Keep-Alive: timeout=15, max=98
+Connection: Keep-Alive
+Content-Type: text/html; charset=iso-8859-1
+
+..........M.Ak.0.....ZO.aV.
+....&e....s...U.h..v:...........'~W...g[..|k..V.v..G.m-7...n.....n!2n..,.!.S..x&....s.6n...m.q.M........'u...4...F
+.4t...I]...,	|..6A.	.g!.>@ .%.8..Y.Di.)..2..!,Y..'........g.T."gE..Z.#<.....w...M.f...y.....
+15:37:22.036013 IP (tos 0x0, ttl 64, id 50181, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x0954 (correct), seq 653651559, ack 462978304, win 32994, length 0
+E..(..@.@......,
+......P&..g..}.P...	T........
+15:37:22.052372 IP (tos 0x0, ttl 64, id 50182, offset 0, flags [DF], proto TCP (6), length 329)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [P.], cksum 0x688a (correct), seq 653651559:653651848, ack 462978304, win 32994, length 289: HTTP, length: 289
+	GET /favicon.ico HTTP/1.1
+	Host: 10.1.1.2
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+	Accept-Language: en-US,en;q=0.5
+	Accept-Encoding: gzip, deflate
+	Connection: keep-alive
+	
+E..I..@.@......,
+......P&..g..}.P...h...GET /favicon.ico HTTP/1.1
+Host: 10.1.1.2
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+
+15:37:22.052582 IP (tos 0x0, ttl 127, id 49205, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [.], cksum 0x8e24 (correct), seq 462978304, ack 653651848, win 64240, length 0
+E..(.5......
+......,.P....}.&...P....$..
+15:37:22.053183 IP (tos 0x0, ttl 127, id 49206, offset 0, flags [none], proto TCP (6), length 539)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [P.], cksum 0xd96e (correct), seq 462978304:462978803, ack 653651848, win 64240, length 499: HTTP, length: 499
+	HTTP/1.1 404 Not Found
+	Date: Wed, 16 May 2018 16:03:59 GMT
+	Server: Apache/2.2.17 (Ubuntu)
+	Vary: Accept-Encoding
+	Content-Encoding: gzip
+	Content-Length: 235
+	Keep-Alive: timeout=15, max=97
+	Connection: Keep-Alive
+	Content-Type: text/html; charset=iso-8859-1
+	
+E....6......
+......,.P....}.&...P....n..HTTP/1.1 404 Not Found
+Date: Wed, 16 May 2018 16:03:59 GMT
+Server: Apache/2.2.17 (Ubuntu)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 235
+Keep-Alive: timeout=15, max=97
+Connection: Keep-Alive
+Content-Type: text/html; charset=iso-8859-1
+
+..........M.Ak.0.....ZO.aV.
+....&e....s...U.h..v:...........'~W...g[..|k..V.v..G.m-7...n.....n!2n..,.!.S..x&....s.6n...m.q.M........'u...4...F
+.4t...I]...,	|..6A.	.g!.>@ .%.8..Y.Di.)..2..!,Y..'........g.T."gE..Z.#<.....w...M.f...y.....
+15:37:22.094458 IP (tos 0x0, ttl 64, id 50183, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x00c4 (correct), seq 653651848, ack 462978803, win 34398, length 0
+E..(..@.@......,
+......P&.....~.P..^..........
+15:37:32.078518 IP (tos 0x0, ttl 64, id 50184, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x00c5 (correct), seq 653651847, ack 462978803, win 34398, length 0
+E..(..@.@......,
+......P&.....~.P..^..........
+15:37:32.078844 IP (tos 0x0, ttl 127, id 49207, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [.], cksum 0x8c31 (correct), seq 462978803, ack 653651848, win 64240, length 0
+E..(.7......
+......,.P....~.&...P....1..
+15:37:37.054721 IP (tos 0x0, ttl 64, id 50185, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [F.], cksum 0x00c3 (correct), seq 653651848, ack 462978803, win 34398, length 0
+E..(.	@.@......,
+......P&.....~.P..^..........
+15:37:37.055047 IP (tos 0x0, ttl 127, id 49208, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [.], cksum 0x8c31 (correct), seq 462978803, ack 653651849, win 64239, length 0
+E..(.8......
+......,.P....~.&...P....1..
+15:37:37.055379 IP (tos 0x0, ttl 127, id 49209, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [FP.], cksum 0x8c28 (correct), seq 462978803, ack 653651849, win 64239, length 0
+E..(.9......
+......,.P....~.&...P....(..
+15:37:37.055655 IP (tos 0x0, ttl 64, id 62043, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x00c2 (correct), seq 653651849, ack 462978804, win 34398, length 0
+E..(.[@.@.~....,
+......P&.....~.P..^..........
+

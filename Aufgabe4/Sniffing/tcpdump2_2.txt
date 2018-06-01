@@ -1,0 +1,485 @@
+15:23:21.395179 IP 192.168.254.44.39191 > server.svslab.domain: 38155+ A? google.de. (27)
+15:23:21.395218 IP debian.39191 > server.svslab.domain: 38155+ A? google.de. (27)
+15:23:21.395269 IP 192.168.254.44.39191 > server.svslab.domain: 32616+ AAAA? google.de. (27)
+15:23:21.395275 IP debian.39191 > server.svslab.domain: 32616+ AAAA? google.de. (27)
+15:23:21.397210 IP server.svslab.domain > debian.39191: 38155 1/4/8 A 216.58.213.227 (301)
+15:23:21.397222 IP server.svslab.domain > 192.168.254.44.39191: 38155 1/4/8 A 216.58.213.227 (301)
+15:23:21.397921 IP 192.168.254.44.53013 > server.svslab.domain: 45974+ A? google.de. (27)
+15:23:21.397935 IP debian.53013 > server.svslab.domain: 45974+ A? google.de. (27)
+15:23:21.398480 IP server.svslab.domain > debian.53013: 45974 1/4/8 A 216.58.213.227 (301)
+15:23:21.398495 IP server.svslab.domain > 192.168.254.44.53013: 45974 1/4/8 A 216.58.213.227 (301)
+15:23:21.399920 IP 192.168.254.44.53764 > ham04s01-in-f3.1e100.net.http: Flags [S], seq 3283053340, win 29200, options [mss 1460,sackOK,TS val 2031106 ecr 0,nop,wscale 6], length 0
+15:23:21.415476 IP server.svslab.domain > debian.39191: 32616 1/4/8 AAAA 2a00:1450:4005:80b::2003 (313)
+15:23:21.415501 IP server.svslab.domain > 192.168.254.44.39191: 32616 1/4/8 AAAA 2a00:1450:4005:80b::2003 (313)
+15:23:21.421362 IP ham04s01-in-f3.1e100.net.http > 192.168.254.44.53764: Flags [S.], seq 1565017315, ack 3283053341, win 64240, options [mss 1460], length 0
+15:23:21.422506 IP 192.168.254.44.53764 > ham04s01-in-f3.1e100.net.http: Flags [.], ack 1, win 29200, length 0
+15:23:21.463252 IP 192.168.254.44.46111 > server.svslab.domain: 64397+ A? www.google.de. (31)
+15:23:21.463285 IP debian.46111 > server.svslab.domain: 64397+ A? www.google.de. (31)
+15:23:21.463328 IP 192.168.254.44.46111 > server.svslab.domain: 20119+ AAAA? www.google.de. (31)
+15:23:21.463333 IP debian.46111 > server.svslab.domain: 20119+ AAAA? www.google.de. (31)
+15:23:21.465060 IP server.svslab.domain > debian.46111: 64397 1/4/8 A 216.58.213.227 (305)
+15:23:21.465076 IP server.svslab.domain > 192.168.254.44.46111: 64397 1/4/8 A 216.58.213.227 (305)
+15:23:21.465126 IP server.svslab.domain > debian.46111: 20119 1/4/8 AAAA 2a00:1450:4005:80a::2003 (317)
+15:23:21.465130 IP server.svslab.domain > 192.168.254.44.46111: 20119 1/4/8 AAAA 2a00:1450:4005:80a::2003 (317)
+15:23:21.485565 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [S], seq 3248390911, win 29200, options [mss 1460,sackOK,TS val 2031127 ecr 0,nop,wscale 6], length 0
+15:23:21.507460 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [S.], seq 4194118135, ack 3248390912, win 64240, options [mss 1460], length 0
+15:23:21.508120 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 1, win 29200, length 0
+15:23:21.508363 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1:518, ack 1, win 29200, length 517
+15:23:21.508539 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 518, win 64240, length 0
+15:23:21.530060 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 1:153, ack 518, win 64240, length 152
+15:23:21.530515 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 153, win 30016, length 0
+15:23:21.531036 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 518:569, ack 153, win 30016, length 51
+15:23:21.531235 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 569, win 64240, length 0
+15:23:21.531874 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 569:726, ack 153, win 30016, length 157
+15:23:21.531930 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 726:1129, ack 153, win 30016, length 403
+15:23:21.532031 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 726, win 64240, length 0
+15:23:21.532068 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1129, win 64240, length 0
+15:23:21.613101 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 153:222, ack 1129, win 64240, length 69
+15:23:21.613666 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 222:260, ack 1129, win 64240, length 38
+15:23:21.618622 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1129:1167, ack 260, win 30016, length 38
+15:23:21.618907 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1167, win 64240, length 0
+15:23:21.669853 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 260:625, ack 1167, win 64240, length 365
+15:23:21.669932 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 625:2043, ack 1167, win 64240, length 1418
+15:23:21.670515 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 2043, win 34032, length 0
+15:23:21.670736 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 2043:3503, ack 1167, win 64240, length 1460
+15:23:21.670738 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 3503:4879, ack 1167, win 64240, length 1376
+15:23:21.671237 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 4879, win 39420, length 0
+15:23:21.672161 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 4879:6339, ack 1167, win 64240, length 1460
+15:23:21.672163 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 6339:7715, ack 1167, win 64240, length 1376
+15:23:21.672447 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 7715, win 45260, length 0
+15:23:21.673806 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 7715:9175, ack 1167, win 64240, length 1460
+15:23:21.673809 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 9175:10551, ack 1167, win 64240, length 1376
+15:23:21.674444 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 10551, win 51100, length 0
+15:23:21.675261 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 10551:12011, ack 1167, win 64240, length 1460
+15:23:21.675264 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 12011:13387, ack 1167, win 64240, length 1376
+15:23:21.676106 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 13387, win 56940, length 0
+15:23:21.676534 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 13387:14847, ack 1167, win 64240, length 1460
+15:23:21.676536 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 14847:16223, ack 1167, win 64240, length 1376
+15:23:21.677963 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 16223:17641, ack 1167, win 64240, length 1418
+15:23:21.678458 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 16223, win 61320, length 0
+15:23:21.691434 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 17641:19101, ack 1167, win 64240, length 1460
+15:23:21.691436 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 19101:20477, ack 1167, win 64240, length 1376
+15:23:21.692113 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 20477, win 64240, length 0
+15:23:21.692718 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 20477:21937, ack 1167, win 64240, length 1460
+15:23:21.692720 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 21937:23313, ack 1167, win 64240, length 1376
+15:23:21.694161 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 23313:24731, ack 1167, win 64240, length 1418
+15:23:21.694484 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 23313, win 64240, length 0
+15:23:21.694924 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 24731:26191, ack 1167, win 64240, length 1460
+15:23:21.694925 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 26191:27567, ack 1167, win 64240, length 1376
+15:23:21.695527 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 27567, win 64240, length 0
+15:23:21.696375 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 27567:29027, ack 1167, win 64240, length 1460
+15:23:21.696376 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 29027:30403, ack 1167, win 64240, length 1376
+15:23:21.697845 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 30403:31863, ack 1167, win 64240, length 1460
+15:23:21.697847 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 31863:33239, ack 1167, win 64240, length 1376
+15:23:21.698036 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 30403, win 64240, length 0
+15:23:21.698088 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 33239, win 64240, length 0
+15:23:21.699278 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 33239:34699, ack 1167, win 64240, length 1460
+15:23:21.699279 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 34699:36075, ack 1167, win 64240, length 1376
+15:23:21.700078 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 36075, win 64240, length 0
+15:23:21.700805 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 36075:37535, ack 1167, win 64240, length 1460
+15:23:21.700807 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 37535:38911, ack 1167, win 64240, length 1376
+15:23:21.701058 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 38911, win 64240, length 0
+15:23:21.702184 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 38911:40371, ack 1167, win 64240, length 1460
+15:23:21.702186 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 40371:41747, ack 1167, win 64240, length 1376
+15:23:21.703647 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 41747:43207, ack 1167, win 64240, length 1460
+15:23:21.703648 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 43207:44583, ack 1167, win 64240, length 1376
+15:23:21.704081 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 41747, win 64240, length 0
+15:23:21.704123 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 44583, win 64240, length 0
+15:23:21.705087 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 44583:46043, ack 1167, win 64240, length 1460
+15:23:21.705089 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 46043:47419, ack 1167, win 64240, length 1376
+15:23:21.706431 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 47419, win 64240, length 0
+15:23:21.706498 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 47419:48879, ack 1167, win 64240, length 1460
+15:23:21.706499 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 48879:50255, ack 1167, win 64240, length 1376
+15:23:21.708022 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 50255, win 64240, length 0
+15:23:21.712622 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 50255:51715, ack 1167, win 64240, length 1460
+15:23:21.712624 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 51715:53091, ack 1167, win 64240, length 1376
+15:23:21.713297 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 53091, win 64240, length 0
+15:23:21.713707 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 53091:54551, ack 1167, win 64240, length 1460
+15:23:21.713708 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 54551:55927, ack 1167, win 64240, length 1376
+15:23:21.713972 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 55927, win 64240, length 0
+15:23:21.714727 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 55927:57345, ack 1167, win 64240, length 1418
+15:23:21.714768 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 57345:58763, ack 1167, win 64240, length 1418
+15:23:21.714898 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 58763, win 64240, length 0
+15:23:21.716048 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 58763:60223, ack 1167, win 64240, length 1460
+15:23:21.716049 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 60223:61599, ack 1167, win 64240, length 1376
+15:23:21.716908 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 61599:63059, ack 1167, win 64240, length 1460
+15:23:21.716909 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 63059:64435, ack 1167, win 64240, length 1376
+15:23:21.717931 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 64435:65895, ack 1167, win 64240, length 1460
+15:23:21.717932 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 65895:67271, ack 1167, win 64240, length 1376
+15:23:21.718459 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 61599, win 64240, length 0
+15:23:21.718498 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 64435, win 64240, length 0
+15:23:21.718525 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 67271, win 64240, length 0
+15:23:21.718975 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 67271:68731, ack 1167, win 64240, length 1460
+15:23:21.718976 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 68731:70107, ack 1167, win 64240, length 1376
+15:23:21.720089 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 70107, win 64240, length 0
+15:23:21.720158 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 70107:71567, ack 1167, win 64240, length 1460
+15:23:21.720159 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 71567:72698, ack 1167, win 64240, length 1131
+15:23:21.721051 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 72698, win 64240, length 0
+15:23:21.721236 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1167:1213, ack 72698, win 64240, length 46
+15:23:21.721369 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1213, win 64240, length 0
+15:23:21.751881 IP 192.168.254.44.51895 > server.svslab.domain: 3957+ A? consent.google.com. (36)
+15:23:21.751938 IP debian.51895 > server.svslab.domain: 3957+ A? consent.google.com. (36)
+15:23:21.751977 IP 192.168.254.44.51895 > server.svslab.domain: 13717+ AAAA? consent.google.com. (36)
+15:23:21.751981 IP debian.51895 > server.svslab.domain: 13717+ AAAA? consent.google.com. (36)
+15:23:21.752077 IP 192.168.254.44.43469 > server.svslab.domain: 20153+ A? consent.google.com. (36)
+15:23:21.752091 IP debian.43469 > server.svslab.domain: 20153+ A? consent.google.com. (36)
+15:23:21.753753 IP server.svslab.domain > debian.51895: 3957 1/4/8 A 216.58.213.238 (300)
+15:23:21.753765 IP server.svslab.domain > 192.168.254.44.51895: 3957 1/4/8 A 216.58.213.238 (300)
+15:23:21.753805 IP server.svslab.domain > debian.43469: 20153 1/4/8 A 216.58.213.238 (300)
+15:23:21.753809 IP server.svslab.domain > 192.168.254.44.43469: 20153 1/4/8 A 216.58.213.238 (300)
+15:23:21.755226 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [S], seq 3897589563, win 29200, options [mss 1460,sackOK,TS val 2031195 ecr 0,nop,wscale 6], length 0
+15:23:21.775942 IP server.svslab.domain > debian.51895: 13717 1/4/8 AAAA 2a00:1450:4005:80b::200e (312)
+15:23:21.775954 IP server.svslab.domain > 192.168.254.44.51895: 13717 1/4/8 AAAA 2a00:1450:4005:80b::200e (312)
+15:23:21.779977 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [S.], seq 3996541642, ack 3897589564, win 64240, options [mss 1460], length 0
+15:23:21.783968 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [.], ack 1, win 29200, length 0
+15:23:21.784022 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 1:518, ack 1, win 29200, length 517
+15:23:21.787973 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 518, win 64240, length 0
+15:23:21.807456 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [P.], seq 1:153, ack 518, win 64240, length 152
+15:23:21.808070 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [.], ack 153, win 30016, length 0
+15:23:21.808374 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 518:569, ack 153, win 30016, length 51
+15:23:21.808557 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 569, win 64240, length 0
+15:23:21.808679 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 569:726, ack 153, win 30016, length 157
+15:23:21.808745 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 726:1135, ack 153, win 30016, length 409
+15:23:21.808786 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 726, win 64240, length 0
+15:23:21.808879 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 1135, win 64240, length 0
+15:23:21.829988 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [P.], seq 153:222, ack 1135, win 64240, length 69
+15:23:21.830598 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 1135:1173, ack 222, win 30016, length 38
+15:23:21.830779 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 1173, win 64240, length 0
+15:23:21.851774 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [P.], seq 222:260, ack 1173, win 64240, length 38
+15:23:21.861744 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [P.], seq 260:728, ack 1173, win 64240, length 468
+15:23:21.861941 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [P.], seq 728:812, ack 1173, win 64240, length 84
+15:23:21.862288 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [.], ack 812, win 31088, length 0
+15:23:21.862595 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 1173:1219, ack 812, win 31088, length 46
+15:23:21.862745 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 1219, win 64240, length 0
+15:23:21.897882 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1213:1418, ack 72698, win 64240, length 205
+15:23:21.897953 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1418:1456, ack 72698, win 64240, length 38
+15:23:21.898130 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1418, win 64240, length 0
+15:23:21.898178 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1456, win 64240, length 0
+15:23:21.926947 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 72698:72871, ack 1456, win 64240, length 173
+15:23:21.928394 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1456:1502, ack 72871, win 64240, length 46
+15:23:21.928598 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1502, win 64240, length 0
+15:23:22.248983 IP 192.168.254.44.56150 > server.svslab.domain: 40883+ A? www.gstatic.com. (33)
+15:23:22.249015 IP debian.56150 > server.svslab.domain: 40883+ A? www.gstatic.com. (33)
+15:23:22.249056 IP 192.168.254.44.56150 > server.svslab.domain: 38596+ AAAA? www.gstatic.com. (33)
+15:23:22.249061 IP debian.56150 > server.svslab.domain: 38596+ AAAA? www.gstatic.com. (33)
+15:23:22.250486 IP 192.168.254.44.35383 > server.svslab.domain: 27233+ A? www.gstatic.com. (33)
+15:23:22.250497 IP debian.35383 > server.svslab.domain: 27233+ A? www.gstatic.com. (33)
+15:23:22.250777 IP server.svslab.domain > debian.56150: 40883 1/4/8 A 216.58.213.227 (304)
+15:23:22.250786 IP server.svslab.domain > 192.168.254.44.56150: 40883 1/4/8 A 216.58.213.227 (304)
+15:23:22.250967 IP server.svslab.domain > debian.35383: 27233 1/4/8 A 216.58.213.227 (304)
+15:23:22.250975 IP server.svslab.domain > 192.168.254.44.35383: 27233 1/4/8 A 216.58.213.227 (304)
+15:23:22.251016 IP server.svslab.domain > debian.56150: 38596 1/4/8 AAAA 2a00:1450:4005:80b::2003 (316)
+15:23:22.251021 IP server.svslab.domain > 192.168.254.44.56150: 38596 1/4/8 AAAA 2a00:1450:4005:80b::2003 (316)
+15:23:22.252137 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [S], seq 2616409606, win 29200, options [mss 1460,sackOK,TS val 2031319 ecr 0,nop,wscale 6], length 0
+15:23:22.273697 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [S.], seq 77201661, ack 2616409607, win 64240, options [mss 1460], length 0
+15:23:22.274478 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 1, win 29200, length 0
+15:23:22.274680 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1:518, ack 1, win 29200, length 517
+15:23:22.274871 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [.], ack 518, win 64240, length 0
+15:23:22.296397 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [P.], seq 1:153, ack 518, win 64240, length 152
+15:23:22.296837 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 153, win 30016, length 0
+15:23:22.297165 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 518:569, ack 153, win 30016, length 51
+15:23:22.297359 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [.], ack 569, win 64240, length 0
+15:23:22.298545 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 569:726, ack 153, win 30016, length 157
+15:23:22.298884 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [.], ack 726, win 64240, length 0
+15:23:22.318637 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [P.], seq 153:222, ack 726, win 64240, length 69
+15:23:22.327475 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 726:764, ack 222, win 30016, length 38
+15:23:22.327618 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [.], ack 764, win 64240, length 0
+15:23:22.339783 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35584: Flags [P.], seq 222:260, ack 764, win 64240, length 38
+15:23:22.383990 IP 192.168.254.44.35584 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 260, win 30016, length 0
+15:23:22.480714 IP 192.168.254.44.48552 > server.svslab.domain: 12903+ A? apis.google.com. (33)
+15:23:22.480748 IP debian.48552 > server.svslab.domain: 12903+ A? apis.google.com. (33)
+15:23:22.480792 IP 192.168.254.44.48552 > server.svslab.domain: 10793+ AAAA? apis.google.com. (33)
+15:23:22.480796 IP debian.48552 > server.svslab.domain: 10793+ AAAA? apis.google.com. (33)
+15:23:22.482702 IP server.svslab.domain > debian.48552: 12903 2/4/8 CNAME plus.l.google.com., A 172.217.19.78 (318)
+15:23:22.482712 IP server.svslab.domain > 192.168.254.44.48552: 12903 2/4/8 CNAME plus.l.google.com., A 172.217.19.78 (318)
+15:23:22.482754 IP server.svslab.domain > debian.48552: 10793 2/4/8 CNAME plus.l.google.com., AAAA 2a00:1450:4005:80a::200e (330)
+15:23:22.482759 IP server.svslab.domain > 192.168.254.44.48552: 10793 2/4/8 CNAME plus.l.google.com., AAAA 2a00:1450:4005:80a::200e (330)
+15:23:22.673265 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1502:1688, ack 72871, win 64240, length 186
+15:23:22.673336 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1688:1726, ack 72871, win 64240, length 38
+15:23:22.673505 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1688, win 64240, length 0
+15:23:22.673552 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1726, win 64240, length 0
+15:23:22.702722 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 72871:73042, ack 1726, win 64240, length 171
+15:23:22.704303 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1726:1772, ack 73042, win 65535, length 46
+15:23:22.704459 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 1772, win 64240, length 0
+15:23:22.769095 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 1772:2079, ack 73042, win 65535, length 307
+15:23:22.769166 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2079:2117, ack 73042, win 65535, length 38
+15:23:22.769317 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2079, win 64240, length 0
+15:23:22.769365 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2117, win 64240, length 0
+15:23:22.775590 IP 192.168.254.44.50504 > server.svslab.domain: 19968+ A? adservice.google.de. (37)
+15:23:22.775630 IP debian.50504 > server.svslab.domain: 19968+ A? adservice.google.de. (37)
+15:23:22.775771 IP 192.168.254.44.50504 > server.svslab.domain: 34996+ AAAA? adservice.google.de. (37)
+15:23:22.775777 IP debian.50504 > server.svslab.domain: 34996+ AAAA? adservice.google.de. (37)
+15:23:22.776236 IP server.svslab.domain > debian.50504: 19968 2/4/8 CNAME pagead46.l.doubleclick.net., A 172.217.19.66 (351)
+15:23:22.776246 IP server.svslab.domain > 192.168.254.44.50504: 19968 2/4/8 CNAME pagead46.l.doubleclick.net., A 172.217.19.66 (351)
+15:23:22.776289 IP server.svslab.domain > debian.50504: 34996 2/4/8 CNAME pagead46.l.doubleclick.net., AAAA 2a00:1450:4005:800::2002 (363)
+15:23:22.776294 IP server.svslab.domain > 192.168.254.44.50504: 34996 2/4/8 CNAME pagead46.l.doubleclick.net., AAAA 2a00:1450:4005:800::2002 (363)
+15:23:22.776767 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [S], seq 2557414859, win 29200, options [mss 1460,sackOK,TS val 2031450 ecr 0,nop,wscale 6], length 0
+15:23:22.798180 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [S.], seq 2288500269, ack 2557414860, win 64240, options [mss 1460], length 0
+15:23:22.798482 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [.], ack 1, win 29200, length 0
+15:23:22.799002 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [P.], seq 1:518, ack 1, win 29200, length 517
+15:23:22.799187 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [.], ack 518, win 64240, length 0
+15:23:22.806461 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 73042:73200, ack 2117, win 64240, length 158
+15:23:22.807525 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2117:2163, ack 73200, win 65535, length 46
+15:23:22.807667 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2163, win 64240, length 0
+15:23:22.820733 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [P.], seq 1:153, ack 518, win 64240, length 152
+15:23:22.822535 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [.], ack 153, win 30016, length 0
+15:23:22.822740 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [P.], seq 518:569, ack 153, win 30016, length 51
+15:23:22.822899 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [.], ack 569, win 64240, length 0
+15:23:22.826490 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [P.], seq 569:1110, ack 153, win 30016, length 541
+15:23:22.826690 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [.], ack 1110, win 64240, length 0
+15:23:22.843865 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [P.], seq 153:222, ack 1110, win 64240, length 69
+15:23:22.846489 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [P.], seq 1110:1148, ack 222, win 30016, length 38
+15:23:22.846648 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [.], ack 1148, win 64240, length 0
+15:23:22.865127 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [P.], seq 222:260, ack 1148, win 64240, length 38
+15:23:22.871547 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [P.], seq 260:781, ack 1148, win 64240, length 521
+15:23:22.871625 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [P.], seq 781:865, ack 1148, win 64240, length 84
+15:23:22.872085 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [.], ack 781, win 31088, length 0
+15:23:22.872327 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [P.], seq 1148:1194, ack 865, win 31088, length 46
+15:23:22.872490 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [.], ack 1194, win 64240, length 0
+15:23:23.880579 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2163:2344, ack 73200, win 65535, length 181
+15:23:23.880868 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2344, win 64240, length 0
+15:23:23.948488 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 73200:73660, ack 2344, win 64240, length 460
+15:23:23.948552 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 73660:73971, ack 2344, win 64240, length 311
+15:23:23.949500 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 73971, win 65535, length 0
+15:23:23.949559 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2344:2390, ack 73971, win 65535, length 46
+15:23:23.949804 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2390, win 64240, length 0
+15:23:24.022940 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2390:2554, ack 73971, win 65535, length 164
+15:23:24.023175 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2554, win 64240, length 0
+15:23:24.092701 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 73971:74736, ack 2554, win 64240, length 765
+15:23:24.093340 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2554:2600, ack 74736, win 65535, length 46
+15:23:24.093528 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2600, win 64240, length 0
+15:23:24.240367 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2600:2765, ack 74736, win 65535, length 165
+15:23:24.240614 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2765, win 64240, length 0
+15:23:24.306201 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 74736:75153, ack 2765, win 64240, length 417
+15:23:24.307048 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 75153:75408, ack 2765, win 64240, length 255
+15:23:24.307748 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 75408, win 65535, length 0
+15:23:24.307800 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2765:2811, ack 75408, win 65535, length 46
+15:23:24.307952 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2811, win 64240, length 0
+15:23:24.381445 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2811:2977, ack 75408, win 65535, length 166
+15:23:24.381692 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 2977, win 64240, length 0
+15:23:24.448660 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 75408:75900, ack 2977, win 64240, length 492
+15:23:24.450362 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 75900:76112, ack 2977, win 64240, length 212
+15:23:24.450733 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 76112, win 65535, length 0
+15:23:24.450771 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 2977:3023, ack 76112, win 65535, length 46
+15:23:24.450902 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3023, win 64240, length 0
+15:23:24.504527 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3023:3189, ack 76112, win 65535, length 166
+15:23:24.504754 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3189, win 64240, length 0
+15:23:24.570429 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 76112:76678, ack 3189, win 64240, length 566
+15:23:24.571248 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 76678:76851, ack 3189, win 64240, length 173
+15:23:24.571298 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 76851:76897, ack 3189, win 64240, length 46
+15:23:24.571553 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 76897, win 65535, length 0
+15:23:24.571598 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3189:3235, ack 76897, win 65535, length 46
+15:23:24.571770 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3235, win 64240, length 0
+15:23:24.615966 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3235:3402, ack 76897, win 65535, length 167
+15:23:24.616211 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3402, win 64240, length 0
+15:23:24.682136 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 76897:77238, ack 3402, win 64240, length 341
+15:23:24.682354 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 77238:77531, ack 3402, win 64240, length 293
+15:23:24.682889 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 77531, win 65535, length 0
+15:23:24.682932 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3402:3448, ack 77531, win 65535, length 46
+15:23:24.683098 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3448, win 64240, length 0
+15:23:24.939975 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3448:3616, ack 77531, win 65535, length 168
+15:23:24.940239 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3616, win 64240, length 0
+15:23:25.006841 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 77531:78138, ack 3616, win 64240, length 607
+15:23:25.007295 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3616:3662, ack 78138, win 65535, length 46
+15:23:25.007501 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3662, win 64240, length 0
+15:23:25.046351 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3662:3831, ack 78138, win 65535, length 169
+15:23:25.046507 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3831, win 64240, length 0
+15:23:25.116750 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 78138:78734, ack 3831, win 64240, length 596
+15:23:25.116817 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 78734:78780, ack 3831, win 64240, length 46
+15:23:25.117269 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 78780, win 65535, length 0
+15:23:25.117313 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3831:3877, ack 78780, win 65535, length 46
+15:23:25.117504 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 3877, win 64240, length 0
+15:23:25.192924 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 3877:4046, ack 78780, win 65535, length 169
+15:23:25.193189 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4046, win 64240, length 0
+15:23:25.263998 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 78780:79345, ack 4046, win 64240, length 565
+15:23:25.265543 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 79345:79630, ack 4046, win 64240, length 285
+15:23:25.265590 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 79630:79676, ack 4046, win 64240, length 46
+15:23:25.266669 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 79676, win 65535, length 0
+15:23:25.266731 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4046:4092, ack 79676, win 65535, length 46
+15:23:25.267142 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4092, win 64240, length 0
+15:23:25.347037 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4092:4262, ack 79676, win 65535, length 170
+15:23:25.347268 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4262, win 64240, length 0
+15:23:25.415255 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 79676:80135, ack 4262, win 64240, length 459
+15:23:25.415744 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 80135:80256, ack 4262, win 64240, length 121
+15:23:25.415794 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 80256:80302, ack 4262, win 64240, length 46
+15:23:25.416264 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 80302, win 65535, length 0
+15:23:25.416316 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4262:4308, ack 80302, win 65535, length 46
+15:23:25.416431 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4308, win 64240, length 0
+15:23:25.723403 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4308:4479, ack 80302, win 65535, length 171
+15:23:25.723650 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4479, win 64240, length 0
+15:23:25.791138 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 80302:80801, ack 4479, win 64240, length 499
+15:23:25.791457 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 80801:81000, ack 4479, win 64240, length 199
+15:23:25.791506 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 81000:81046, ack 4479, win 64240, length 46
+15:23:25.792048 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 81046, win 65535, length 0
+15:23:25.792095 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4479:4525, ack 81046, win 65535, length 46
+15:23:25.792252 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4525, win 64240, length 0
+15:23:25.882394 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4525:4697, ack 81046, win 65535, length 172
+15:23:25.882632 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4697, win 64240, length 0
+15:23:25.951383 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 81046:81478, ack 4697, win 64240, length 432
+15:23:25.951955 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 81478:81609, ack 4697, win 64240, length 131
+15:23:25.952006 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 81609:81655, ack 4697, win 64240, length 46
+15:23:25.952403 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 81655, win 65535, length 0
+15:23:25.952477 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4697:4743, ack 81655, win 65535, length 46
+15:23:25.952645 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4743, win 64240, length 0
+15:23:26.464170 ARP, Request who-has 192.168.254.44 tell debian, length 28
+15:23:26.464498 ARP, Reply 192.168.254.44 is-at 00:50:56:2b:79:2f (oui Unknown), length 46
+15:23:26.533091 IP 192.168.254.44.53764 > ham04s01-in-f3.1e100.net.http: Flags [F.], seq 1, ack 1, win 29200, length 0
+15:23:26.533429 IP ham04s01-in-f3.1e100.net.http > 192.168.254.44.53764: Flags [.], ack 2, win 64239, length 0
+15:23:26.554627 IP ham04s01-in-f3.1e100.net.http > 192.168.254.44.53764: Flags [FP.], seq 1, ack 2, win 64239, length 0
+15:23:26.554910 IP 192.168.254.44.53764 > ham04s01-in-f3.1e100.net.http: Flags [.], ack 2, win 29200, length 0
+15:23:42.518609 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4743:4992, ack 81655, win 65535, length 249
+15:23:42.518876 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 4992, win 64240, length 0
+15:23:42.636748 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 81655:83115, ack 4992, win 64240, length 1460
+15:23:42.636750 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 83115:83224, ack 4992, win 64240, length 109
+15:23:42.637127 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 83224:84684, ack 4992, win 64240, length 1460
+15:23:42.637129 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 84684:86144, ack 4992, win 64240, length 1460
+15:23:42.637129 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 86144:87478, ack 4992, win 64240, length 1334
+15:23:42.637173 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 83224, win 65535, length 0
+15:23:42.637364 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 87478, win 65535, length 0
+15:23:42.637849 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 87478:88938, ack 4992, win 64240, length 1460
+15:23:42.637851 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 88938:90398, ack 4992, win 64240, length 1460
+15:23:42.637851 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 90398:91578, ack 4992, win 64240, length 1180
+15:23:42.638261 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 91578, win 65535, length 0
+15:23:42.638943 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 91578:92996, ack 4992, win 64240, length 1418
+15:23:42.639205 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 92996:94456, ack 4992, win 64240, length 1460
+15:23:42.639206 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 94456:95832, ack 4992, win 64240, length 1376
+15:23:42.639744 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 95832, win 65535, length 0
+15:23:42.639792 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 95832:97292, ack 4992, win 64240, length 1460
+15:23:42.639793 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 97292:98752, ack 4992, win 64240, length 1460
+15:23:42.639794 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 98752:100086, ack 4992, win 64240, length 1334
+15:23:42.640057 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 100086, win 65535, length 0
+15:23:42.640749 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 100086:101546, ack 4992, win 64240, length 1460
+15:23:42.640750 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 101546:103006, ack 4992, win 64240, length 1460
+15:23:42.640751 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 103006:104340, ack 4992, win 64240, length 1334
+15:23:42.641587 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 104340, win 65535, length 0
+15:23:42.641643 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 104340:105800, ack 4992, win 64240, length 1460
+15:23:42.641644 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 105800:107260, ack 4992, win 64240, length 1460
+15:23:42.641644 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 107260:108594, ack 4992, win 64240, length 1334
+15:23:42.641933 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 108594, win 65535, length 0
+15:23:42.642249 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 108594:110054, ack 4992, win 64240, length 1460
+15:23:42.642251 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 110054:111316, ack 4992, win 64240, length 1262
+15:23:42.642463 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 111316, win 65535, length 0
+15:23:43.162885 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 111316:112734, ack 4992, win 64240, length 1418
+15:23:43.163014 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 112734:114152, ack 4992, win 64240, length 1418
+15:23:43.163323 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 114152:114780, ack 4992, win 64240, length 628
+15:23:43.163449 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 114780:116240, ack 4992, win 64240, length 1460
+15:23:43.163451 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 116240:116365, ack 4992, win 64240, length 125
+15:23:43.164127 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 114152, win 65535, length 0
+15:23:43.164170 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 116365, win 65535, length 0
+15:23:43.176961 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 116365:117783, ack 4992, win 64240, length 1418
+15:23:43.177177 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 117783:119243, ack 4992, win 64240, length 1460
+15:23:43.177178 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 119243:119334, ack 4992, win 64240, length 91
+15:23:43.178491 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 119334, win 65535, length 0
+15:23:43.181007 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 1219:1384, ack 812, win 31088, length 165
+15:23:43.181227 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 1384, win 64240, length 0
+15:23:43.181282 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 119334:120752, ack 4992, win 64240, length 1418
+15:23:43.181571 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 120752:122212, ack 4992, win 64240, length 1460
+15:23:43.181573 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 122212:123588, ack 4992, win 64240, length 1376
+15:23:43.182132 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 123588:125048, ack 4992, win 64240, length 1460
+15:23:43.182134 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 125048:126508, ack 4992, win 64240, length 1460
+15:23:43.182134 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 126508:126692, ack 4992, win 64240, length 184
+15:23:43.182376 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 123588, win 65535, length 0
+15:23:43.182416 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 126692, win 65535, length 0
+15:23:43.182783 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 126692:128152, ack 4992, win 64240, length 1460
+15:23:43.182784 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 128152:128581, ack 4992, win 64240, length 429
+15:23:43.184059 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 128581, win 65535, length 0
+15:23:43.201783 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 128581:129999, ack 4992, win 64240, length 1418
+15:23:43.202014 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 129999:131459, ack 4992, win 64240, length 1460
+15:23:43.202016 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 131459:132835, ack 4992, win 64240, length 1376
+15:23:43.202495 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 132835, win 65535, length 0
+15:23:43.202544 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 132835:134295, ack 4992, win 64240, length 1460
+15:23:43.202545 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 134295:135755, ack 4992, win 64240, length 1460
+15:23:43.202546 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 135755:137089, ack 4992, win 64240, length 1334
+15:23:43.203387 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 137089:138549, ack 4992, win 64240, length 1460
+15:23:43.203389 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 138549:140009, ack 4992, win 64240, length 1460
+15:23:43.203389 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 140009:141343, ack 4992, win 64240, length 1334
+15:23:43.204036 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 137089, win 65535, length 0
+15:23:43.204074 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 141343, win 65535, length 0
+15:23:43.204244 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 141343:142803, ack 4992, win 64240, length 1460
+15:23:43.204245 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 142803:144263, ack 4992, win 64240, length 1460
+15:23:43.204246 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 144263:144890, ack 4992, win 64240, length 627
+15:23:43.204957 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 144890:146350, ack 4992, win 64240, length 1460
+15:23:43.204959 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 146350:147810, ack 4992, win 64240, length 1460
+15:23:43.204959 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 147810:149144, ack 4992, win 64240, length 1334
+15:23:43.205776 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 149144:150604, ack 4992, win 64240, length 1460
+15:23:43.205777 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 150604:152064, ack 4992, win 64240, length 1460
+15:23:43.205778 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 152064:153398, ack 4992, win 64240, length 1334
+15:23:43.206450 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 144890, win 65535, length 0
+15:23:43.206504 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 153398, win 65535, length 0
+15:23:43.206547 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 153398:154858, ack 4992, win 64240, length 1460
+15:23:43.206555 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 154858:156318, ack 4992, win 64240, length 1460
+15:23:43.206555 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 156318:157652, ack 4992, win 64240, length 1334
+15:23:43.207459 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 157652:159112, ack 4992, win 64240, length 1460
+15:23:43.207460 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 159112:160067, ack 4992, win 64240, length 955
+15:23:43.208022 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 157652, win 65535, length 0
+15:23:43.208066 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 160067, win 65535, length 0
+15:23:43.214815 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [P.], seq 812:975, ack 1384, win 64240, length 163
+15:23:43.216263 IP 192.168.254.44.39374 > ham04s01-in-f238.1e100.net.https: Flags [P.], seq 1384:1430, ack 975, win 32160, length 46
+15:23:43.216436 IP ham04s01-in-f238.1e100.net.https > 192.168.254.44.39374: Flags [.], ack 1430, win 64240, length 0
+15:23:43.222673 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 160067:161485, ack 4992, win 64240, length 1418
+15:23:43.222756 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 161485:162945, ack 4992, win 64240, length 1460
+15:23:43.222757 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 162945:164321, ack 4992, win 64240, length 1376
+15:23:43.223296 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 164321:165781, ack 4992, win 64240, length 1460
+15:23:43.223298 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 165781:167241, ack 4992, win 64240, length 1460
+15:23:43.223299 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 167241:168575, ack 4992, win 64240, length 1334
+15:23:43.224164 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 164321, win 65535, length 0
+15:23:43.224232 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 168575, win 65535, length 0
+15:23:43.224286 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 168575:170035, ack 4992, win 64240, length 1460
+15:23:43.224287 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 170035:171495, ack 4992, win 64240, length 1460
+15:23:43.224287 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 171495:172829, ack 4992, win 64240, length 1334
+15:23:43.224424 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 172829, win 65535, length 0
+15:23:43.225017 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 172829:174289, ack 4992, win 64240, length 1460
+15:23:43.225018 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 174289:175749, ack 4992, win 64240, length 1460
+15:23:43.225019 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 175749:176412, ack 4992, win 64240, length 663
+15:23:43.225540 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 176412:177872, ack 4992, win 64240, length 1460
+15:23:43.225541 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 177872:179332, ack 4992, win 64240, length 1460
+15:23:43.225542 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 179332:180666, ack 4992, win 64240, length 1334
+15:23:43.225873 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 176412, win 65535, length 0
+15:23:43.226005 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 180666, win 65535, length 0
+15:23:43.226330 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 180666:182126, ack 4992, win 64240, length 1460
+15:23:43.226331 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 182126:183586, ack 4992, win 64240, length 1460
+15:23:43.226331 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 183586:184920, ack 4992, win 64240, length 1334
+15:23:43.226558 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 184920, win 65535, length 0
+15:23:43.227154 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 184920:186380, ack 4992, win 64240, length 1460
+15:23:43.227154 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 186380:187840, ack 4992, win 64240, length 1460
+15:23:43.227155 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 187840:189174, ack 4992, win 64240, length 1334
+15:23:43.228010 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 189174, win 65535, length 0
+15:23:43.228047 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 189174:190634, ack 4992, win 64240, length 1460
+15:23:43.228048 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 190634:192094, ack 4992, win 64240, length 1460
+15:23:43.228048 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 192094:193428, ack 4992, win 64240, length 1334
+15:23:43.228881 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 193428:194888, ack 4992, win 64240, length 1460
+15:23:43.228883 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 194888:196348, ack 4992, win 64240, length 1460
+15:23:43.228883 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 196348:197682, ack 4992, win 64240, length 1334
+15:23:43.229720 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], seq 197682:199142, ack 4992, win 64240, length 1460
+15:23:43.229722 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 199142:199663, ack 4992, win 64240, length 521
+15:23:43.230478 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 193428, win 65535, length 0
+15:23:43.230526 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [.], ack 199663, win 65535, length 0
+15:23:43.230769 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 4992:5038, ack 199663, win 65535, length 46
+15:23:43.230908 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 5038, win 64240, length 0
+15:23:43.390123 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 5038:5357, ack 199663, win 65535, length 319
+15:23:43.390198 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 5357:5395, ack 199663, win 65535, length 38
+15:23:43.390312 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 5357, win 64240, length 0
+15:23:43.390360 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 5395, win 64240, length 0
+15:23:43.419538 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 199663:199835, ack 5395, win 64240, length 172
+15:23:43.420301 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 5395:5441, ack 199835, win 65535, length 46
+15:23:43.420483 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 5441, win 64240, length 0
+15:23:44.047873 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 5441:5659, ack 199835, win 65535, length 218
+15:23:44.048020 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 5659:5697, ack 199835, win 65535, length 38
+15:23:44.048240 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 5659, win 64240, length 0
+15:23:44.048296 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 5697, win 64240, length 0
+15:23:44.077602 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 199835:200007, ack 5697, win 64240, length 172
+15:23:44.078646 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 5697:5743, ack 200007, win 65535, length 46
+15:23:44.078832 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 5743, win 64240, length 0
+15:23:44.149288 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 5743:6055, ack 200007, win 65535, length 312
+15:23:44.149354 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 6055:6093, ack 200007, win 65535, length 38
+15:23:44.149517 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 6055, win 64240, length 0
+15:23:44.149564 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 6093, win 64240, length 0
+15:23:44.150826 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [P.], seq 1194:1307, ack 865, win 31088, length 113
+15:23:44.151019 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [.], ack 1307, win 64240, length 0
+15:23:44.178833 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [P.], seq 865:959, ack 1307, win 64240, length 94
+15:23:44.179995 IP 192.168.254.44.36410 > ham02s17-in-f2.1e100.net.https: Flags [P.], seq 1307:1353, ack 959, win 31088, length 46
+15:23:44.180193 IP ham02s17-in-f2.1e100.net.https > 192.168.254.44.36410: Flags [.], ack 1353, win 64240, length 0
+15:23:44.181707 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [P.], seq 200007:200166, ack 6093, win 64240, length 159
+15:23:44.182627 IP 192.168.254.44.35580 > ham04s01-in-f3.1e100.net.https: Flags [P.], seq 6093:6139, ack 200166, win 65535, length 46
+15:23:44.182834 IP ham04s01-in-f3.1e100.net.https > 192.168.254.44.35580: Flags [.], ack 6139, win 64240, length 0
+

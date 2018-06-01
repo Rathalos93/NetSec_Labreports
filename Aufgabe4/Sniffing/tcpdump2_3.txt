@@ -1,0 +1,8 @@
+15:25:28.896331 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [S], seq 887817361, win 29200, options [mss 1460,sackOK,TS val 2062980 ecr 0,nop,wscale 6], length 0
+15:25:28.917766 IP ham04s01-in-f227.1e100.net.http > 192.168.254.44.53774: Flags [S.], seq 1356948058, ack 887817362, win 64240, options [mss 1460], length 0
+15:25:28.918528 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [.], ack 1, win 29200, length 0
+15:25:33.919668 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [F.], seq 1, ack 1, win 29200, length 0
+15:25:33.919957 IP ham04s01-in-f227.1e100.net.http > 192.168.254.44.53774: Flags [.], ack 2, win 64239, length 0
+15:25:33.941716 IP ham04s01-in-f227.1e100.net.http > 192.168.254.44.53774: Flags [FP.], seq 1, ack 2, win 64239, length 0
+15:25:33.942022 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [.], ack 2, win 29200, length 0
+

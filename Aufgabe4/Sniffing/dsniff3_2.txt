@@ -1,0 +1,14 @@
+-----------------
+05/17/18 16:38:53 tcp 192.168.254.44.44688 -> labservervm.svslab.80 (http)
+GET /verysecure/ HTTP/1.1
+Host: 10.1.1.2
+Authorization: Basic RmFsc2NoZXJVc2VyOkZhbHNjaGVzUGFzc3dvcnQ= [FalscherUser:FalschesPasswort]
+
+GET /verysecure/ HTTP/1.1
+Host: 10.1.1.2
+Authorization: Basic YWxpY2U6c2hyZ2VoZWlt [alice:shrgeheim]
+
+GET /verysecure/ HTTP/1.1
+Host: 10.1.1.2
+Authorization: Basic YWxpY2U6c2VocmdlaGVpbQ== [alice:sehrgeheim]
+

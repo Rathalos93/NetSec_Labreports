@@ -1,0 +1,213 @@
+###1.
+1
+VMs nach MyVMs Kopiert
+VMs in reihenfolge gestartet
+Anmeldung mit user/user auf SurfingVM
+Anmeldung mit user/user auf RoutingVM
+2
+SurfingVM:
+/sbin/ipconfig
+ip: 192.168.254.44
+Gateway: 192.168.254.1
+DNS-Server: 10.1.1.1
+3
+RouterVM:
+ens33 IP: 172.16.65.139
+ens36 IP: 192.168.254.1
+Gateway: 172.16.65.2
+4
+ping 10.1.1.1 erfolgreich, zu 10.1.1.2 fehlgeschlagen, da server down
+Internet Surfen möglich
+
+###2.
+1
+sudo tcpdump -p startet tcp dump, sudo ist nötig, ohne witd tcpdump nicht gefunden
+Felder:
+<timestamp> IP <source IP-Adress and port> > <destination IP Adress and port> Flags [<flags>] <sequence from to, ack number| ack> <tcp window> <packet length>
+2
+sudo tcpdump -p -i any host 192.168.254.44 or 10.1.1.1
+zur Interpretation: Packetpushers Quelle
+3
+sudo tcpdump -p -i any src 192.168.254.44 or 10.1.1.1 and port 80
+4
+sudo tcpdump -p -A -i any src 192.168.254.44 or 10.1.1.1 and port 80
+sudo tcpdump -p -A -nnvvSs 65535 -i any src 192.168.254.44 or 10.1.1.1 and port 80
+5
+Header ist Base64 Codiert => decode
+###3.
+1
+sudo urlsnarf -i any -v ".*" src 192.168.254.44 or 10.1.1.1 and port 80
+2
+sudo dsniff -i any src 192.168.254.44 or 10.1.1.2
+
+###4.
+1
+informiert
+2
+Capture filter: snifft genau auf angegebenen Filter
+Display filter: snifft alles, filtert anzeige
+DATAGRAMME!!1!!11!
+3
+done
+4
+ens36, dies ist das Gateway der surfingVM
+displayfilter zeigt nur gewünschte Daten, ist aber unabhängig von Interface
+5
+Traffic der SufingVM soll untersucht werden: filter auf ens36
+Ausgetauschte Nachrichten:
+- DNS namespace auflösen von 10.1.1.1 DNS Server zu 10.1.1.2 Destination Adress
+- Ping mit Pingrequest an labserver und Reply von Labserver
+- ARP IP zu MAC adresse auflösen
+Comand um die ttl zu bekommen:
+host -v 10.1.1.1
+- gibt ttl in Sekunden aus
+Ping mit DNS-Caching:
+- Nachrichtenaustausch identisch, jedoch deutlich schneller
+- Erwartet: ungecached sollte response deutlich länger brauchen
+- tatsächlich: kein unterschied
+Bedeutung:
+- DNS server Cached nicht, oder Chaching wirkt sich nicht deutlich genug für einen Sichtbaren Unterschied aus
+Anfragen über HTTP verkehr:
+erste Anfrage: 6-12ms
+F5 refresh: 2 ms
+link refresh: 2ms
+url refresh: 3ms
+
+DNS Anfragen:
+erste Response: 2 ms
+gecached: 0,7 ms
+Erwartet:
+- gecached schneller als ungecached
+- mehr Protokolle als bei Ping involviert
+tatsächlich:
+- wie erwartet, beteiligte Protokolle: HTTP, TCP, DNS
+6
+Filter: (ip.dst==192.168.254.44 or ip.src==192.168.254.44) && (http && !ocsp)
+7
+Rechtsklick auf HTTP package: Follow => TCP Stream => TCP Stream öffnet sich
+8
+filter: (ip.dst==192.168.254.44 or ip.src==192.168.254.44) && tcp
+1.: Paket vom Client
+2.: Breadcast
+3.: Ack
+siehe Screenshot
+9
+filter: (ip.dst==192.168.254.44 or ip.src==192.168.254.44) && http
+vermutung/möglichkeit OCSP related? wird mehr OCSP ausgetauscht?
+
+###5.
+1
+gemacht
+2
+sudo arpspoof 172.16.65.2 "weil ist gateway der Router-VM"
+3
+wurde Protokolliert, siehe Anhang
+4
+IP Mystery VM: 172.16.65.138
+Displayfilter: ip.addr==10.1.1.2 && icmp
+5
+Verwendetes Protokoll: POP
+Zugangsdaten: User: bumblebee; PW: Optimus Prime
+Sichere Alternative: IMAPS, verwendet schon bei Verbindungsaufbau eine SSL verschlüsselung
+weitere Alternative: SMTP mit PGP verschlüsselung
+6
+Firefoxversion: Mozilla 5.0 auf Ubuntu-Linux
+URL: 10.1.1.2/secure
+User: admin
+PW: geheim
+Widerspruch: keiner
+7
+^C
+###6.
+1
+Funktionen:
+Portscan
+Umgebungsmapping
+Versionserkennung
+OS erkennung
+Stealthscan (baut keine vollständige TCP verbindung auf)
+2
+Antwortende Rechner:
+10.1.1.1
+10.1.1.2
+10.1.1.11
+10.1.1.21
+10.1.1.31
+10.1.1.41
+10.1.1.51
+10.1.1.61
+10.1.1.71
+10.1.1.81
+10.1.1.91
+10.1.1.101
+10.1.1.111
+10.1.1.121
+10.1.1.131
+10.1.1.199
+10.1.1.206
+10.1.1.214
+10.1.1.254
+3
+nmap -sP 10.1.1.0/24
+Rechner wie in 2. gefunden, zusaätzlich wurde 10.1.1.3 gefunden
+nmap verwendet für den Pingscan TCP
+Es wird versucht eine Verbindung aufzubauen, sobald das 1. ACK erhalten wird ist wird der Verbindungsaufbau resetted (rst flag) und Host ist erreichbar
+Bei geschlossenen Ports wird direkt ein RST von diesem erhalten
+Andernfalls nach timeout host nicht erreichbar, icmp mit Fehlermeldung wird empfangen
+10.1.1.3 wurde mit unserem Script nicht gefunden, da hier das Ping protokoll nicht implementiert ist, TCP hingegen schon, weshalb 10.1.1.3 mit nmap gefunden wurde
+4
+nmap -sT 10.1.1.2 -p 80-85
+TCP-Connect scan baut eine komplette TCP verbindung auf (3-way-handshake: Request, SYN, ACK, RST)
+Port 80 (HTTP port) ist als einziger offen
+nmap -sS 10.1.1.2 -p 80-85
+Stealth-Scan startet indem er dem host direkt ein ACK schickt und tut so, als hätte er einen request erhalten. Kommt hierrauf irgend eine Form der REaktion, ist der Host erreichbar.
+5
+sudo nmap -T Aggressive -A -v 172.16.65.138 -r -p 0-65535
+Port 5288: Apache httpd 2.2.4 ((Ubuntu))
+title: secret site
+
+###7.
+1
+gemacht
+2
+alles erfolgreich
+3
+unter localhost bei Greenbone angemeldet
+4
+die 3 mit der höchsten severity:
+- SSL/TLS: Report Vulnerable Cipher Suites for HTTPS (2x)
+- SSL/TLS: Certificate Signed Using a weak signature Algorithm
+5
+done
+6
+Severity high:
+OS End of life Detection
+SSH Brute Force Logins With default credentials reporting ######## User: root; PW: password
+Medium:
+SSH Weak Encryption Algorithms Supported
+Low:
+TCP Timestamps
+SSH weak MAC Algorithms Supported
+Local scan:
+616 Sicherheitslücken
+Veraltetes Ubuntu system, viele/alle Pakete sind veraltet
+
+
+Quellen:
+www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/
+- unix-linux-dns-lookup-commands
+unix.stackexchange.com (what dns server am I using)
+packetpushers.net/masterclass-tcpdump-interpreting-output/
+wiki.wireshark.org/DisplayFilters
+ubuntuusers.de/nmap
+garron.me/en/go2linux/wich-service-or-program-listenung-port.html
+openvas.org/setup-and-start.de
+Wikipedia:
+- DNS-Caching
+- Multicast DNS
+- arpspoof
+- pop
+- smtp
+- imap
+- nmap
+- OpenVAS
