@@ -62,7 +62,7 @@
 \centerline{\rule{1.2\linewidth}{.2pt}}
 %\shorthandoff{"}
 \section{Vertrautmachen mit der Umgebung}
-te
+
 \subsection{}
 \subsection{}
 \subsection{}
@@ -76,7 +76,15 @@ te
 \subsection{}
 \section{Sniffing mit dsniff und urlsnarf}
 \subsection{}
+\begin{itemize}
+\item sudo urlsnarf -i any -v ".*" src 192.168.254.44 or 10.1.1.1 and port 80
+\end{itemize}
+Urlsnarf wird ausgeführt, sodass auf alle Netwerk-Interfaces gesnifft wird. Source IP-Adresse ist die SurfingVM oder der DNS-Server. So wird der Gesamte HTTP-Verkehr zwischen den beiden aufgezeichnet.
 \subsection{}
+\begin{itemize}
+\item sudo dsniff -i any src 192.168.254.44 or 10.1.1.2
+\end{itemize}
+Dsniff sucht in der Kommunikation von SurfingVM und Laborserver nach entschlüsselbaren Passwörtern
 \section{Sniffing mit Wireshark}
 \subsection{}
 \subsection{}
@@ -108,7 +116,24 @@ te
 \subsection{}
 \subsection{}
 \subsection{}
-\section{Quellen}
 l
+\newline
+\section{Quellen}
+\begin{thebibliography}{50}
+\bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
+\bibitem [Stackexchange] , \url{unix.stackexchange.com}
+\bibitem [Tcpdump], \url{packetpushers.net/masterclass-tcpdump-interpreting-output/}
+\bibitem [Wireshark], \url{wiki.wireshark.org/DisplayFilters}
+\bibitem [Nmap 1], \url{ubuntuusers.de/nmap}
+\bibitem [Nmap 2], \url{garron.me/en/go2linux/wich-service-or-program-listenung-port.html}
+\bibitem [OpenVAS], \url{openvas.org/setup-and-start.de}
+\bibitem [ARP Spoof], \url{https://en.wikipedia.org/wiki/ARP_spoofing}
+\bibitem [DNS], \url{https://en.wikipedia.org/wiki/Name_server#Caching_name_server}
+\bibitem [DNS 2], \url{https://en.wikipedia.org/wiki/Multicast_DNS}
+\bibitem [POP], \url{https://de.wikipedia.org/wiki/Post_Office_Protocol}
+\bibitem [IMAP], \url{https://de.wikipedia.org/wiki/Internet_Message_Access_Protocol}
+\bibitem [SMTP], \url{https://de.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol}
+\bibitem [Nmap 3], \url{https://de.wikipedia.org/wiki/Nmap}	
+\end{thebibliography}
 \section{Anhang}
 \end{document}
