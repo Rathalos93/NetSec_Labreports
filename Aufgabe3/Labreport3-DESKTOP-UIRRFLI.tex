@@ -4,7 +4,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
+%\usepackage[ngerman]{babel}
 \usepackage{lineno}
 \usepackage{listings}
 \usepackage[T1]{fontenc}
@@ -57,7 +57,7 @@
 \date{\today}
 
 \begin{document}
-\shorthandoff{"}
+%\shorthandoff{"}
 \pagenumbering{arabic}
 \maketitle
 \centerline{\rule{1.2\linewidth}{.2pt}}
@@ -66,7 +66,7 @@
 Telnet wurde gestartet und mit man7.org verbunden. Der URL-Pfad wurde mit HTTP/1.1 angefordert und anschließend style.css angefordert, siehe Anhang.
 \section{SMTP}
 \subsection{}
-Die Verbindung zum Mailhost wurde mit Telnet hergestellt. Zum Erstellen der Mail wurde die Quelle linuxjournal.com verwendet. Als Mailhost wurde die Adresse des Fachbereichs angegeben und eine Informatik Mailadresse sowohl als Absender als auch Empfänger. Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender "Unknown Host" angegeben ist. Der Versuch vom Mailhost des Fachbereiches aus eine g-mail-Adresse anzugeben schlug mit "Cannot find your hostname" fehl. Der Versuch zum Google Host zu verbinden scheiterte aufgrund eines Timeouts.
+Die Verbindung zum Mailhost wurde mit Telnet hergestellt. Zum Erstellen der Mail wurde die Quelle linuxjournal.com verwendet. Als Mailhost wurde die Adresse des Fachbereichs angegeben und eine Informatik Mailadresse sowohl als Absender als auch Empfänger. Im Mailprogramm werden Absender und Empfänger korrekt angezeigt, im Quelltext der Mail fällt jedoch auf, dass als Host Absender "Unknown Host" angegeben ist. Der Versuch vom Mailhost des Fachbereiches aus eine g-mail-Adresse anzugeben schlug mit \"Cannot find your hostname\" fehl. Der Versuch zum Google Host zu verbinden scheiterte aufgrund eines Timeouts.
 \section{DNS-Spoofing}
 \subsection{}
 $serial={}$ erwartet eine Eingabe von bestimmter Länge, andere Eingaben sind nicht valide und es wird ausgegeben, dass die Länge falsch ist. Durch ausprobieren von Eingaben mit aufsteigender Länge wurde herausgefunden, dass die Eingaben die Länge 8 haben müssen. Bei Falschen Eingaben korrekter Länge wird $SERIAL\_VALID=0$ zurück gegeben, um die Software zu aktivieren wird also $SERIAL\_VALID=1$ als Rückgabe benötigt.
