@@ -62,18 +62,42 @@
 \centerline{\rule{1.2\linewidth}{.2pt}}
 %\shorthandoff{"}
 \section{Vertrautmachen mit der Umgebung}
-
 \subsection{}
+Die VMs wurden in der angegebenen Reihenfplge gestartet, auf SurfingVM und RouterVM wurde der Benutzer user/user angemeldet.
 \subsection{}
+Mit dem Befehl /sbin/ifconfig wurden die Daten erhalten:\\
+ip-Adresse: 192.68.254.44\\
+Gateway: 192.68.254.1\\
+DNS-Server: 10.1.1.1\\
 \subsection{}
+ens33 IP: 172.16.65.139\\
+ens36 IP: 192.168.254.1\\
+Gateway: 172.16.65.2\\
 \subsection{}
+Der Ping zu 10.1.1.1 war erfolgreich unter surfen im Internet möglich, der Ping zu 10.1.1.2 war nicht erfolgreich, da der Server nicht verfügbar war.
 \section{Sniffing mit tcpdump}
 \subsection{}
+informieren done
 \subsection{}
+sudo tcpdump -p -i any host 192.168.254.44 or 10.1.1.1\\
+Mit diesem Befehl wurde, alle Nachrichten protokolliert, die von der SurfingVM gesendet oder empfangen werden. 
+Die Felder, die in einer DNS-Antwort übertragen werden sehen wie folgt aus:\\
+<timestamp> IP <source IP-Adress and port> > <destination IP Adress and port> Flags [<flags>] <sequence from to, ack number| ack> <tcp window> <packet length>\\
+Ausgabe siehe Anhang.
 \subsection{}
+sudo tcpdump -p -i any src 192.168.254.44 or 10.1.1.1 and port 80\\
+Ausgabe siehe Anhang.
 \subsection{}
+sudo tcpdump -p -A -i any src 192.168.254.44 or 10.1.1.1 and port 80\\
+Die Pakete sind vermutlich zu grö als dass tcpdump sie komplett abfängt.\\
+sudo tcpdump -p -A -nnvvSs 65535 -i any src 192.168.254.44 or 10.1.1.1 and port 80\\
+%TODO: snippets aus dem Anhang vergleichen
+Ausgaben siehe Anhang
 \subsection{}
+%TODO: snippets aus dem Anhang einfügen
+Der Header ist Base64 Codiert. 
 \subsection{}
+beendet
 \section{Sniffing mit dsniff und urlsnarf}
 \subsection{}
 \begin{itemize}
