@@ -142,8 +142,13 @@ Beim Aufruf einer Seite mit HTTPS protokolliert Wireshark Nachrichten mit dem OC
 \section{ARP-Spoofing}
 \section{Scanning mit nmap}
 \section{OpenVAS}
-
-l
+Dienste von OpemVAS laufen problemlos bei Überprüfung. \\
+Es wird sich mit user/user auf 127.0.0.1 angemeldet. \\ \\
+Bei Quick-Scan auf localhost werden 3 high severity Schwachstellen gefunden:\\
+- SSL/TLS: Report Vulnerable Cipher Suites for HTTPS (2x)\\
+- SSL/TLS: Certificate Signed Using a weak signature Algorithm\\\\
+Scan auf MysteryVM findet OpenVAS die Zugangsdaten des SSH-Servers: root/password\\
+Scan mit SSH-Credentials enthüllt enorme Anzahl an high severity Schwachstellen, wobei die Meisten davon auf eine veraltete OS-Version zurückzuführen sind.
 \newline
 \section{Quellen}
 \begin{thebibliography}{50}
