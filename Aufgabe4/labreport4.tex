@@ -141,6 +141,11 @@ Dieser Datenverkehr wurde ein paar Minuten lang protokolliert und anschließend 
 Der Mail-Client verwendet POP, die Zugangsdaten sind User: bumblebee, Passwort: Optimus Prime. Eine sichere Alternative wäre IMAPS, welches bereits bei Verbindungsaufbau eine SSL verschlüsselung verwendet. Eine Weitere Möglichkeit wäre die Verwendung von SMTP mit eine PGP Verschlüsselung.\\
 Die MysteryVM verwendet für ihre HTTP requests Mozilla Firefox 5.0 auf Ubuntu-Linux. Die Abgerufene URL ist 10.1.1.2, die Logindaten sind User: admin, Passwort: geheim. Beim Aufruf der Webseite ergibt sich kein Widerspruch.
 \section{Scanning mit nmap}
+Die wichtigsten nmap Funktionen: Portscan, Umgebungsmapping, OS Erkennung, Versionserkennung, Stealthscan.\\
+Auf Pinganfragen reagieren die Adressen 10.1.1.X, mit X=1, 2, 11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 199, 206, 214, 254\\
+Mit dem nmap Scan wird zusätzlich zu den bereits gefundenen Adressen auch 10.1.1.3 gefunden. nmap verwendet beim Ping-Scan gar nicht das Ping Protokoll, sondern TCP. Es wird versucht eine TCP verbindung aufzubauen und sobald ein ACK erhalten wurde, wird der Verbindungsaufbau mit einem rst-Flag abgebrochen und der Host als erreichbar identifiziert. Bei geschlossenen Ports wird von diesen direkt ein RST erhalten, was jedoch ausreicht um zu Wissen, dass diese Adresse verfügbar ist. Tritt keiner dieser Fälle ein wird über ICMP eine Fehlermeldung empfangen und der Host ist unerreichbar.\\
+Der TCP-Connect Scan baut eine komplette TCP-Verbindung auf (3-way-handshake: Request, SYN, ACK, RST). Der Stealth-Scan hingegen tut so als hätte er eine Anfrage bekommen, indem er direkt ein SYN an eine Adresse schickt. Wird hierrauf eine Reaktion erhalten, so ist der Host verfügbar.\\
+Mit $sudo\ nmap\ -T\ Agressive\ -A\ -v\ 172.16.65.138\ -r\ -p\ 0-65535$ wurden alle Ports der MysteryVM gescannt. Auf Port 5288 befindet sich der Apache server namens secret site.
 \section{OpenVAS}
 
 l
