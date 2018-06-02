@@ -62,42 +62,37 @@
 \centerline{\rule{1.2\linewidth}{.2pt}}
 %\shorthandoff{"}
 \section{Vertrautmachen mit der Umgebung}
-\subsection{}
-Die VMs wurden in der angegebenen Reihenfplge gestartet, auf SurfingVM und RouterVM wurde der Benutzer user/user angemeldet.
-\subsection{}
-Mit dem Befehl /sbin/ifconfig wurden die Daten erhalten:\\
+Die VMs wurden in der angegebenen Reihenfplge gestartet, auf SurfingVM und RouterVM wurde der Benutzer user/user angemeldet. Mit dem Befehl $/sbin/ifconfig$ wurden die Daten erhalten:\\
+SurfingVM:\\
 ip-Adresse: 192.68.254.44\\
 Gateway: 192.68.254.1\\
 DNS-Server: 10.1.1.1\\
-\subsection{}
+RouterVM:\\
 ens33 IP: 172.16.65.139\\
 ens36 IP: 192.168.254.1\\
 Gateway: 172.16.65.2\\
-\subsection{}
 Der Ping zu 10.1.1.1 war erfolgreich unter surfen im Internet möglich, der Ping zu 10.1.1.2 war nicht erfolgreich, da der Server nicht verfügbar war.
 \section{Sniffing mit tcpdump}
-\subsection{}
-informieren done
-\subsection{}
 sudo tcpdump -p -i any host 192.168.254.44 or 10.1.1.1\\
 Mit diesem Befehl wurde, alle Nachrichten protokolliert, die von der SurfingVM gesendet oder empfangen werden. 
 Die Felder, die in einer DNS-Antwort übertragen werden sehen wie folgt aus:\\
 <timestamp> IP <source IP-Adress and port> > <destination IP Adress and port> Flags [<flags>] <sequence from to, ack number| ack> <tcp window> <packet length>\\
 Ausgabe siehe Anhang.
-\subsection{}
+\begin{itemize}
+\item
 sudo tcpdump -p -i any src 192.168.254.44 or 10.1.1.1 and port 80\\
-Ausgabe siehe Anhang.
-\subsection{}
+Durch die Einschränkung auf Port 80 wir nurnoch der HTTP Verkehr protokolliert, Ausgabe siehe Anhang.
+\item
 sudo tcpdump -p -A -i any src 192.168.254.44 or 10.1.1.1 and port 80\\
-Die Pakete sind vermutlich zu grö als dass tcpdump sie komplett abfängt.\\
+Dur das -A Flag derden die Protokollierten Pakete als Ascii-Code angezeigt. Die Pakete sind vermutlich zu groß als dass tcpdump sie komplett abfängt.\\
 sudo tcpdump -p -A -nnvvSs 65535 -i any src 192.168.254.44 or 10.1.1.1 and port 80\\
+Durch die -nnvvSs Flag werden pro Paket nun bis zu 65535 Byte Protokolliert.
 %TODO: snippets aus dem Anhang vergleichen
 Ausgaben siehe Anhang
-\subsection{}
+\item
 %TODO: snippets aus dem Anhang einfügen
 Der Header ist Base64 Codiert. 
-\subsection{}
-beendet
+\end{itemize}
 \section{Sniffing mit dsniff und urlsnarf}
 \subsection{}
 \begin{itemize}
@@ -120,13 +115,11 @@ Dsniff sucht in der Kommunikation von SurfingVM und Laborserver nach entschlüss
 \subsection{}
 \subsection{}
 \section{ARP-Spoofing}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
+sudo arpspoof 172.16.65.2\\
+Die Angegebene Adresse ist das Gateway der RouterVM, arpspoof leitet nun den Gesamten Datenverkehr dorthin um.
+Dieser Datenverkehr wurde ein paar Minuten lang protokolliert und anschließend in Wireshark mit $ip.addr\ == 10.1.1.2 \&\& icmp$ gefiltert, wodurch genau die Kommunikation über das Ping-Protokoll mit 10.1.1.2 angezeigt wird. Von der IP-Adresse 172.16.65.138 kam alle 37 Sekunden ein Ping, dies ist also die Adresse der MysteryVM.\\
+Der Mail-Client verwendet POP, die Zugangsdaten sind User: bumblebee, Passwort: Optimus Prime. Eine sichere Alternative wäre IMAPS, welches bereits bei Verbindungsaufbau eine SSL verschlüsselung verwendet. Eine Weitere Möglichkeit wäre die Verwendung von SMTP mit eine PGP Verschlüsselung.\\
+Die MysteryVM verwendet für ihre HTTP requests Mozilla Firefox 5.0 auf Ubuntu-Linux. Die Abgerufene URL ist 10.1.1.2, die Logindaten sind User: admin, Passwort: geheim. Beim Aufruf der Webseite ergibt sich kein Widerspruch.
 \section{Scanning mit nmap}
 \subsection{}
 \subsection{}
