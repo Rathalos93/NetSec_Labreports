@@ -320,6 +320,17 @@ Content-Type: text/html; charset=iso-8859-1
 
 ..........u.OK.@....).^.P.I....j..P.hz.....B.....?.
 \end{lstlisting}
+\subsection*{Ping Bashscript}
+\begin{lstlisting}
+#!/bin/sh
+# ping scanner
+
+for i in `seq 1 254`
+do
+	ping -c 1 10.1.1.$i
+	echo pinging 10.1.1.$i
+done
+\end{lstlisting}
 \subsection*{Wireshark}
 \subsubsection*{TCP-Chat}
 \begin{figure}[!ht]
@@ -331,5 +342,45 @@ Content-Type: text/html; charset=iso-8859-1
 \begin{figure}[!ht]
 	\centering
      \includegraphics[width=0.9\textwidth]{Bilder/https_traffic_surfingvm.png}
+\end{figure}
+\newpage
+\subsubsection*{Sniffing mit ARP-Spoofing aktiv}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/sniffing_mit_arp.png}
+\end{figure}
+\newpage
+\subsubsection*{HTTP-GET der MysteryVM}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/http_get_von_mysteryVM.png}
+\end{figure}
+\newpage
+\subsubsection*{Nmap Ping-Scan}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/nmap_ping_scan.png}
+\end{figure}
+\newpage
+
+\subsubsection*{Nmap TCP-Scan}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/nmap_tcp_scan.png}
+\end{figure}
+\newpage
+
+\subsubsection*{Ping von MysteryVM}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/ping_von_mysteryVM.png}
+\end{figure}
+\newpage
+
+\subsection*{OpenVAS}
+\subsubsection*{Scan mit Credentials}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/openvas_with_credentials.png}
 \end{figure}
 \end{document}
