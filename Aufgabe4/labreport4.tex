@@ -105,15 +105,35 @@ Urlsnarf wird ausgeführt, sodass auf alle Netwerk-Interfaces gesnifft wird. Sou
 \end{itemize}
 Dsniff sucht in der Kommunikation von SurfingVM und Laborserver nach entschlüsselbaren Passwörtern
 \section{Sniffing mit Wireshark}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
+Ein Capture-Filter gibt an, welche Pakete von Wireshark erfasst werden sollen. Capture-Filter werden immer am Anfang einer Capture-Session festgelegt. \\ \\
+Ein Display-Filter ist lediglich ein visueller Filter auf allen erfassten Paketen uns kann innerhalb einer Session angepasst werden.
+\\\\
+Um den gesamten Traffic der SurfingVM zu protokollieren wird der Capture-Filter auf das Interface "ens36" gesetzt. Da ens36 das Router-Interface für die SurfingVM ist. Alternativ kann man auch einen Display-Filter mit "ip.src==192.168.254.44 or ip.dst==192.168.254.44" setzen. \\ \\
+Nach den erstmaligen anpingen des Laborservers werden folgende Nachrichten ausgetauscht: 
+\begin{itemize}
+\item DNS-Server(10.1.1.1) löst Namespace "labservervm.svslab" zu 10.1.1.2 als Ziel-Adresse auf.
+\item Ping-Request der SurfingVM und Ping-Response des Laborservers.
+\item Auflösung der IP-Adresse zu MAC-Adresse mittels ARP.
+\end{itemize}
+Aus dem Ping-Command wird deutlich das die Time To Life(ttl) 127 Sekunden beträgt.
+Der DNS-Server speichert den Namensraum dementsprechend lange. \\ \\
+Nach Erwartung würde nun ein erneuter Ping deutlich schneller sein, da die Auflösung gespeichert ist. Tatsächlich ergab sich bei einem erneuten Ping kein Unterschied in Zeit und Art der Nachrichten. Vermutung: der DNS-Server verwendet für das Ping-Protokoll kein Caching. \\ \\
+Beim Aufrufen des Laborservers mittels Web-Broswer wird das Caching nun deutlich:
+Die erste Anfragen dauern ungefähr 6-12ms. Ein erneuter Aufruf der URL dauert 3ms. Am schnellsten ist der Refresh auf den Zur verfügung gestellten Link und der Refresh mit der F5-Taste mit jeweils 2ms.
+\\\\
+Um nun ausschließlich den HTTP-Verkehr der SurfingVM zu untersuchen wird folgender Filter verwendet: \\
+(ip.dst==192.168.254.44 or ip.src==192.168.254.44) and (http and !ocsp)\\ \\
+Um den HTTP-Nachrichtenaustausch näher zu untersuchen wurde die Funktion "open TCP-Stream" verwendet: \\
+Rechtsklick auf HTTP package: Follow => TCP Stream => TCP Stream öffnet sich.
+\\\\
+Um den Traffic des TCP-Chats zu protokollieren wird folgender Display-Filter verwendet: \\
+(ip.dst==192.168.254.44 or ip.src==192.168.254.44) and tcp\\\\
+Beim Austausch einiger Nachrichten zwischen SurfingVM und RouterVM mittels TCP-Chats:
+Das TCP-Paket vom Client(SurfingVM)\\
+Der Pseudo-"Broadcast" des Chat-Servers an alle angeschlossenen Clients(hier: die SurfingVM).
+Das ACK bei Beendigung der Kommunikation.
+\\\\
+Beim Aufruf einer Seite mit HTTPS protokolliert Wireshark Nachrichten mit dem OCSP-Protokoll ausgetauscht. Welches ein Protokoll für Sicherheitszertifikate ist.
 \section{ARP-Spoofing}
 sudo arpspoof 172.16.65.2\\
 Die Angegebene Adresse ist das Gateway der RouterVM, arpspoof leitet nun den Gesamten Datenverkehr dorthin um.
@@ -121,18 +141,8 @@ Dieser Datenverkehr wurde ein paar Minuten lang protokolliert und anschließend 
 Der Mail-Client verwendet POP, die Zugangsdaten sind User: bumblebee, Passwort: Optimus Prime. Eine sichere Alternative wäre IMAPS, welches bereits bei Verbindungsaufbau eine SSL verschlüsselung verwendet. Eine Weitere Möglichkeit wäre die Verwendung von SMTP mit eine PGP Verschlüsselung.\\
 Die MysteryVM verwendet für ihre HTTP requests Mozilla Firefox 5.0 auf Ubuntu-Linux. Die Abgerufene URL ist 10.1.1.2, die Logindaten sind User: admin, Passwort: geheim. Beim Aufruf der Webseite ergibt sich kein Widerspruch.
 \section{Scanning mit nmap}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
 \section{OpenVAS}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
+
 l
 \newline
 \section{Quellen}
