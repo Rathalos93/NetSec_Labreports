@@ -147,8 +147,13 @@ Mit dem nmap Scan wird zusätzlich zu den bereits gefundenen Adressen auch 10.1.
 Der TCP-Connect Scan baut eine komplette TCP-Verbindung auf (3-way-handshake: Request, SYN, ACK, RST). Der Stealth-Scan hingegen tut so als hätte er eine Anfrage bekommen, indem er direkt ein SYN an eine Adresse schickt. Wird hierrauf eine Reaktion erhalten, so ist der Host verfügbar.\\
 Mit $sudo\ nmap\ -T\ Agressive\ -A\ -v\ 172.16.65.138\ -r\ -p\ 0-65535$ wurden alle Ports der MysteryVM gescannt. Auf Port 5288 befindet sich der Apache server namens secret site.
 \section{OpenVAS}
-
-l
+Dienste von OpemVAS laufen problemlos bei Überprüfung. \\
+Es wird sich mit user/user auf 127.0.0.1 angemeldet. \\ \\
+Bei Quick-Scan auf localhost werden 3 high severity Schwachstellen gefunden:\\
+- SSL/TLS: Report Vulnerable Cipher Suites for HTTPS (2x)\\
+- SSL/TLS: Certificate Signed Using a weak signature Algorithm\\\\
+Scan auf MysteryVM findet OpenVAS die Zugangsdaten des SSH-Servers: root/password\\
+Scan mit SSH-Credentials enthüllt enorme Anzahl an high severity Schwachstellen, wobei die Meisten davon auf eine veraltete OS-Version zurückzuführen sind.
 \newline
 \section{Quellen}
 \begin{thebibliography}{50}
@@ -167,5 +172,18 @@ l
 \bibitem [SMTP], \url{https://de.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol}
 \bibitem [Nmap 3], \url{https://de.wikipedia.org/wiki/Nmap}	
 \end{thebibliography}
+\newpage
 \section{Anhang}
+\subsection*{Wireshark}
+\subsubsection*{TCP-Chat}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/tcp-chat_1.png}
+\end{figure}
+\newpage
+\subsubsection*{HTTPS-Traffic der SurfingVM}
+\begin{figure}[!ht]
+	\centering
+     \includegraphics[width=0.9\textwidth]{Bilder/https_traffic_surfingvm.png}
+\end{figure}
 \end{document}
