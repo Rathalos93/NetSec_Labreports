@@ -174,6 +174,152 @@ Scan mit SSH-Credentials enthüllt enorme Anzahl an high severity Schwachstellen
 \end{thebibliography}
 \newpage
 \section{Anhang}
+\subsection{tcpdump}
+\subsubsection{2.2 (Ausschnitt)}
+\begin{lstlisting}
+15:23:21.395179 IP 192.168.254.44.39191 > server.svslab.domain: 38155+ A? google.de. (27)
+15:23:21.395218 IP debian.39191 > server.svslab.domain: 38155+ A? google.de. (27)
+15:23:21.395269 IP 192.168.254.44.39191 > server.svslab.domain: 32616+ AAAA? google.de. (27)
+15:23:21.395275 IP debian.39191 > server.svslab.domain: 32616+ AAAA? google.de. (27)
+15:23:21.397210 IP server.svslab.domain > debian.39191: 38155 1/4/8 A 216.58.213.227 (301)
+15:23:21.397222 IP server.svslab.domain > 192.168.254.44.39191: 38155 1/4/8 A 216.58.213.227 (301)
+15:23:21.397921 IP 192.168.254.44.53013 > server.svslab.domain: 45974+ A? google.de. (27)
+15:23:21.397935 IP debian.53013 > server.svslab.domain: 45974+ A? google.de. (27)
+15:23:21.398480 IP server.svslab.domain > debian.53013: 45974 1/4/8 A 216.58.213.227 (301)
+15:23:21.398495 IP server.svslab.domain > 192.168.254.44.53013: 45974 1/4/8 A 216.58.213.227 (301)
+15:23:21.399920 IP 192.168.254.44.53764 > ham04s01-in-f3.1e100.net.http: Flags [S], seq 3283053340, win 29200, options [mss 1460,sackOK,TS val 2031106 ecr 0,nop,wscale 6], length 0
+15:23:21.415476 IP server.svslab.domain > debian.39191: 32616 1/4/8 AAAA 2a00:1450:4005:80b::2003 (313)
+15:23:21.415501 IP server.svslab.domain > 192.168.254.44.39191: 32616 1/4/8 AAAA 2a00:1450:4005:80b::2003 (313)
+15:23:21.421362 IP ham04s01-in-f3.1e100.net.http > 192.168.254.44.53764: Flags [S.], seq 1565017315, ack 3283053341, win 64240, options [mss 1460], length 0
+15:23:21.422506 IP 192.168.254.44.53764 > ham04s01-in-f3.1e100.net.http: Flags [.], ack 1, win 29200, length 0
+15:23:21.463252 IP 192.168.254.44.46111 > server.svslab.domain: 64397+ A? www.google.de. (31)
+15:23:21.463285 IP debian.46111 > server.svslab.domain: 64397+ A? www.google.de. (31)
+15:23:21.463328 IP 192.168.254.44.46111 > server.svslab.domain: 20119+ AAAA? www.google.de. (31)
+15:23:21.463333 IP debian.46111 > server.svslab.domain: 20119+ AAAA? www.google.de. (31)
+15:23:21.465060 IP server.svslab.domain > debian.46111: 64397 1/4/8 A 216.58.213.227 (305)
+\end{lstlisting}
+\subsubsection{2.3}
+\begin{lstlisting}
+15:25:28.896331 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [S], seq 887817361, win 29200, options [mss 1460,sackOK,TS val 2062980 ecr 0,nop,wscale 6], length 0
+15:25:28.917766 IP ham04s01-in-f227.1e100.net.http > 192.168.254.44.53774: Flags [S.], seq 1356948058, ack 887817362, win 64240, options [mss 1460], length 0
+15:25:28.918528 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [.], ack 1, win 29200, length 0
+15:25:33.919668 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [F.], seq 1, ack 1, win 29200, length 0
+15:25:33.919957 IP ham04s01-in-f227.1e100.net.http > 192.168.254.44.53774: Flags [.], ack 2, win 64239, length 0
+15:25:33.941716 IP ham04s01-in-f227.1e100.net.http > 192.168.254.44.53774: Flags [FP.], seq 1, ack 2, win 64239, length 0
+15:25:33.942022 IP 192.168.254.44.53774 > ham04s01-in-f227.1e100.net.http: Flags [.], ack 2, win 29200, length 0
+\end{lstlisting}
+\subsubsection{2.4}
+\begin{lstlisting}
+15:26:50.416349 IP 192.168.254.44.53776 > ham04s01-in-f3.1e100.net.http: Flags [S], seq 257867889, win 29200, options [mss 1460,sackOK,TS val 2083360 ecr 0,nop,wscale 6], length 0
+E..<
+Q@.@..w...,.:.....P.^.q......r............
+... ........
+15:26:50.437465 IP ham04s01-in-f3.1e100.net.http > 192.168.254.44.53776: Flags [S.], seq 2419511584, ack 257867890, win 64240, options [mss 1460], length 0
+E..,.\%.......:.....,.P...6. .^.r`...,.......
+15:26:50.438499 IP 192.168.254.44.53776 > ham04s01-in-f3.1e100.net.http: Flags [.], ack 1, win 29200, length 0
+E..(
+R@.@......,.:.....P.^.r.6.!P.r..F........
+15:26:56.037560 IP 192.168.254.44.53776 > ham04s01-in-f3.1e100.net.http: Flags [F.], seq 1, ack 1, win 29200, length 0
+E..(
+S@.@......,.:.....P.^.r.6.!P.r..E........
+15:26:56.037779 IP ham04s01-in-f3.1e100.net.http > 192.168.254.44.53776: Flags [.], ack 2, win 64239, length 0
+E..(.........:.....,.P...6.!.^.sP...Df..
+15:26:56.058710 IP ham04s01-in-f3.1e100.net.http > 192.168.254.44.53776: Flags [FP.], seq 1, ack 2, win 64239, length 0
+E..(. .......:.....,.P...6.!.^.sP...D]..
+15:26:56.059649 IP 192.168.254.44.53776 > ham04s01-in-f3.1e100.net.http: Flags [.], ack 2, win 29200, length 0
+E..(..@.@......,.:.....P.^.s.6."P.r..D........
+\end{lstlisting}
+\subsubsection{2.4 ()}
+\begin{lstlisting}
+15:32:00.966261 IP (tos 0x0, ttl 64, id 59653, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.254.44.59816 > 172.217.19.67.80: Flags [S], cksum 0x2eae (correct), seq 879628387, win 29200, options [mss 1460,sackOK,TS val 2160998 ecr 0,nop,wscale 6], length 0
+E..<..@.@......,...C...P4n.c......r............
+. .f........
+15:32:00.975082 IP (tos 0x0, ttl 127, id 48869, offset 0, flags [none], proto TCP (6), length 44)
+    172.217.19.67.80 > 192.168.254.44.59816: Flags [S.], cksum 0x023e (correct), seq 3858433839, ack 879628388, win 64240, options [mss 1460], length 0
+E..,...........C...,.P...../4n.d`....>......
+15:32:00.975244 IP (tos 0x0, ttl 64, id 59654, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.59816 > 172.217.19.67.80: Flags [.], cksum 0xa2db (correct), seq 879628388, ack 3858433840, win 29200, length 0
+E..(..@.@......,...C...P4n.d...0P.r...........
+15:32:06.151165 IP (tos 0x0, ttl 64, id 59655, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.59816 > 172.217.19.67.80: Flags [F.], cksum 0xa2da (correct), seq 879628388, ack 3858433840, win 29200, length 0
+E..(..@.@......,...C...P4n.d...0P.r...........
+15:32:06.151422 IP (tos 0x0, ttl 127, id 48995, offset 0, flags [none], proto TCP (6), length 40)
+    172.217.19.67.80 > 192.168.254.44.59816: Flags [.], cksum 0x19fb (correct), seq 3858433840, ack 879628389, win 64239, length 0
+E..(.c.....z...C...,.P.....04n.eP.......
+15:32:06.160127 IP (tos 0x0, ttl 127, id 48996, offset 0, flags [none], proto TCP (6), length 40)
+    172.217.19.67.80 > 192.168.254.44.59816: Flags [FP.], cksum 0x19f2 (correct), seq 3858433840, ack 879628389, win 64239, length 0
+E..(.d.....y...C...,.P.....04n.eP.......
+15:32:06.160350 IP (tos 0x0, ttl 64, id 13069, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.59816 > 172.217.19.67.80: Flags [.], cksum 0xa2d9 (correct), seq 879628389, ack 3858433841, win 29200, length 0
+E..(3.@.@......,...C...P4n.e...1P.r...........
+\end{lstlisting}
+\subsubsection{}
+\begin{lstlisting}
+15:37:11.904675 IP (tos 0x0, ttl 64, id 50174, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [S], cksum 0x2332 (correct), seq 653650674, win 29200, options [mss 1460,sackOK,TS val 2238732 ecr 0,nop,wscale 6], length 0
+E..<..@.@......,
+......P&.........r.#2.........
+.").........
+15:37:11.905309 IP (tos 0x0, ttl 127, id 49198, offset 0, flags [none], proto TCP (6), length 44)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [S.], cksum 0x8168 (correct), seq 462976659, ack 653650675, win 64240, options [mss 1460], length 0
+E..,........
+......,.P....v.&...`....h......
+15:37:11.906327 IP (tos 0x0, ttl 64, id 50175, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [.], cksum 0x2206 (correct), seq 653650675, ack 462976660, win 29200, length 0
+E..(..@.@......,
+......P&.....v.P.r.".........
+15:37:11.906459 IP (tos 0x0, ttl 64, id 50176, offset 0, flags [DF], proto TCP (6), length 329)
+    192.168.254.44.44416 > 10.1.1.2.80: Flags [P.], cksum 0x2e62 (correct), seq 653650675:653650964, ack 462976660, win 29200, length 289: HTTP, length: 289
+	GET /verysecure/ HTTP/1.1
+	Host: 10.1.1.2
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+	Accept-Language: en-US,en;q=0.5
+	Accept-Encoding: gzip, deflate
+	Connection: keep-alive
+	
+E..I..@.@......,
+......P&.....v.P.r..b..GET /verysecure/ HTTP/1.1
+Host: 10.1.1.2
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+
+15:37:11.906592 IP (tos 0x0, ttl 127, id 49199, offset 0, flags [none], proto TCP (6), length 40)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [.], cksum 0x9804 (correct), seq 462976660, ack 653650964, win 64240, length 0
+E..(./......
+......,.P....v.&...P.......
+15:37:11.907611 IP (tos 0x0, ttl 127, id 49200, offset 0, flags [none], proto TCP (6), length 742)
+    10.1.1.2.80 > 192.168.254.44.44416: Flags [P.], cksum 0x2239 (correct), seq 462976660:462977362, ack 653650964, win 64240, length 702: HTTP, length: 702
+	HTTP/1.1 401 Authorization Required
+	Date: Wed, 16 May 2018 16:03:49 GMT
+	Server: Apache/2.2.17 (Ubuntu)
+	WWW-Authenticate: Basic realm="secure content - you have to enter your credentials"
+	Vary: Accept-Encoding
+	Content-Encoding: gzip
+	Content-Length: 339
+	Keep-Alive: timeout=15, max=100
+	Connection: Keep-Alive
+	Content-Type: text/html; charset=iso-8859-1
+	
+E....0.....	
+......,.P....v.&...P..."9..HTTP/1.1 401 Authorization Required
+Date: Wed, 16 May 2018 16:03:49 GMT
+Server: Apache/2.2.17 (Ubuntu)
+WWW-Authenticate: Basic realm="secure content - you have to enter your credentials"
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 339
+Keep-Alive: timeout=15, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=iso-8859-1
+
+..........u.OK.@....).^.P.I....j..P.hz.....B.....?.
+\end{lstlisting}
 \subsection*{Wireshark}
 \subsubsection*{TCP-Chat}
 \begin{figure}[!ht]
