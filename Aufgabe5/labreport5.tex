@@ -61,5 +61,34 @@
 \maketitle
 \centerline{\rule{1.2\linewidth}{.2pt}}
 %\shorthandoff{"}
-\section{test}
+\section{Netzwerkeinstellungen}
+ClientVM: \\
+Ip-Adress: 192.168.254.44\\
+Gateway(RouterVM): 192.168.254.2 \\
+DNS-Server: 10.1.1.1\\\\
+RouterVM: \\
+ens36(virt. Netz): \\
+Ip-Adress: 192.168.254.2\\\\
+ens33(labor Netz): \\
+Ip-Adress: 172.16.65.139 \\\\
+ServerVM: \\
+IP-Adress: 172.16.65.144
+
+\section{Absichern eines Rechners mit iptables}
+check firewalregeln mit: iptables -L\\
+regeln löschen: iptables -F\\\\
+Regeln:\\
+sudo iptables -t filter -I INPUT -p tcp --dport 22 -j ACCEPT // <<SSH \\
+sudo iptables -t filter -I INPUT -p icmp -j ACCEPT // <<Ping \\
+sudo iptables -t filter -I OUTPUT -p tcp --dport 80 -j ACCEPT // >>HTTP \\
+sudo iptables -t filter -I OUTPUT -P icmp -j ACCEPT // >>Ping \\
+sudo iptables -t filter -A INPUT -j REJECT // Rest incoming blockieren \\
+sudo iptables -t filter -A INPUT -j REJECT // Rest incoming blockieren \\\\
+Test der Regeln: \\\\
+
+\section{Quellen}
+\begin{thebibliography}{50}
+\bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
+\bibitem [Stackexchange] , \url{unix.stackexchange.com}
+\end{thebibliography}
 \end{document}
