@@ -83,7 +83,9 @@ sudo iptables -t filter -I INPUT -p icmp -j ACCEPT // <<Ping \\
 sudo iptables -t filter -I OUTPUT -p tcp --dport 80 -j ACCEPT // >>HTTP \\
 sudo iptables -t filter -I OUTPUT -P icmp -j ACCEPT // >>Ping \\
 sudo iptables -t filter -A INPUT -j REJECT // Rest incoming blockieren \\
-sudo iptables -t filter -A INPUT -j REJECT // Rest incoming blockieren \\\\
+sudo iptables -t filter -A OUTPUT -j REJECT // Rest outcoming blockieren \\
+sudo iptables -t filter -A FOWARD -j REJECT // Rest Foward blockieren \\
+
 Test der Regeln: \\\\
 
 \section{Quellen}
