@@ -78,15 +78,17 @@ IP-Adress: 172.16.65.144
 check firewalregeln mit: iptables -L\\
 regeln löschen: iptables -F\\\\
 Regeln:\\
-sudo iptables -t filter -I INPUT -p tcp --dport 22 -j ACCEPT // <<SSH \\
+sudo iptables -t filter -I INPUT -p tcp --sport 22 -j ACCEPT // <<SSH \\
 sudo iptables -t filter -I INPUT -p icmp -j ACCEPT // <<Ping \\
-sudo iptables -t filter -I OUTPUT -p tcp --dport 80 -j ACCEPT // >>HTTP \\
+sudo iptables -t filter -I OUTPUT -p tcp --sport 80 -j ACCEPT // >>HTTP \\
+sudo iptables -t filter -I OUTPUT -p tcp --sport 443 -j ACCEPT // >>HTTPS\\
 sudo iptables -t filter -I OUTPUT -P icmp -j ACCEPT // >>Ping \\
 sudo iptables -t filter -A INPUT -j REJECT // Rest incoming blockieren \\
 sudo iptables -t filter -A OUTPUT -j REJECT // Rest outcoming blockieren \\
-sudo iptables -t filter -A FOWARD -j REJECT // Rest Foward blockieren \\
-
+sudo iptables -t filter -A FOWARD -j REJECT // Rest Foward blockieren \\\\
 Test der Regeln: \\\\
+Client -> Router mit SSH funktioniert.\\
+
 
 \section{Quellen}
 \begin{thebibliography}{50}
