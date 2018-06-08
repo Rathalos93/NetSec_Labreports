@@ -78,27 +78,49 @@ IP-Adress: 172.16.65.144
 check firewalregeln mit: iptables -L\\
 regeln löschen: iptables -F\\\\
 Regeln:\\
-sudo iptables -t filter -I INPUT -p tcp --sport 22 -j ACCEPT // <<SSH \\
+sudo iptables -t filter -I INPUT -p tcp --dport 22 -j ACCEPT // <<SSH \\
 sudo iptables -t filter -I INPUT -p icmp -j ACCEPT // <<Ping \\
 sudo iptables -t filter -I INPUT -p tcp --sport 80 -j ACCEPT // >>HTTP \\
+sudo iptables -t filter -I INPUT -p tcp --sport 443 -j ACCEPT // >>HTTPS\\
 sudo iptables -t filter -I INPUT -p udp --sport 53 -j ACCEPT //\\
 sudo iptables -t filter -I INPUT -p tcp --sport 53 -j ACCEPT //\\
-sudo iptables -t filter -I INPUT -p tcp --sport 443 -j ACCEPT // >>HTTPS\\
+\\
 sudo iptables -t filter -I OUTPUT -p tcp --dport 80 -j ACCEPT // >>HTTP \\
+sudo iptables -t filter -I OUTPUT -p tcp --dport 443 -j ACCEPT // >>HTTPS\\
 sudo iptables -t filter -I OUTPUT -p udp --dport 53 -j ACCEPT //\\
 sudo iptables -t filter -I OUTPUT -p tcp --dport 53 -j ACCEPT //\\
-sudo iptables -t filter -I OUTPUT -p tcp --dport 443 -j ACCEPT // >>HTTPS\\
 sudo iptables -t filter -I OUTPUT -P icmp -j ACCEPT // >>Ping \\
+sudo iptables -t filter -I INPUT -p tcp --sport 22 -j ACCEPT // <<SSH \\
+\\
 sudo iptables -t filter -A INPUT -j REJECT // Rest incoming blockieren \\
 sudo iptables -t filter -A OUTPUT -j REJECT // Rest outcoming blockieren \\
 sudo iptables -t filter -A FOWARD -j REJECT // Rest Foward blockieren \\
 \\
 Test der Regeln: \\\\
 Client -> Router mit SSH funktioniert.\\
-
+Router -> Client mit SSH funktioniert nicht\, wie gewollt\
+Surfen auf der ClientVM ist möglich\\
+\\
+Seerverdienst mit netcat -l -v -p 5555\\
+Verbindungsaufbau nicht erfolgreich wie zu erwarten, da wir eingehende TCP verbindungen Rejecten, connection Refused.\\
+Verbindungsaufbau nicht erfolgreich, keine Reaktion, da die eigehenden Pakete gedroppt werden, Timeout.\\
+\\
+Dynamische Regeln:\\
+sudo iptables -t filter -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT\\
+NEW regeln siehe oben\\
+INPUT Analog\\
+Tests Funktionieren\\
+Dynamisch  Regeln in Praxis bevorzugt:\\
+Die Meisten Pakete werden über bereits bestehende Verbindungen empfangen/gesendet. Diese Werden mit der ersten Regel ohne weitere Prüfung Akzeptiert, was sehr viel Zeit spaart.
+\section{Absichern eines Netzwerkes}
+Wenn eine ClientVM über die RouterVM im Netz surfen will, so wird die IP der ClientVM durch die der RouterVM Maskiert. Es ist nicht erkennbar von welcher IP des Virtuellen Netzes die Anfrage kommt, nur, dass süe über die RouterVM lief.\\
+Ping Client->Server geht wie es sollte\\
+Ping Server->Client geht nicht, da die ClientVM maskiert ist, Timeout\\
+Die ServerVM kann die ClientVM nicht finden, da sie ihre IP nur im lokalem Netzwerk hat, wo sich die ServerVM nicht befindet. Nach Außenhin ist nur die Maskierte IP bekannt.
 \section{Quellen}
 \begin{thebibliography}{50}
 \bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
 \bibitem [Stackexchange] , \url{unix.stackexchange.com}
+\bibitem [Pro-Linux], \url{pro-linux.de}
 \end{thebibliography}
 \end{document}
