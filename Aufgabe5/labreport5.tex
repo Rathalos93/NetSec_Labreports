@@ -116,11 +116,58 @@ Die Meisten Pakete werden über bereits bestehende Verbindungen empfangen/gesend
 Wenn eine ClientVM über die RouterVM im Netz surfen will, so wird die IP der ClientVM durch die der RouterVM Maskiert. Es ist nicht erkennbar von welcher IP des Virtuellen Netzes die Anfrage kommt, nur, dass süe über die RouterVM lief.\\
 Ping Client->Server geht wie es sollte\\
 Ping Server->Client geht nicht, da die ClientVM maskiert ist, Timeout\\
-Die ServerVM kann die ClientVM nicht finden, da sie ihre IP nur im lokalem Netzwerk hat, wo sich die ServerVM nicht befindet. Nach Außenhin ist nur die Maskierte IP bekannt.
+Die ServerVM kann die ClientVM nicht finden, da sie ihre IP nur im lokalem Netzwerk hat, wo sich die ServerVM nicht befindet. Nach Außenhin ist nur die Maskierte IP bekannt.\\
+\\
+ACCEPT, all, anywhere, anywhere, state ESTABLISHED,RELEASED
+ACCEPT, udp, anywhere, anywhere, udp spt:Domain state NEW\\
+ACCEPT, udp, anywhere, anywhere, udp dpt:Domain state NEW\\
+ACCEPT, tcp, anywhere, anywhere, tcp spt:Domain state NEW\\
+ACCEPT, tcp, anywhere, anywhere, tcp dpt:Domain state NEW\\
+REJECT, all, anywhere, 10.0.0.0/8, reject-with icmp-port-unreachable\\
+REJECT, all, anywhere, 172.16.65.144, reject-with icmp-port-unreachable\\
+ACCEPT, tcp, anywhere, anywhere, tcp dpt:http state NEW\\
+ACCEPT, tcp, anywhere, anywhere, tcp spt:http state NEW\\
+ACCEPT, tcp, anywhere, anywhere, tcp dpt:https state NEW\\
+ACCEPT, tcp, anywhere, anywhere, tcp spt:https state NEW\\
+RECEJT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
+=> surfen ist möglich, andere verbindungen können nciht hergestellt werden\\
+\\
+Eine Regel hinzugefügt an position 2:\\
+ACCEPT, tcp, anywhere, 172.16.65.144 state NEW tcp dpt:ssh\\
+=> ssh verbindung von Client zu ServerVM jetzt möglich\\
+\\
+Eine Regel in die NAT table eingefügt:\\
+sudo iptables -t nat -A PREROUTING -p tcp -i ens33 --dport 5022 -j DNAT --to-destination 192.168.254.44:22\\
+ssh-Verbindung zur ClientVM von Server aus möglich.\\
+\\
+sudo ifconfig ens33:1 172.16.65.137 netmask 255.255.255.0\\
+ssh-verbindung kann mit 172.16.65.137 hergestellt werden.\\
+
+\section{SSH-TUNNEL}
+ACCEPT, all, anywhere, anywhere, state ESTABLISHED,RELEASED\\
+ACCEPT, udp, anywhere, anywhere, udp dpt:Domain state NEW\\
+ACCEPT, tcp, anywhere, anywhere, tcp dpt:Domain state NEW\\
+ACCEPT, tcp, anywhere, 172.16.65.144, state NEW tcp dpt:ssh\\
+ACCEPT, tcp, 172.16.65.144, anywhere, state NEW tcp dpt:ssh\\
+RECEJT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
+ssh Verbindung kann hergestellt werden.\\
+\\
+sudo ssh -L 50000:172.16.65.144:80 user@172.16.65.144\\
+Verbindung wird erfolgreich aufgebaut, in wireshark sind die TCP pakete des handshakes zu sehen, die restlichen übertragenen Pakete sind nur ssh verschlüsselt zu sehen, http kann nicht erkannt werden.\\
+\\
+Local Forwarding forwarded nur statisch auf einen Host, surfen ist deshalb auf diese Weise nicht möglich.\\
+\\
+ssh -D 50000 172.16.65.144\\
+Browser Anpassungen:\\
+Advanced settings => Manual proxy confiuration: 127.0.0.1, port 50000\\
+Check Prox DNS when SOCK5, check use proxy for all protocols\\
+Surfen nicht möglich\\
 \section{Quellen}
 \begin{thebibliography}{50}
 \bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
-\bibitem [Stackexchange] , \url{unix.stackexchange.com}
-\bibitem [Pro-Linux], \url{pro-linux.de}
+\bibitem [Stackexchange] , \url{www.unix.stackexchange.com}
+\bibitem [Pro-Linux], \url{www.pro-linux.de}
+\bibitem [Serverfault], \url{www.serverfault.com}
+\bibitem [computerhope], \url{www.computerhope.com}
 \end{thebibliography}
 \end{document}
