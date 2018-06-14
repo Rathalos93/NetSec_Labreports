@@ -111,7 +111,7 @@ NEW regeln siehe oben\\
 INPUT Analog\\
 Tests Funktionieren\\
 Dynamisch  Regeln in Praxis bevorzugt:\\
-Die Meisten Pakete werden über bereits bestehende Verbindungen empfangen/gesendet. Diese Werden mit der ersten Regel ohne weitere Prüfung Akzeptiert, was sehr viel Zeit spaart.
+Die Meisten Pakete werden über bereits bestehende Verbindungen empfangen/gesendet. Diese Werden mit der ersten Regel ohne weitere Prüfung Akzeptiert, was sehr viel Zeit spart.
 \section{Absichern eines Netzwerkes}
 Wenn eine ClientVM über die RouterVM im Netz surfen will, so wird die IP der ClientVM durch die der RouterVM Maskiert. Es ist nicht erkennbar von welcher IP des Virtuellen Netzes die Anfrage kommt, nur, dass süe über die RouterVM lief.\\
 Ping Client->Server geht wie es sollte\\
@@ -141,8 +141,9 @@ sudo iptables -t nat -A PREROUTING -p tcp -i ens33 --dport 5022 -j DNAT --to-des
 ssh-Verbindung zur ClientVM von Server aus möglich.\\
 \\
 sudo ifconfig ens33:1 172.16.65.137 netmask 255.255.255.0\\
+sudo iptables -t nat -A PREROUTING -d 172.16.65.130 -i ens33 -j DNAT --to-destination 192.168.254.44
 ssh-verbindung kann mit 172.16.65.137 hergestellt werden.\\
-
+\\
 \section{SSH-TUNNEL}
 ACCEPT, all, anywhere, anywhere, state ESTABLISHED,RELEASED\\
 ACCEPT, udp, anywhere, anywhere, udp dpt:Domain state NEW\\
@@ -161,7 +162,49 @@ ssh -D 50000 172.16.65.144\\
 Browser Anpassungen:\\
 Advanced settings => Manual proxy confiuration: 127.0.0.1, port 50000\\
 Check Prox DNS when SOCK5, check use proxy for all protocols\\
-Surfen nicht möglich\\
+Set SocksHost to 27.0.0.1\\
+Surfin werkz!\\
+\\
+in der ClientVM $/edt/ssh/sshd_config$ GatewayPorts auf yes setzen\\
+netcat -l -p 5555\\
+ssh -R 1337:127.0.0.1:5555 user@172.16.65.144\\
+netcat 127.0.0.1 1337\\
+\section{OpenVPN}
+1.\\
+sudo iptables -A FORWARD -i ens36 -o ens33 -m state --state NEW -j ACCEPT\\
+sudo iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT\\
+sudo iptables -A FORWARD -j REJECT\\
+2.\\
+openvpn --genkey --secret static.key\\
+Key wurde per CopyPaste der static.key datei auf beide Maschienen gebracht.\\
+server.conf angepasst wie in openvpn.net beschrieben:\\
+dev tun\\
+ifconfig 10.42.0.1 10.42.0.2\\
+secret static.key\\
+3.\\
+sudo iptables -A INPUT -m state --stateNEW -p udp --dport 1194 -j ACCEPT\\
+sudo iptables -A INPUT -m state --stateNEW -p tcp --dport 1194 -j ACCEPT\\
+sudo iptables -A INPUT -j REJECT\\
+sudo iptables -I INPUT -m state --state RELATED, ESTABLISHED -j ACCEPT\\
+sudo iptables -A OUTPUT -m state --state RELATED, ESTABLISHED -j ACCEPT\\
+sudo iptables -A OUTPUT -j REJECT\\
+4.\\
+auf der ClientVM die remote.conf anpassen:\\
+remote 172.16.65.144\\
+dev tun\\
+ifconfig 10.42.0.2 10.42.0.1\\
+secret static.key\\
+5.\\
+sudo openvpn remote.conf\\
+"Peer Connection Initialized with [AF\_INET]172.16.65.144:1194"\\
+"Initialization Sequence Completed"\\
+6.\\
+- Die Nachrichten werden von beiden Seiten über das Interface tun0 übertragen.\\
+- Der Zugriff gelingt nicht\\
+- sudo iptables -I INPUT 2 -m state --state NEW -i tun0 -j ACCEPT\\
+=> verbindung zum Webserver jetzt möglich\\
+- ssh verbindung über tun0 interface möglich\\
+\section{HTTP-Tunnel}
 \section{Quellen}
 \begin{thebibliography}{50}
 \bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
