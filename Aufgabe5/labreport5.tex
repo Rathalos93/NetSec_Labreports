@@ -77,6 +77,142 @@ IP-Adress: 172.16.65.144
 \section{Absichern eines Rechners mit iptables}
 check firewalregeln mit: iptables -L\\
 regeln löschen: iptables -F\\\\
+SSH-Server wurde runtergeladen und mit "sudo service ssh start" gestartet.\\
+Regeln wurden so konzipiert, dass die Kommunikation nur auf den jeweiligen Ports (auf jeweils der INPUT, OUTPUT chain) erlaubt wird: SSH - 22, DNS - 53, HTTP - 80, HTTPS - 443.\\\\
+Genaue Regeln: siehe Anhang.\\\\
+Test der Regeln: \\
+Client -> Router mit SSH funktioniert.\\
+Router -> Client mit SSH funktioniert nicht\, wie gewollt\
+Surfen auf der ClientVM ist möglich\\
+\\
+Seerverdienst mit netcat -l -v -p 5555\\
+Verbindungsaufbau nicht erfolgreich wie zu erwarten, da wir eingehende TCP verbindungen Rejecten, connection Refused.\\\\
+Änderung des Filter-Targets auf DROP:
+Verbindungsaufbau nicht erfolgreich, keine Reaktion, da die eigehenden Pakete gedroppt werden, Timeout.\\
+\\
+Dynamische Regeln:\\
+sudo iptables -t filter -A [OUTPUT/INPUT] -m state --state ESTABLISHED,RELATED -j ACCEPT\\
+Die restlichen Regeln sind analog zu den Regeln auf 2.2, diese haben jedoch die Flags: "-m state --state NEW".\\\\
+Tests Funktionieren\\
+Dynamisch  Regeln in Praxis bevorzugt:\\
+Die Meisten Pakete werden über bereits bestehende Verbindungen empfangen/gesendet. Diese Werden mit der ersten Regel ohne weitere Prüfung Akzeptiert, was sehr viel Zeit spart.
+\section{Absichern eines Netzwerkes}
+Wenn eine ClientVM über die RouterVM im Netz surfen will, so wird die IP der ClientVM durch die der RouterVM Maskiert. Es ist nicht erkennbar von welcher IP des Virtuellen Netzes die Anfrage kommt, nur, dass sie über die RouterVM lief.\\\\
+Ping Client->Server geht wie es sollte\\
+Ping Server->Client geht nicht, da die ClientVM maskiert ist, Timeout\\
+Die ServerVM kann die ClientVM nicht finden, da sie ihre IP nur im lokalem Netzwerk hat, wo sich die ServerVM nicht befindet. Nach Außenhin ist nur die Maskierte IP bekannt.\\
+\\
+Ähnlich wie in Aufgabe 2.3 Lassen wir wieder DNS,HTTP,HTTPS auf den jeweiligen Endports zu. Desweiteren verbieten wir aber Zugriff auf die IP-Adressen 10.0.0.0/8 (Labor-Rechner) und 172.16.65.144 (ServerVM).\\
+Genaue Regeln: Siehe Anhang\\\\
+=> surfen ist möglich, andere Verbindungen können nicht hergestellt werden\\
+\\
+Um SSH-Verbindungen zur ServerVM zu erlauben wird an Position 2 eine Regel hinzugefügt:\\
+ACCEPT, tcp, anywhere, 172.16.65.144 state NEW tcp dpt:ssh\\
+=> ssh verbindung von Client zu ServerVM jetzt möglich\\
+\\
+Eine Regel in die NAT table eingefügt:\\
+sudo iptables -t nat -A PREROUTING -p tcp -i ens33 --dport 5022 -j DNAT --to-destination 192.168.254.44:22\\
+SSH-Verbindung zur ClientVM von Server aus möglich.\\
+\\
+Für das Port-Forwarding wird eine neues Interface anhand einer 24-Bit Maske erstellt. Anschließend wird eine DNAT-Regel in der PREROUTING Chain hinzugefügt.\\
+sudo ifconfig ens33:1 172.16.65.137 netmask 255.255.255.0\\
+sudo iptables -t nat -A PREROUTING -d 172.16.65.130 -i ens33 -j DNAT --to-destination 192.168.254.44.
+SSH-Verbindung kann nun mit 172.16.65.137 hergestellt werden.
+\section{SSH-TUNNEL}
+Die Firewall-Regeln sind so aufgebaut, dass lediglich DNS-Kommunikation und SSH-Kommunikation mit Destination oder Source: 172.16.65.144 (ServerVM) zugelassen wird.\\
+Genaue Regeln: Siehe Anhang.\\
+=> SSH-Verbindung kann hergestellt werden.\\
+\\
+sudo ssh -L 50000:172.16.65.144:80 user@172.16.65.144\\
+Verbindung wird erfolgreich aufgebaut, in Wireshark sind die TCP-Pakete des Handshakes zu sehen, die restlichen übertragenen Pakete sind nur SSH verschlüsselt zu sehen, HTTP kann nicht erkannt werden.\\
+\\
+Local Forwarding forwarded nur statisch auf einen Host, surfen ist deshalb auf diese Weise nicht möglich.\\
+\\
+Dynamischen Forwarding:\\
+ssh -D 50000 172.16.65.144\\
+Browser Anpassungen:\\
+Advanced settings => Manual proxy confiuration: 127.0.0.1, port 50000\\
+Set Host as SOCK5.
+Set Sock5-Host to 127.0.0.1\\
+Somit Funktioniert das Surfen über einen dynamischen SSH-Tunnel.\\
+\\
+In der ClientVM $/etc/ssh/sshd_config$ GatewayPorts auf yes setzen\\
+Server-Prozess mit netcat starten (ServerVM):
+netcat -l -p 5555\\
+ssh -R 1337:127.0.0.1:5555 user@172.16.65.144\\
+netcat 127.0.0.1 1337\\
+=> Baut rückwärts eine TCP-Verbindung via SSH-Tunnel zur ServerVM auf.
+\section{OpenVPN}
+1.\\
+Da die RouterVM externen und internen Verkehr über seperate Netzwerk-Interfaces unterscheidet, ist es Möglich mittels Input und Output Flag nur Verkehr zuzulassen der von ens36 nach ens33 gerichtet ist.\\
+2.\\
+openvpn --genkey --secret static.key\\
+Key wurde per CopyPaste der static.key datei auf beide Maschienen gebracht.\\
+server.conf erstellt wie in openvpn.net beschrieben:\\
+dev tun\\
+ifconfig 10.42.0.1 10.42.0.2\\
+secret static.key\\
+3.\\
+Da der OpenVPN-Server auf Port 1194 läuft lassen wir nur UDP und TCP über diesen port zu. Der Rest wird Rejectet.\\
+Genaue Regeln: Siehe Anhang.\\
+4.\\
+Auf der ClientVM die remote.conf erstellen:\\
+remote 172.16.65.144\\
+dev tun\\
+ifconfig 10.42.0.2 10.42.0.1\\
+secret static.key\\
+5.\\
+sudo openvpn remote.conf(ServerVM)\\
+sudo openvpn client.conf(ClientVM)\\
+"Peer Connection Initialized with [AF\_INET]172.16.65.144:1194"\\
+"Initialization Sequence Completed"\\
+6.\\
+Die Nachrichten werden von beiden Seiten über das Interface tun0 übertragen.\\
+Der Zugriff gelingt nicht\\
+sudo iptables -I INPUT 2 -m state --state NEW -i tun0 -j ACCEPT\\
+=> Verbindung zum Webserver jetzt möglich\\\\
+SSH-Verbindung über tun0 interface möglich\\
+\section{HTTP-Tunnel}
+1.\\
+Damit nur Verbindungen auf unverschlüsselten Seiten zugelassen werden, erlauben wir nur Kommunikation über die Ports 53(DNS) und 80(HTTP). \\ Genaue Regeln: Siehe Anhang.
+2.\\
+Auf der ServerVM wird eine neue DNAT-Regel hinzugefügt die Verbindungen mit Zielport 80 nach 22 umleitet.\\
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 172.16.65.144:22\\
+Verbindung zum SSH-Server über Port 80 funktioniert hiermit.
+3.\\
+Squid wurde installiert.
+Die Firewall wurde so konfiguriert, dass eingehende(INPUT) Verbindungen mit dem Zielport 3128(Squid-Port) erlaubt werden. Der Rest wird Rejectet. Bei der OUTPUT-Chain erlauben wir nur Kommunikation die den Zielport 80 oder 443 haben, auch hier wird der Rest Rejectet. In der Foward-Chain wird alles Rejectet. Um Namspace-Auflösung nicht zu verhindern erlauben wir noch Kommunikation über Port 53. Genaue Regeln: Siehe Anhang.\\
+4.\\
+Proxy-Einstelungen von Squid wurden in Firefox übernommen. Proxy verbietet jedoch die Verbingung. In der squid.conf wurde "http\_access alow all" hinzugefügt. Surfen funktioniert nun.\\
+5.\\
+Verbindung zum Squid server wird aufgebaut, über diesen wird dann zur ServerVM Connected
+sudo nc 192.168.144.2 3128\\
+CONNECT 172.16.65.144:80 HTTP/1.1\\
+=> Verbindung Aufgebaut.\\
+Corkscrew wurde instaliert(vorher Regeln für apt-get zulassen).\\
+Unter ~/.ssh/config ersrellt. In config:\\
+Host *\\
+ProxyCommand corkscrew 192.168.254.2 3128 \%h \%p\\
+squid\_config file: acl Safe\_ports port 22 \#ssh\\\\
+SSH-Server der ServerVM auf Port 443 gestartet durch Anpassung der config.
+Connection erfolgreich: ssh -p 443 172.16.65.144\\
+6.\\
+SSH-Server Config angepasst, server wieder auf Port 22 und restarten\\
+sudo hts -F localhost:22 443 => der http-tunnel Server lauscht auf Port 22\\
+sudo htc -P 192.168.254.2:3128 -F 1337 172.16.65.144:443 => htc lauscht auf port 443 und konvertiert empfangene Pakete auf ssh\\
+ssh -p 1337 user\@127.0.0.1\\
+In Wireshark sieht man wie RouterVM und ServerVM mit TCP über port 443 komminizieren, Verschlüsselt durch SSL.\\
+\section{Quellen}
+\begin{thebibliography}{50}
+\bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
+\bibitem [Stackexchange] , \url{www.unix.stackexchange.com}
+\bibitem [Pro-Linux], \url{www.pro-linux.de}
+\bibitem [Serverfault], \url{www.serverfault.com}
+\bibitem [computerhope], \url{www.computerhope.com}
+\bibitem[Wikipedia], \url{www.wikipedia.org/wiki/Squid}
+\end{thebibliography}
+\section{Anhang}
+\subsection*{2.2 Iptables}
 Regeln:\\
 sudo iptables -t filter -I INPUT -p tcp --dport 22 -j ACCEPT // <<SSH \\
 sudo iptables -t filter -I INPUT -p icmp -j ACCEPT // <<Ping \\
@@ -95,30 +231,9 @@ sudo iptables -t filter -I INPUT -p tcp --sport 22 -j ACCEPT // <<SSH \\
 sudo iptables -t filter -A INPUT -j REJECT // Rest incoming blockieren \\
 sudo iptables -t filter -A OUTPUT -j REJECT // Rest outcoming blockieren \\
 sudo iptables -t filter -A FOWARD -j REJECT // Rest Foward blockieren \\
-\\
-Test der Regeln: \\\\
-Client -> Router mit SSH funktioniert.\\
-Router -> Client mit SSH funktioniert nicht\, wie gewollt\
-Surfen auf der ClientVM ist möglich\\
-\\
-Seerverdienst mit netcat -l -v -p 5555\\
-Verbindungsaufbau nicht erfolgreich wie zu erwarten, da wir eingehende TCP verbindungen Rejecten, connection Refused.\\
-Verbindungsaufbau nicht erfolgreich, keine Reaktion, da die eigehenden Pakete gedroppt werden, Timeout.\\
-\\
-Dynamische Regeln:\\
-sudo iptables -t filter -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT\\
-NEW regeln siehe oben\\
-INPUT Analog\\
-Tests Funktionieren\\
-Dynamisch  Regeln in Praxis bevorzugt:\\
-Die Meisten Pakete werden über bereits bestehende Verbindungen empfangen/gesendet. Diese Werden mit der ersten Regel ohne weitere Prüfung Akzeptiert, was sehr viel Zeit spart.
-\section{Absichern eines Netzwerkes}
-Wenn eine ClientVM über die RouterVM im Netz surfen will, so wird die IP der ClientVM durch die der RouterVM Maskiert. Es ist nicht erkennbar von welcher IP des Virtuellen Netzes die Anfrage kommt, nur, dass süe über die RouterVM lief.\\
-Ping Client->Server geht wie es sollte\\
-Ping Server->Client geht nicht, da die ClientVM maskiert ist, Timeout\\
-Die ServerVM kann die ClientVM nicht finden, da sie ihre IP nur im lokalem Netzwerk hat, wo sich die ServerVM nicht befindet. Nach Außenhin ist nur die Maskierte IP bekannt.\\
-\\
-ACCEPT, all, anywhere, anywhere, state ESTABLISHED,RELEASED
+\subsection*{3.3 Iptables}
+FORWARD-Chain:\\
+ACCEPT, all, anywhere, anywhere, state ESTABLISHED,RELATED
 ACCEPT, udp, anywhere, anywhere, udp spt:Domain state NEW\\
 ACCEPT, udp, anywhere, anywhere, udp dpt:Domain state NEW\\
 ACCEPT, tcp, anywhere, anywhere, tcp spt:Domain state NEW\\
@@ -130,101 +245,32 @@ ACCEPT, tcp, anywhere, anywhere, tcp spt:http state NEW\\
 ACCEPT, tcp, anywhere, anywhere, tcp dpt:https state NEW\\
 ACCEPT, tcp, anywhere, anywhere, tcp spt:https state NEW\\
 RECEJT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
-=> surfen ist möglich, andere verbindungen können nciht hergestellt werden\\
-\\
-Eine Regel hinzugefügt an position 2:\\
-ACCEPT, tcp, anywhere, 172.16.65.144 state NEW tcp dpt:ssh\\
-=> ssh verbindung von Client zu ServerVM jetzt möglich\\
-\\
-Eine Regel in die NAT table eingefügt:\\
-sudo iptables -t nat -A PREROUTING -p tcp -i ens33 --dport 5022 -j DNAT --to-destination 192.168.254.44:22\\
-ssh-Verbindung zur ClientVM von Server aus möglich.\\
-\\
-sudo ifconfig ens33:1 172.16.65.137 netmask 255.255.255.0\\
-sudo iptables -t nat -A PREROUTING -d 172.16.65.130 -i ens33 -j DNAT --to-destination 192.168.254.44
-ssh-verbindung kann mit 172.16.65.137 hergestellt werden.\\
-\\
-\section{SSH-TUNNEL}
-ACCEPT, all, anywhere, anywhere, state ESTABLISHED,RELEASED\\
+\subsection*{4.1}
+FORWARD-Chain:\\
+ACCEPT, all, anywhere, anywhere, state ESTABLISHED,RELATED\\
 ACCEPT, udp, anywhere, anywhere, udp dpt:Domain state NEW\\
 ACCEPT, tcp, anywhere, anywhere, tcp dpt:Domain state NEW\\
 ACCEPT, tcp, anywhere, 172.16.65.144, state NEW tcp dpt:ssh\\
 ACCEPT, tcp, 172.16.65.144, anywhere, state NEW tcp dpt:ssh\\
 RECEJT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
-ssh Verbindung kann hergestellt werden.\\
-\\
-sudo ssh -L 50000:172.16.65.144:80 user@172.16.65.144\\
-Verbindung wird erfolgreich aufgebaut, in wireshark sind die TCP pakete des handshakes zu sehen, die restlichen übertragenen Pakete sind nur ssh verschlüsselt zu sehen, http kann nicht erkannt werden.\\
-\\
-Local Forwarding forwarded nur statisch auf einen Host, surfen ist deshalb auf diese Weise nicht möglich.\\
-\\
-ssh -D 50000 172.16.65.144\\
-Browser Anpassungen:\\
-Advanced settings => Manual proxy confiuration: 127.0.0.1, port 50000\\
-Check Prox DNS when SOCK5, check use proxy for all protocols\\
-Set SocksHost to 127.0.0.1\\
-Surfin werkz!\\
-\\
-in der ClientVM $/edt/ssh/sshd_config$ GatewayPorts auf yes setzen\\
-netcat -l -p 5555\\
-ssh -R 1337:127.0.0.1:5555 user@172.16.65.144\\
-netcat 127.0.0.1 1337\\
-\section{OpenVPN}
-1.\\
+\subsection*{5.1}
 sudo iptables -A FORWARD -i ens36 -o ens33 -m state --state NEW -j ACCEPT\\
 sudo iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT\\
 sudo iptables -A FORWARD -j REJECT\\
-2.\\
-openvpn --genkey --secret static.key\\
-Key wurde per CopyPaste der static.key datei auf beide Maschienen gebracht.\\
-server.conf angepasst wie in openvpn.net beschrieben:\\
-dev tun\\
-ifconfig 10.42.0.1 10.42.0.2\\
-secret static.key\\
-3.\\
-sudo iptables -A INPUT -m state --stateNEW -p udp --dport 1194 -j ACCEPT\\
-sudo iptables -A INPUT -m state --stateNEW -p tcp --dport 1194 -j ACCEPT\\
+\subsection*{5.3}
+sudo iptables -A INPUT -m state --state NEW -p udp --dport 1194 -j ACCEPT\\
+sudo iptables -A INPUT -m state --state NEW -p tcp --dport 1194 -j ACCEPT\\
 sudo iptables -A INPUT -j REJECT\\
 sudo iptables -I INPUT -m state --state RELATED, ESTABLISHED -j ACCEPT\\
 sudo iptables -A OUTPUT -m state --state RELATED, ESTABLISHED -j ACCEPT\\
 sudo iptables -A OUTPUT -j REJECT\\
-4.\\
-auf der ClientVM die remote.conf anpassen:\\
-remote 172.16.65.144\\
-dev tun\\
-ifconfig 10.42.0.2 10.42.0.1\\
-secret static.key\\
-5.\\
-sudo openvpn remote.conf\\
-"Peer Connection Initialized with [AF\_INET]172.16.65.144:1194"\\
-"Initialization Sequence Completed"\\
-6.\\
-- Die Nachrichten werden von beiden Seiten über das Interface tun0 übertragen.\\
-- Der Zugriff gelingt nicht\\
-- sudo iptables -I INPUT 2 -m state --state NEW -i tun0 -j ACCEPT\\
-=> verbindung zum Webserver jetzt möglich\\
-- ssh verbindung über tun0 interface möglich\\
-\section{HTTP-Tunnel}
-1.\\
-ACCEPT, all, anywhere, anywhere, state RELEASED,ESTABLISHED\\
+\subsection*{6.1}
+FORWARD-Chain
+ACCEPT, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
 ACCEPT, tcp, anywhere, anywhere, state NEW, tcp dpt:http\\
 ACCEPT, udp, anywhere, anywhere, state NEW, udp dpt:domain\\
 REJECT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
-2.\\
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-testination 172.16.65.144:22\\
-3.\\
-INPUT:\\
-ACCEPT, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
-ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:3128\\
-REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
-FORWARD:\\
-REJECT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
-OUTPUT\\
-ACCEPT, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
-ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:80\\
-ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:443\\
-REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
-4.\\
+\subsection*{6.3}
 INPUT:\\
 ACCPET, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
 ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:3128\\
@@ -238,32 +284,4 @@ ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:https\\
 ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:domain\\
 REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
 5.\\
-Verbindung zum Squid server wird aufgebaut, über diesen wird dann zur ServerVM Connected
-sudo nc 192.168.144.2 3128\\
-CONNECT 172.16.65.144:80 HTTP/1.1\\
-=> Verbindung Aufgebaut.\\
-Corcscrew installieren:\\
-Masquerade regel muss wieder eingefügt werden bzw. install vor entfernen dieser vorgenommen werden => mail an Ephraim!\\
-unter etc/.ssh touch config\\
-Host *\\
-ProxyCommand corkscrew 192.168.254.2 3128 \%h \%p\\
-squid\_config file: acl Safe\_ports port 22 \#ssh\\
-ssh server der ServerVM auf Port 443 gestartet durch Anpassung der Config, alternativ wäre starten auf Port 22 möglich, wenn eine DNAT regel zum Umleiten von Port 443 auf 22 eingefügt wird, da tcp nur auf destinationport 80 und 443 zugelassen wird.\\
-Alternativ: Port in der squid\_conf hinzufügen und Squid neu starten\\
-Connection erfolgreich: ssh -p 443 172.16.65.144\\
-6.\\
-ssh-server Config angepasst, server wieder auf Port 22 und restarten\\
-sudo hts -F localhost:22 443 => der http-tunnel Server lauscht auf Port 22\\
-sudo htc -P 192.168.254.2:3128 -F 1337 172.16.65.144:443 => htc lauscht auf port 443 und konvertiert empfangene Pakete auf ssh\\
-ssh -p 1337 user\@127.0.0.1\\
-In Wireshark sieht man wie RouterVM und ServerVM mit TCP über port 443 komminizieren, Verschlüsselt durch SSL.\\
-\section{Quellen}
-\begin{thebibliography}{50}
-\bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
-\bibitem [Stackexchange] , \url{www.unix.stackexchange.com}
-\bibitem [Pro-Linux], \url{www.pro-linux.de}
-\bibitem [Serverfault], \url{www.serverfault.com}
-\bibitem [computerhope], \url{www.computerhope.com}
-\bibitem[Wikipedia], \url{www.wikipedia.org/wiki/Squid}
-\end{thebibliography}
 \end{document}
