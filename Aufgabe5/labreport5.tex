@@ -174,11 +174,11 @@ sudo iptables -I INPUT 2 -m state --state NEW -i tun0 -j ACCEPT\\
 SSH-Verbindung über tun0 interface möglich\\
 \section{HTTP-Tunnel}
 1.\\
-Damit nur Verbindungen auf unverschlüsselten Seiten zugelassen werden, erlauben wir nur Kommunikation über die Ports 53(DNS) und 80(HTTP). \\ Genaue Regeln: Siehe Anhang.
+Damit nur Verbindungen auf unverschlüsselten Seiten zugelassen werden, erlauben wir nur Kommunikation über die Ports 53(DNS) und 80(HTTP). \\ Genaue Regeln: Siehe Anhang.\\
 2.\\
 Auf der ServerVM wird eine neue DNAT-Regel hinzugefügt die Verbindungen mit Zielport 80 nach 22 umleitet.\\
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 172.16.65.144:22\\
-Verbindung zum SSH-Server über Port 80 funktioniert hiermit.
+Verbindung zum SSH-Server über Port 80 funktioniert hiermit.\\
 3.\\
 Squid wurde installiert.
 Die Firewall wurde so konfiguriert, dass eingehende(INPUT) Verbindungen mit dem Zielport 3128(Squid-Port) erlaubt werden. Der Rest wird Rejectet. Bei der OUTPUT-Chain erlauben wir nur Kommunikation die den Zielport 80 oder 443 haben, auch hier wird der Rest Rejectet. In der Foward-Chain wird alles Rejectet. Um Namspace-Auflösung nicht zu verhindern erlauben wir noch Kommunikation über Port 53. Genaue Regeln: Siehe Anhang.\\
@@ -200,8 +200,8 @@ Connection erfolgreich: ssh -p 443 172.16.65.144\\
 SSH-Server Config angepasst, server wieder auf Port 22 und restarten\\
 sudo hts -F localhost:22 443 => der http-tunnel Server lauscht auf Port 22\\
 sudo htc -P 192.168.254.2:3128 -F 1337 172.16.65.144:443 => htc lauscht auf port 443 und konvertiert empfangene Pakete auf ssh\\
-ssh -p 1337 user\@127.0.0.1\\
-In Wireshark sieht man wie RouterVM und ServerVM mit TCP über port 443 komminizieren, Verschlüsselt durch SSL.\\
+ssh -p 1337 user@127.0.0.1\\
+In Wireshark sieht man wie RouterVM und ServerVM mit TCP über port 443 kommunizieren, Verschlüsselt durch SSL.\\
 \section{Quellen}
 \begin{thebibliography}{50}
 \bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
