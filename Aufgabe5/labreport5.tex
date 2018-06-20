@@ -162,7 +162,7 @@ ssh -D 50000 172.16.65.144\\
 Browser Anpassungen:\\
 Advanced settings => Manual proxy confiuration: 127.0.0.1, port 50000\\
 Check Prox DNS when SOCK5, check use proxy for all protocols\\
-Set SocksHost to 27.0.0.1\\
+Set SocksHost to 127.0.0.1\\
 Surfin werkz!\\
 \\
 in der ClientVM $/edt/ssh/sshd_config$ GatewayPorts auf yes setzen\\
@@ -205,6 +205,58 @@ sudo openvpn remote.conf\\
 => verbindung zum Webserver jetzt möglich\\
 - ssh verbindung über tun0 interface möglich\\
 \section{HTTP-Tunnel}
+1.\\
+ACCEPT, all, anywhere, anywhere, state RELEASED,ESTABLISHED\\
+ACCEPT, tcp, anywhere, anywhere, state NEW, tcp dpt:http\\
+ACCEPT, udp, anywhere, anywhere, state NEW, udp dpt:domain\\
+REJECT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
+2.\\
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-testination 172.16.65.144:22\\
+3.\\
+INPUT:\\
+ACCEPT, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
+ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:3128\\
+REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
+FORWARD:\\
+REJECT, all, anywhere, anywhere, reject-with icmp-port-unreachable\\
+OUTPUT\\
+ACCEPT, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
+ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:80\\
+ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:443\\
+REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
+4.\\
+INPUT:\\
+ACCPET, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
+ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:3128\\
+REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
+FORWARD:\\
+REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
+OUTPUT:\\
+ACCPET, all, anywhere, anywhere, state RELATED,ESTABLISHED\\
+ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:http\\
+ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:https\\
+ACCEPT, tcp, anywhere, anywhere, state NEW tcp dpt:domain\\
+REJECT, all, anywhere, anyhwere, reject-with icmp-port-unreachable\\
+5.\\
+Verbindung zum Squid server wird aufgebaut, über diesen wird dann zur ServerVM Connected
+sudo nc 192.168.144.2 3128\\
+CONNECT 172.16.65.144:80 HTTP/1.1\\
+=> Verbindung Aufgebaut.\\
+Corcscrew installieren:\\
+Masquerade regel muss wieder eingefügt werden bzw. install vor entfernen dieser vorgenommen werden => mail an Ephraim!\\
+unter etc/.ssh touch config\\
+Host *\\
+ProxyCommand corkscrew 192.168.254.2 3128 \%h \%p\\
+squid\_config file: acl Safe\_ports port 22 \#ssh\\
+ssh server der ServerVM auf Port 443 gestartet durch Anpassung der Config, alternativ wäre starten auf Port 22 möglich, wenn eine DNAT regel zum Umleiten von Port 443 auf 22 eingefügt wird, da tcp nur auf destinationport 80 und 443 zugelassen wird.\\
+Alternativ: Port in der squid\_conf hinzufügen und Squid neu starten\\
+Connection erfolgreich: ssh -p 443 172.16.65.144\\
+6.\\
+ssh-server Config angepasst, server wieder auf Port 22 und restarten\\
+sudo hts -F localhost:22 443 => der http-tunnel Server lauscht auf Port 22\\
+sudo htc -P 192.168.254.2:3128 -F 1337 172.16.65.144:443 => htc lauscht auf port 443 und konvertiert empfangene Pakete auf ssh\\
+ssh -p 1337 user\@127.0.0.1\\
+In Wireshark sieht man wie RouterVM und ServerVM mit TCP über port 443 komminizieren, Verschlüsselt durch SSL.\\
 \section{Quellen}
 \begin{thebibliography}{50}
 \bibitem  [Cyberciti], \url{www.cyberciti.biz/faq/how-to-find-out-default-gateway-in-ubuntu/}
@@ -212,5 +264,6 @@ sudo openvpn remote.conf\\
 \bibitem [Pro-Linux], \url{www.pro-linux.de}
 \bibitem [Serverfault], \url{www.serverfault.com}
 \bibitem [computerhope], \url{www.computerhope.com}
+\bibitem[Wikipedia], \url{www.wikipedia.org/wiki/Squid}
 \end{thebibliography}
 \end{document}
