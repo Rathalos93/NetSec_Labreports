@@ -52,8 +52,8 @@
   morekeywords={*,...}            % if you want to add more keywords to the set
 } 
 
-\title{\vspace{-2cm}Title}
-\author{default author \\facculty}
+\title{\vspace{-2cm}NetSec Blatt 6}
+\author{Jonas Sander \\ Kolja Hopfmann \\facculty}
 \date{\today}
 
 \begin{document}
@@ -63,6 +63,23 @@
 \shorthandoff{"}
 \section{Absicherung des TCP-Chats mit SSL}
 \section{CAs und Webserver-Zertifikate}
+\subsection{OpenSSL selbstsigniertes Zertifikat}
+sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout apache-selfsigned.key -out apache-selfsigned.crt\\
+für das erzeugen des Zertifikats und des Schlüsseln. Das Zertifikat und der Schlüssel werden dann in der default-ssl.conf eingebunden. Daraufhin wird der Server neugestartet.
+\subsubsection{Aufrufen im Browser}
+Der Webserver wird nun über https aufgerufen. Das Selbstsignierte Zertifikat wird als vertrauendswürdig eingestuft.
+\subsubsection{Nachteil von selbstsignierten Zertifikaten}
+Jeder kann ein selbst signiertes Zertifikat erstellen, das macht es noch lange nicht vertrauenswürdig. Aus diesem Grund gibt es neutrale CA's welche Vertrauenswürdigkeit garantieren.
+\subsection{HTTPS-Weiterleitung}
+Modul aktivieren mit: sudo a2enmod rewrite\\
+Erstellen einer .htaccess Datei für das Beschreiben der Regeln (Pfad zur Datei wird in default.conf hinterlegt.) Regeln einfügen:\\
+\begin{verbatim}
+RewriteEngine On
+RewriteCond \%{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST} %{REQUEST_URI} [R=301,L] 
+\end{verbatim}
+Server neustarten.
+
 \section{Unsichere selbstentwickelte Verschlüsselungsalgorithmen}
 \section{EasyAES}
 \section{Timing-Angriff auf Passwörter}
