@@ -1,13 +1,13 @@
 const fs = require('fs');
 
-const sFile = "baziCryptfiles/n03.txt.enc" //filename goes here
+const sFile = "advaziCryptfiles/n04.txt.enc" //filename goes here
 
 fs.readFile(sFile, function read(err, data) {
     if (err) {
         throw err;
     }
     console.log(data);
-    var sKey = data.slice(data.length -10, data.length);
+    var sKey = getAdvaziKey(data);
 
     console.log("Key found: " +
     Buffer.from(sKey, 'hex').toString('utf8'));
@@ -17,6 +17,9 @@ fs.readFile(sFile, function read(err, data) {
 
 });
 
+function getAdvaziKey(data) {
+  return "0A";
+}
 
 function decrypt(sKey, sMessage) {
   var sFullKey = "";
