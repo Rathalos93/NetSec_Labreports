@@ -63,6 +63,8 @@
 \shorthandoff{"}
 \section{Absicherung des TCP-Chats mit SSL}
 \section{CAs und Webserver-Zertifikate}
+\subsection{Fallstudie}
+keine Doku nötig
 \subsection{OpenSSL selbstsigniertes Zertifikat}
 sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout apache-selfsigned.key -out apache-selfsigned.crt\\
 für das erzeugen des Zertifikats und des Schlüsseln. Das Zertifikat und der Schlüssel werden dann in der default-ssl.conf eingebunden. Daraufhin wird der Server neugestartet.
@@ -79,8 +81,21 @@ RewriteCond \%{HTTPS} off
 RewriteRule (.*) https://%{HTTP_HOST} %{REQUEST_URI} [R=301,L] 
 \end{verbatim}
 Server neustarten.
-
+\subsection{sslstrip}
+sslstrip und wireshark installiert\\
+bei aufruf der Seite über hhtp wurden wir auf https umgeleitet, die TLS-Datenpakete konnten nicht mitgelesen werden (verschlüsslt).\\
+sslstrip -p -l 8080\\
+http proxy: 127.0.0.1, use for all protocols, no proxy for localhost entfernt\\
+Bei aufruf mit http wird nun nicht mehr umgeleitet\\
+in der sslstip.log sind Passwort und User der Anmeldung sichtbar.\\
+Die Lösung aus 2.3 bietet keine hohe sicherheit, da sie sich mit einfachen Mitteln umgehen lässt.\\
+HSTS:\\
+HSTS enthält strict-transport-security-header, der dem Client vorgibt, über wie lange Zeit er mit dem Server nur über https kommunizieren darf. Wird hiergegen verstoßen werden alle weiteren Verbindungen vom server ignoriert. Selbst wenn ein Proxy verwendet wird, gelangt der HSTS header trotzdem an den Browser und dieser muss sich daran halten. Hält sich dieser hieran, ist ein ssl stripping nicht möglich.
 \section{Unsichere selbstentwickelte Verschlüsselungsalgorithmen}
+Der Key lässt sich aus der Verschlüsselten Datei auslesen, da dieser direkt dargestellt wird, wenn 0 werte codiert werden.\\
+Key01: e53k9dxe53\\
+Key02: 7dmKdn7dmK\\
+Key03: Rl9sN3c4Rl\\
 \section{EasyAES}
 \section{Timing-Angriff auf Passwörter}
 \end{document}
