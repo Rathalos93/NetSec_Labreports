@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{lineno}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{eurosym}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{units}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{import}
+\usepackage{url}
+\usepackage{amsthm}
+\theoremstyle{plain}
+
+\lstset
+{ %
+  language=R,                     % the language of the code
+  basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+%  keywordstyle=\color{blue},      % keyword style
+%  commentstyle=\color{green},   % comment style
+%  stringstyle=\color{blue},       % string literal style
+  %escapeinside={\%*}{*)},         % if you want to add a comment within your code
+  escapeinside={(*@}{@*)},         
+  morekeywords={*,...}            % if you want to add more keywords to the set
+} 
+
+\title{\vspace{-2cm}NetSec Blatt 6}
+\author{Jonas Sander \\ Kolja Hopfmann \\facculty}
+\date{\today}
+
+\begin{document}
+\pagenumbering{arabic}
+\maketitle
+\centerline{\rule{1.2\linewidth}{.2pt}}
+\shorthandoff{"}
+\section{Absicherung des TCP-Chats mit SSL}
+\section{CAs und Webserver-Zertifikate}
+\subsection{Fallstudie}
+keine Doku nötig
+\subsection{OpenSSL selbstsigniertes Zertifikat}
+sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout apache-selfsigned.key -out apache-selfsigned.crt\\
+für das erzeugen des Zertifikats und des Schlüsseln. Das Zertifikat und der Schlüssel werden dann in der default-ssl.conf eingebunden. Daraufhin wird der Server neugestartet.
+\subsubsection{Aufrufen im Browser}
+Der Webserver wird nun über https aufgerufen. Das Selbstsignierte Zertifikat wird als vertrauendswürdig eingestuft.
+\subsubsection{Nachteil von selbstsignierten Zertifikaten}
+Jeder kann ein selbst signiertes Zertifikat erstellen, das macht es noch lange nicht vertrauenswürdig. Aus diesem Grund gibt es neutrale CA's welche Vertrauenswürdigkeit garantieren.
+\subsection{HTTPS-Weiterleitung}
+Modul aktivieren mit: sudo a2enmod rewrite\\
+Erstellen einer .htaccess Datei für das Beschreiben der Regeln (Pfad zur Datei wird in default.conf hinterlegt.) Regeln einfügen:\\
+\begin{verbatim}
+RewriteEngine On
+RewriteCond \%{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST} %{REQUEST_URI} [R=301,L] 
+\end{verbatim}
+Server neustarten.
+\subsection{sslstrip}
+sslstrip und wireshark installiert\\
+bei aufruf der Seite über hhtp wurden wir auf https umgeleitet, die TLS-Datenpakete konnten nicht mitgelesen werden (verschlüsslt).\\
+sslstrip -p -l 8080\\
+http proxy: 127.0.0.1, use for all protocols, no proxy for localhost entfernt\\
+Bei aufruf mit http wird nun nicht mehr umgeleitet\\
+in der sslstip.log sind Passwort und User der Anmeldung sichtbar.\\
+Die Lösung aus 2.3 bietet keine hohe sicherheit, da sie sich mit einfachen Mitteln umgehen lässt.\\
+HSTS:\\
+HSTS enthält strict-transport-security-header, der dem Client vorgibt, über wie lange Zeit er mit dem Server nur über https kommunizieren darf. Wird hiergegen verstoßen werden alle weiteren Verbindungen vom server ignoriert. Selbst wenn ein Proxy verwendet wird, gelangt der HSTS header trotzdem an den Browser und dieser muss sich daran halten. Hält sich dieser hieran, ist ein ssl stripping nicht möglich.
+\section{Unsichere selbstentwickelte Verschlüsselungsalgorithmen}
+Der Key lässt sich aus der Verschlüsselten Datei auslesen, da dieser direkt dargestellt wird, wenn 0 werte codiert werden.\\
+Key01: e53k9dxe53\\
+Key02: 7dmKdn7dmK\\
+Key03: Rl9sN3c4Rl\\
+Die Dateien wurden mit einem Script entschlüsselt (siehe Anhang).\\
+Dieses findet den Key, indem es die 10 letzten Byte der Datei nimmt und XORt die Datei dann mit diesem.\\
+
+\section{EasyAES}
+\section{Timing-Angriff auf Passwörter}
+\end{document}
