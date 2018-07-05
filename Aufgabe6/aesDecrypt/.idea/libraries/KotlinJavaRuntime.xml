@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="KotlinJavaRuntime">
+    <CLASSES>
+      <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime.jar!/" />
+      <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/commons-codec-1.11" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="http://commons.apache.org/proper/commons-codec/download_codec.cgi" />
+      <root url="file://$USER_HOME$/Downloads/commons-codec-1.11/apidocs" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime-sources.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/commons-codec-1.11" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/commons-codec-1.11" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/commons-codec-1.11" recursive="false" type="SOURCES" />
+  </library>
+</component>
