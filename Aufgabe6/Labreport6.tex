@@ -4,7 +4,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
+%\usepackage[ngerman]{babel}
 \usepackage{lineno}
 \usepackage{listings}
 \usepackage[T1]{fontenc}
@@ -60,7 +60,7 @@
 \pagenumbering{arabic}
 \maketitle
 \centerline{\rule{1.2\linewidth}{.2pt}}
-\shorthandoff{"}
+%\shorthandoff{"}
 \section{Absicherung des TCP-Chats mit SSL}
 \section{CAs und Webserver-Zertifikate}
 \subsection{Fallstudie}
@@ -97,8 +97,13 @@ Key01: e53k9dxe53\\
 Key02: 7dmKdn7dmK\\
 Key03: Rl9sN3c4Rl\\
 Die Dateien wurden mit einem Script entschlüsselt (siehe Anhang).\\
-Dieses findet den Key, indem es die 10 letzten Byte der Datei nimmt und XORt die Datei dann mit diesem.\\
-
+Dieses findet den Key, indem es die 10 letzten Byte der Datei nimmt und XORt die Datei dann mit diesem.\\\\
+Mit Advazicrypt ist das Knacken der Verschlüsselung schwerer, da der key sich nicht mehr direkt aus dem Padding auslesen lässt. Da Jedoch bekannt ist, dass die Gepaddeten Bytes jeweils genau den Wert entsprechend der Anzahl der gepaddeten Bytes enthalten, kann diese Anzahl festgestellt und somit der Schlüssel durch Bitweises XOR dieser Zahl mit dem Verschlüsselten Wert der Gepaddeten Bytes immer noch ermittelt werden. Das Script hierfür befindet sich im Anhang.\\
+Key04: qIk4n3oqIk\\
+key05: 4i0nsK4i0n\\
+key06: 3l337sec3l\\
 \section{EasyAES}
+
 \section{Timing-Angriff auf Passwörter}
+\section{Anhang}
 \end{document}
