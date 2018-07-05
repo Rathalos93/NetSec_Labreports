@@ -1,34 +1,27 @@
 const fs = require('fs');
 
-const sFile = "advaziCryptfiles/n04.txt.enc" //filename goes here
+const sFile = "advaziCryptfiles/n06.txt.enc" //filename goes here
 
-fs.readFile(sFile, function read(err, dataBuffer) {
+fs.readFile(sFile, function read(err, data) {
     if (err) {
         throw err;
     }
-    console.log(typeof dataBuffer);
-    console.log(dataBuffer);
-    var sHexKey = getAdvaziKey(dataBuffer);
+    console.log(data);
+    var sKey = getAdvaziKey(data);
 
-    console.log(typeof sHexKey);
     console.log("Key found: " +
-    Buffer.from(sHexKey, 'hex').toString('utf8'));
+    Buffer.from(sKey, 'hex').toString('utf8'));
 
-    var clear = decrypt(sHexKey, dataBuffer);
+    var clear = decrypt(sKey, data);
     console.log("Klartext: " + clear);
 
 });
 
-function getAdvaziKey(data) {
-  var bufferPaddedKey = data.slice(data.length -10, data.length);
-  return "5A";
-}
-
-function decrypt(sHexKey, sMessage) {
+function decrypt(sKey, sMessage) {
   var sFullKey = "";
 
   while(sFullKey.length < sMessage.length) {
-    sFullKey += sHexKey;
+    sFullKey += sKey;
   }
 
   return Buffer.from(xor(sFullKey, sMessage), 'hex').toString('utf8');
@@ -48,4 +41,30 @@ function xor(a, b) {
    }
  }
  return new Buffer(res);
+}
+
+
+function getAdvaziKey(data) {
+	var bPaddedKey = data.slice(data.length -10, data.length);
+	var sPaddedKey = Buffer.from(bPaddedKey, 'hex').toString('utf8');
+	var sData = Buffer.from(data, 'hex').toString('utf8');
+	var sPaddingFill = "";
+	var sPaddingFillFull = "";
+
+	var i = 0;
+	while(sData.charAt(sData.length - (i+1)) == sPaddedKey.charAt(sPaddedKey.length - ((i%10)+1))) {
+		i++;
+	}
+
+	sPaddingFill = String.fromCharCode(i);
+	console.log("CONVERTED I TO HEXSTRING: " + i + " = " + sPaddingFill);
+
+	for(var j = 0; j < 10; j++){
+		sPaddingFillFull += sPaddingFill;
+	}
+	sPaddingFillFull = Buffer.from(new Buffer(sPaddingFillFull), 'hex').toString('utf8');
+	console.log(sPaddingFillFull);
+	var trueKey = xor(sPaddingFillFull, sPaddedKey);
+	console.log(Buffer.from(trueKey, 'hex').toString('utf8'));
+  return trueKey;
 }
