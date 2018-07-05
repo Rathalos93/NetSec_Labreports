@@ -17,9 +17,6 @@ fs.readFile(sFile, function read(err, data) {
 
 });
 
-function getAdvaziKey(data) {
-  return "0A";
-}
 
 function decrypt(sKey, sMessage) {
   var sFullKey = "";
@@ -45,4 +42,29 @@ function xor(a, b) {
    }
  }
  return new Buffer(res);
+}
+
+function getAdvaziKey(data) {
+	var bPaddedKey = data.slice(data.length -10, data.length);
+	var sPaddedKey = Buffer.from(bPaddedKey, 'hex').toString('utf8');
+	var sData = Buffer.from(data, 'hex').toString('utf8');
+	var sPaddingFill = "";
+	var sPaddingFillFull = "";
+	
+	var i = 0;
+	while(sData.charAt(sData.length - (i+1)) == sPaddedKey.charAt(sPaddedKey.length - ((i%10)+1))) {
+		i++;
+	}
+	
+	sPaddingFill = String.fromCharCode(i);
+	console.log("CONVERTED I TO HEXSTRING: " + i + " = " + sPaddingFill);
+	
+	for(var j = 0; j < 10; j++){
+		sPaddingFillFull += sPaddingFill;
+	}
+	sPaddingFillFull = Buffer.from(new Buffer(sPaddingFillFull), 'hex').toString('utf8');
+	console.log(sPaddingFillFull);
+	var trueKey = xor(sPaddingFillFull, sPaddedKey);
+	console.log(Buffer.from(trueKey, 'hex').toString('utf8'));
+  return trueKey;
 }
