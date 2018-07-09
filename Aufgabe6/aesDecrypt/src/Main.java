@@ -2,6 +2,7 @@ import org.apache.commons.codec.binary.Hex;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -13,22 +14,25 @@ public class Main
 	public static void main(String[] args) throws Exception
 	{
 		System.out.println("AES Decrypt");
-		ArrayList<String> keys = generateKeys();
+		HashSet<String> keys = generateKeys();
 		System.out.println("Done generating Keys");
-		Map<String, String> middleA = new HashMap<String, String>();
-		Map<String, String> middleB = new HashMap<String, String>();
+		Map<String, String> middleA = new HashMap<>();
+		Map<String, String> middleB = new HashMap<>();
 
 		String plaintext = "Verschluesselung";
 		String ciphertext = "be393d39ca4e18f41fa9d88a9d47a574";
 		byte[] bytes = Hex.decodeHex(ciphertext.toCharArray());
 		ciphertext = new String(bytes, "UTF-8");
 
-		for (int i = 0; i < keys.size(); i++)
-		{
-			AES.setKey(keys.get(i));
-			middleA.put(AES.encrypt(plaintext), keys.get(i));
-			middleB.put(AES.decrypt(ciphertext), keys.get(i));
-		}
+        for (String key : keys) {
+            AES.setKey(key);
+
+            AES.encrypt(plaintext);
+            middleA.put(AES.getEncryptedString(), key);
+
+            AES.decrypt(ciphertext);
+            middleB.put(AES.getDecryptedString(), key );
+        }
 
 		System.out.println("Done encrypting");
 
@@ -56,24 +60,27 @@ public class Main
 	private static boolean checkCorrectness(String plaintext, String ciphertext, String key1, String key2)
 	{
 		AES.setKey(key1);
-		String e1 = AES.encrypt(plaintext);
+		AES.encrypt(plaintext);
+		String e1 = AES.getEncryptedString();
 
 		AES.setKey(key2);
-		String e2 = AES.encrypt(e1);
+		AES.encrypt(e1);
+		String e2 = AES.getEncryptedString();
 
 		return e2.equals(ciphertext);
 	}
 
 
-	private static ArrayList<String> generateKeys()
+	private static HashSet<String> generateKeys()
 	{
-		ArrayList<String> keys = new ArrayList<String>();
+	    HashSet<String> keys = new HashSet<>();
 
 		for (int posByteA = 0; posByteA < 16; posByteA++)
 		{
-			System.out.println("posByteA: " + posByteA);
-			for (int posByteB = 0; posByteB < 16; posByteB++)
+            System.out.println(((double) posByteA / 16) * 100 + "% complete");
+            for (int posByteB = posByteA; posByteB < 16; posByteB++)
 			{
+
 				for (int valueByteA = 0; valueByteA < 256; valueByteA++)
 				{
 					for (int valueByteB = 0; valueByteB < 256; valueByteB++)
@@ -82,12 +89,8 @@ public class Main
 						key[posByteA] = (byte) valueByteA;
 						key[posByteB] = (byte) valueByteB;
 
-						String sKey = Hex.encodeHexString(key);
-						if (posByteA >= 6)
-						{
-							System.out.println(sKey);
-						}
-
+						//String sKey = Hex.encodeHexString(key);
+                        String sKey = key + "";
 						keys.add(sKey);
 					}
 				}
