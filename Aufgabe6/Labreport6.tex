@@ -92,13 +92,18 @@ Die Lösung aus 2.3 bietet keine hohe sicherheit, da sie sich mit einfachen Mitt
 HSTS:\\
 HSTS enthält strict-transport-security-header, der dem Client vorgibt, über wie lange Zeit er mit dem Server nur über https kommunizieren darf. Wird hiergegen verstoßen werden alle weiteren Verbindungen vom server ignoriert. Selbst wenn ein Proxy verwendet wird, gelangt der HSTS header trotzdem an den Browser und dieser muss sich daran halten. Hält sich dieser hieran, ist ein ssl stripping nicht möglich.
 \section{Unsichere selbstentwickelte Verschlüsselungsalgorithmen}
+\subsection{}
 Der Key lässt sich aus der Verschlüsselten Datei auslesen, da dieser direkt dargestellt wird, wenn 0 werte codiert werden.\\
 Key01: e53k9dxe53\\
 Key02: 7dmKdn7dmK\\
 Key03: Rl9sN3c4Rl\\
 Die Dateien wurden mit einem Script entschlüsselt (siehe Anhang).\\
 Dieses findet den Key, indem es die 10 letzten Byte der Datei nimmt und XORt die Datei dann mit diesem.\\
-
+Nachricht 1: Hallo Peter, Endlich koennen wir geheim kommunizieren! Bis bald, Max\\
+Nachricht 2: Hi Max Super, Sicherheitsbewusstsein ist ja extrem wichtig! Schoene Gruesse, Peter.\\
+Nachricht 3: Hi Peter, hast du einen Geheimtipp fuer ein Buch fuer mich? Gruss, Max\\
+\subsection{}
+Das Knacken ist nun schwieriger, da der Key nicht mehr direkt aus dem Padding auslesbar ist. Dies ist jedoch immer noch unsicher.\\
 \section{EasyAES}
 \section{Timing-Angriff auf Passwörter}
 \end{document}
