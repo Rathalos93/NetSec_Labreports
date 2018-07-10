@@ -36,6 +36,8 @@ public class Main
 
 		System.out.println("Done encrypting");
 
+
+        //Meet in the middle angriff
 		for (String sA : middleA.keySet())
 		{
 			for (String sB : middleB.keySet())
