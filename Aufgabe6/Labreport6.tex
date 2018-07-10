@@ -108,6 +108,7 @@ Key04: qIk4n3oqIk\\
 key05: 4i0nsK4i0n\\
 key06: 3l337sec3l\\
 \section{EasyAES}
+Zuerst werden die möglichen Keys generiert. Dies geschieht über 4 verschachtelte Schleifen, von denen 2 die Position (0-15) der nicht-null Bytes bestimmen und 2 den Inhalt (0-255) dieser. Insgesamt ergeben sich so $(\sum_{i=1}^{16} i^2)\cdot 2^{16}$ unterschiedliche Schlüssel. Über diese Schlüssel wird dann Iteriert und der Klartext mit dem Schlüssel der jeweiligen Iteration Chiffriert und der verschlüsselte Text Dechiffriert. Die beiden hierdurch erhaltenen Werte werden in mit dem verwendeten Schlüssel in die HashMaps middleA und middleB gespeichert. Sobald Jeder Key zur Chiffrierung und Dechiffrierung verwendet wurde, werden alle Werte aus middleA mit allen Werten aus middleB verglichen. Sobald eine Übereinstimmung gefunden wurde, sind die zu diesen Werten gehörenden Keys die zur Verschlüsselung Verwendeten Keys. Zuletzt wird der Klartext mit diesen beiden Keys Chiffriert und das Ergebnis mit dem Verschlüsselten Text verglichen um sicher zu stellen, dass die Keys tatsächlich korrekt sind.
 \section{Timing-Angriff auf Passwörter}
 \section{Anhang}
 \end{document}
