@@ -23,6 +23,7 @@
 \usepackage{amsthm}
 \theoremstyle{plain}
 
+
 \lstset
 { %
   language=R,                     % the language of the code
@@ -53,7 +54,7 @@
 } 
 
 \title{\vspace{-2cm}NetSec Blatt 6}
-\author{Jonas Sander \\ Kolja Hopfmann \\facculty}
+\author{Jonas Sander \\ Kolja Hopfmann \\UHH}
 \date{\today}
 
 \begin{document}
@@ -67,6 +68,15 @@ Die Objekte der Klasse Socket wurden durch Objekte der Klasse SSLSocket und SSLS
 keytool -genkey -keystore myKey -keyalg RSA
 \end{verbatim} 
 erstellt und dort der Schlüssel $skeletonkey$ hinterlegt. In den Java args wurde beim Start von Server und Client die Datei mit den Schlüsseln, sowie das zu verwendende Passwort angegeben.\\
+\begin{verbatim}
+java -Djavax.net.ssl.keyStore=myKey -Djavax.net.ssl.keyStorePassword=skeletonkey 
+ -Djava.protocol.handler.pkgs=com.sun.net.ssl.internal.www.protocol 
+ -Djavax.net.debug=ssl SecureServer
+\end{verbatim}
+\begin{verbatim}
+java -Djavax.net.ssl.keyStore=myKey -Djavax.net.ssl.keyStorePassword=skeletonkey 
+ SecureClient
+\end{verbatim}
 Siehe Code im Anhang.
 \section{CAs und Webserver-Zertifikate}
 \subsection{Fallstudie}
@@ -96,9 +106,9 @@ Bei aufruf mit http wird nun nicht mehr umgeleitet\\
 in der sslstip.log sind Passwort und User der Anmeldung sichtbar.\\
 Die Lösung aus 2.3 bietet keine hohe sicherheit, da sie sich mit einfachen Mitteln umgehen lässt.\\
 HSTS:\\
-HSTS enthält strict-transport-security-header, der dem Client vorgibt, über wie lange Zeit er mit dem Server nur über https kommunizieren darf. Wird hiergegen verstoßen werden alle weiteren Verbindungen vom server ignoriert. Selbst wenn ein Proxy verwendet wird, gelangt der HSTS header trotzdem an den Browser und dieser muss sich daran halten. Hält sich dieser hieran, ist ein ssl stripping nicht möglich.
+HSTS enthält strict-transport-security-header, der dem Client vorgibt, über wie lange Zeit er mit dem Server nur über https kommunizieren darf. Wird hiergegen verstoßen werden alle weiteren Verbindungen vom Server ignoriert. Selbst wenn ein Proxy verwendet wird, gelangt der HSTS header trotzdem an den Browser und dieser muss sich daran halten. Hält sich dieser hieran, ist ein ssl stripping nicht möglich.
 \section{Unsichere selbstentwickelte Verschlüsselungsalgorithmen}
-\subsection{}
+\subsection{BaziCrypt}
 Der Key lässt sich aus der Verschlüsselten Datei auslesen, da dieser direkt dargestellt wird, wenn 0 werte codiert werden.\\
 Key01: e53k9dxe53\\
 Key02: 7dmKdn7dmK\\
@@ -108,14 +118,25 @@ Dieses findet den Key, indem es die 10 letzten Byte der Datei nimmt und XORt die
 Nachricht 1: Hallo Peter, Endlich koennen wir geheim kommunizieren! Bis bald, Max\\
 Nachricht 2: Hi Max Super, Sicherheitsbewusstsein ist ja extrem wichtig! Schoene Gruesse, Peter.\\
 Nachricht 3: Hi Peter, hast du einen Geheimtipp fuer ein Buch fuer mich? Gruss, Max\\
-\subsection{}
+\subsection{AdvaziCrypt}
 Mit Advazicrypt ist das Knacken der Verschlüsselung schwerer, da der key sich nicht mehr direkt aus dem Padding auslesen lässt. Da Jedoch bekannt ist, dass die Gepaddeten Bytes jeweils genau den Wert entsprechend der Anzahl der gepaddeten Bytes enthalten, kann diese Anzahl festgestellt und somit der Schlüssel durch Bitweises XOR dieser Zahl mit dem Verschlüsselten Wert der Gepaddeten Bytes immer noch ermittelt werden. Das Script hierfür befindet sich im Anhang.\\
 Key04: qIk4n3oqIk\\
 key05: 4i0nsK4i0n\\
 key06: 3l337sec3l\\
+Nachricht 4: Hi Max, natuerlich: Kryptologie von A. Beutelspacher ist super. Gruss Peter\\
+Nachricht 5: Hi Peter, worum geht es in dem Buch? Ciao, Max.\\
+Nachricht 6: Hi Max, das ist ein super Buch, das viele Krypto-Themen abdeckt. Gruss Peter\\
 \section{EasyAES}
 Zuerst werden die möglichen Keys generiert. Dies geschieht über 4 verschachtelte Schleifen, von denen 2 die Position (0-15) der nicht-null Bytes bestimmen und 2 den Inhalt (0-255) dieser. Insgesamt ergeben sich so $(\sum_{i=1}^{16} i^2)\cdot 2^{16}$ unterschiedliche Schlüssel. Über diese Schlüssel wird dann Iteriert und der Klartext mit dem Schlüssel der jeweiligen Iteration Chiffriert und der verschlüsselte Text Dechiffriert. Die beiden hierdurch erhaltenen Werte werden in mit dem verwendeten Schlüssel in die HashMaps middleA und middleB gespeichert. Sobald Jeder Key zur Chiffrierung und Dechiffrierung verwendet wurde, werden alle Werte aus middleA mit allen Werten aus middleB verglichen. Sobald eine Übereinstimmung gefunden wurde, sind die zu diesen Werten gehörenden Keys die zur Verschlüsselung Verwendeten Keys. Zuletzt wird der Klartext mit diesen beiden Keys Chiffriert und das Ergebnis mit dem Verschlüsselten Text verglichen um sicher zu stellen, dass die Keys tatsächlich korrekt sind.
 \section{Timing-Angriff auf Passwörter}
+\section{Quellen}
+\begin{thebibliography}{50}
+\bibitem [SSLSockets] , \url{https://stackoverflow.com/questions/13874387/create-app-with-sslsocket-java}
+\bibitem [Zertifikat mit Apache2], \url{https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl
+-certificate-for-apache-in-ubuntu-16-04}
+\bibitem [Padding] , \url{https://en.wikipedia.org/wiki/Padding_(cryptography)#PKCS7}
+\bibitem [Meet-the-Middle] , \url{https://en.wikipedia.org/wiki/Meet-in-the-middle_attack}
+\end{thebibliography}
 \section{Anhang}
 \subsection{Absicherung des TCP-Chats mit SSL}
 \subsubsection{ClientWorker}
