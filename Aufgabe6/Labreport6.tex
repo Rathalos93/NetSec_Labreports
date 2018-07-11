@@ -127,7 +127,10 @@ Nachricht 4: Hi Max, natuerlich: Kryptologie von A. Beutelspacher ist super. Gru
 Nachricht 5: Hi Peter, worum geht es in dem Buch? Ciao, Max.\\
 Nachricht 6: Hi Max, das ist ein super Buch, das viele Krypto-Themen abdeckt. Gruss Peter\\
 \section{EasyAES}
-Zuerst werden die möglichen Keys generiert. Dies geschieht über 4 verschachtelte Schleifen, von denen 2 die Position (0-15) der nicht-null Bytes bestimmen und 2 den Inhalt (0-255) dieser. Insgesamt ergeben sich so $(\sum_{i=1}^{16} i^2)\cdot 2^{16}$ unterschiedliche Schlüssel. Über diese Schlüssel wird dann Iteriert und der Klartext mit dem Schlüssel der jeweiligen Iteration Chiffriert und der verschlüsselte Text Dechiffriert. Die beiden hierdurch erhaltenen Werte werden in mit dem verwendeten Schlüssel in die HashMaps middleA und middleB gespeichert. Sobald Jeder Key zur Chiffrierung und Dechiffrierung verwendet wurde, werden alle Werte aus middleA mit allen Werten aus middleB verglichen. Sobald eine Übereinstimmung gefunden wurde, sind die zu diesen Werten gehörenden Keys die zur Verschlüsselung Verwendeten Keys. Zuletzt wird der Klartext mit diesen beiden Keys Chiffriert und das Ergebnis mit dem Verschlüsselten Text verglichen um sicher zu stellen, dass die Keys tatsächlich korrekt sind.
+Zuerst werden die möglichen Keys generiert. Dies geschieht über 4 verschachtelte Schleifen, von denen 2 die Position (0-15) der nicht-null Bytes bestimmen und 2 den Inhalt (0-255) dieser. Insgesamt ergeben sich so $(\sum_{i=1}^{16} i^2)\cdot 2^{16}$ unterschiedliche Schlüssel. Über diese Schlüssel wird dann Iteriert und der Klartext mit dem Schlüssel der jeweiligen Iteration Chiffriert und der verschlüsselte Text Dechiffriert. Die beiden hierdurch erhaltenen Werte werden in mit dem verwendeten Schlüssel in die HashMaps middleA und middleB gespeichert. Sobald Jeder Key zur Chiffrierung und Dechiffrierung verwendet wurde, werden alle Werte aus middleA mit allen Werten aus middleB verglichen. Sobald eine Übereinstimmung gefunden wurde, sind die zu diesen Werten gehörenden Keys die zur Verschlüsselung Verwendeten Keys. Zuletzt wird der Klartext mit diesen beiden Keys Chiffriert und das Ergebnis mit dem Verschlüsselten Text verglichen um sicher zu stellen, dass die Keys tatsächlich korrekt sind.\\
+Der Code hierfür befindet sich im Anhang, es kommt jedoch zu einer Exception, da die Maps größer als der maximale integer Wert werden.\\
+Ein Alternativer Ansatz wäre gar keine Maps zu Speicherung der Encrypteten bzw. Decrypteten zwischenwerte zu verwenden, sondern alle Werte on-the-fly zu generieren und direkt zu verleichen. Hierdurch ist Speicherplatz kein Problem mehr, jedoch müssen alle Werte derart vielfach berechnet werden, dass die Laufzeit unverwendbar schlecht wird.\\
+Der Code hierfür befindet sich ebenfalls im Anhang.
 \section{Timing-Angriff auf Passwörter}
 \section{Quellen}
 \begin{thebibliography}{50}
@@ -716,6 +719,97 @@ import java.util.Map;
 			}
 		}
 		return keys;
+	}
+}
+\end{lstlisting}
+\subsubsection{AESDecrypt - no Maps}
+\begin{lstlisting}
+import org.apache.commons.codec.binary.Hex;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
+/**
+ * Created by hoppix on 11.07.18.
+ */
+public class Main
+{
+		public static void main(String[] args) throws Exception
+		{
+			System.out.println("AES Decrypt");
+
+			String plaintext = "Verschluesselung";
+			String ciphertext = "be393d39ca4e18f41fa9d88a9d47a574";
+			byte[] bytes = Hex.decodeHex(ciphertext.toCharArray());
+			ciphertext = new String(bytes, "UTF-8");
+
+			for (int posByteA1 = 0; posByteA1 < 16; posByteA1++)
+			{
+				System.out.println(((double) posByteA1 / 16) * 100 + "% complete");
+				for (int posByteB1 = posByteA1; posByteB1 < 16; posByteB1++)
+				{
+					System.out.println("Iteration " + posByteA1 + "." + posByteB1);
+					for (int valueByteA1 = 0; valueByteA1 < 256; valueByteA1++)
+					{
+						for (int valueByteB1 = 0; valueByteB1 < 256; valueByteB1++)
+						{
+							for (int posByteA2 = 0; posByteA2 < 16; posByteA2++)
+							{
+								for (int posByteB2 = posByteA2; posByteB2 < 16; posByteB2++)
+								{
+
+									for (int valueByteA2 = 0; valueByteA2 < 256; valueByteA2++)
+									{
+										for (int valueByteB2 = 0; valueByteB2 < 256; valueByteB2++)
+										{
+											byte[] key1 = new byte[16];
+											byte[] key2 = new byte[16];
+											String sKey1 = Hex.encodeHexString(key1);
+											String sKey2 = Hex.encodeHexString(key2);
+
+											AES.setKey(sKey1);
+											AES.encrypt(plaintext);
+											String plainEncrypt = AES.getEncryptedString();
+											AES.setKey(sKey2);
+											AES.encrypt(ciphertext);
+											String cipherDecrypt = AES.getEncryptedString();
+
+											if (plainEncrypt.equals(cipherDecrypt))
+											{
+												ArrayList<String> keyPair = new ArrayList<>();
+
+												keyPair.add(sKey1);
+												keyPair.add(sKey2);
+
+												System.out.println(keyPair.toString());
+												System.out.println("Correctness: ");
+												System.out.println(checkCorrectness(plaintext, ciphertext, sKey1,
+													sKey2));
+											}
+
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	private static boolean checkCorrectness(String plaintext, String ciphertext, String key1, String key2)
+	{
+		AES.setKey(key1);
+		AES.encrypt(plaintext);
+		String e1 = AES.getEncryptedString();
+
+		AES.setKey(key2);
+		AES.encrypt(e1);
+		String e2 = AES.getEncryptedString();
+
+		return e2.equals(ciphertext);
 	}
 }
 \end{lstlisting}
